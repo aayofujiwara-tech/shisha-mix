@@ -190,16 +190,24 @@
 
 .dp-flavor-name {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 14px;
   font-weight: 500;
 }
 
 .dp-flavor-brand {
+  flex-shrink: 0;
+  white-space: nowrap;
   font-size: 12px;
   color: var(--color-text-muted);
 }
 
 .dp-flavor-ratio {
+  flex-shrink: 0;
+  white-space: nowrap;
   font-size: 13px;
   font-weight: 700;
   color: var(--color-amber);
