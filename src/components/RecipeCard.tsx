@@ -49,6 +49,9 @@ export default function RecipeCard({ recipe, showAuthor = false, selected = fals
             <span key={i} className="recipe-card-flavor">
               <span className="recipe-card-flavor-dot" style={{ background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
               {f.name} <span className="recipe-card-flavor-brand">({f.brand})</span>
+              <span className="recipe-card-flavor-ratio">
+                {totalRatio > 0 ? Math.round((f.ratio / totalRatio) * 100) : f.ratio}%
+              </span>
             </span>
           ))}
         </div>

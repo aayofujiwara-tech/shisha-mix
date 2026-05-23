@@ -93,6 +93,13 @@
   font-size: 12px;
 }
 
+.recipe-card-flavor-ratio {
+  font-size: 12px;
+  color: var(--color-amber);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 .recipe-card-tags {
   display: flex;
   flex-wrap: wrap;
