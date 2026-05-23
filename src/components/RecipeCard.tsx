@@ -17,7 +17,10 @@ interface Props {
 
 export default function RecipeCard({ recipe, showAuthor = false, selected = false, onSelect }: Props) {
   const navigate = useNavigate()
-  const totalRatio = recipe.flavors.reduce((s, f) => s + f.ratio, 0)
+  const flavors = recipe.flavors ?? []
+  const photos = recipe.photos ?? []
+  const categories = recipe.category ?? []
+  const totalRatio = flavors.reduce((s, f) => s + (f.ratio ?? 0), 0)
 
   const handleClick = () => {
     if (onSelect) onSelect(recipe)
@@ -29,9 +32,9 @@ export default function RecipeCard({ recipe, showAuthor = false, selected = fals
       className={`recipe-card card${selected ? ' selected' : ''}`}
       onClick={handleClick}
     >
-      {recipe.photos.length > 0 && (
+      {photos.length > 0 && (
         <div className="recipe-card-photo">
-          <img src={recipe.photos[0]} alt={recipe.name} />
+          <img src={photos[0]} alt={recipe.name} />
         </div>
       )}
       <div className="recipe-card-body">
@@ -45,22 +48,25 @@ export default function RecipeCard({ recipe, showAuthor = false, selected = fals
         )}
 
         <div className="recipe-card-flavors">
-          {recipe.flavors.map((f, i) => (
+          {flavors.map((f, i) => (
             <span key={i} className="recipe-card-flavor">
               <span className="recipe-card-flavor-dot" style={{ background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
               {f.name} <span className="recipe-card-flavor-brand">({f.brand})</span>
+              <span className="recipe-card-flavor-ratio">
+                {totalRatio > 0 ? Math.round(((f.ratio ?? 0) / totalRatio) * 100) : (f.ratio ?? 0)}%
+              </span>
             </span>
           ))}
         </div>
 
         {totalRatio > 0 && (
           <div className="ratio-bar-container" style={{ marginTop: 8 }}>
-            {recipe.flavors.map((f, i) => (
+            {flavors.map((f, i) => (
               <div
                 key={i}
                 className="ratio-bar-segment"
                 style={{
-                  flex: f.ratio,
+                  flex: f.ratio ?? 0,
                   background: RATIO_COLORS[i % RATIO_COLORS.length],
                   opacity: 0.85,
                 }}
@@ -70,7 +76,7 @@ export default function RecipeCard({ recipe, showAuthor = false, selected = fals
         )}
 
         <div className="recipe-card-tags">
-          {recipe.category.map((c) => (
+          {categories.map((c) => (
             <span key={c} className="tag">{c}</span>
           ))}
         </div>
