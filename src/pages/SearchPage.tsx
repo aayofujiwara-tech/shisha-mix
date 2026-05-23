@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react'
 import RecipeCard from '../components/RecipeCard'
-import RecipeDetailPanel from '../components/RecipeDetailPanel'
 import { usePublicRecipes } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { presets } from '../data/presets'
@@ -10,6 +9,7 @@ import './SearchPage.css'
 
 const STRENGTH_OPTS = Object.entries(STRENGTH_LABELS) as [Recipe['strength'], string][]
 const SWEET_OPTS = Object.entries(SWEETNESS_LABELS) as [Recipe['sweetness'], string][]
+const RATIO_COLORS = ['#f59e0b','#3b82f6','#22c55e','#a855f7','#ef4444','#06b6d4','#f97316','#14b8a6']
 
 function FilterPanel({
   keyword, setKeyword,
@@ -117,6 +117,91 @@ function FilterPanel({
   )
 }
 
+function PCDetailView({ recipe, onClose }: { recipe: Recipe; onClose: () => void }) {
+  const flavors = recipe.flavors ?? []
+  const photos = recipe.photos ?? []
+  const totalRatio = flavors.reduce((s, f) => s + (f.ratio ?? 0), 0)
+
+  return (
+    <div className="pc-detail-view">
+      {/* Left: name / author / tags / fields / memo */}
+      <div className="pc-detail-left">
+        <div className="pc-detail-top-row">
+          <div className="pc-detail-meta">
+            {photos.length > 0 && (
+              <img src={photos[0]} alt={recipe.name} className="pc-detail-photo" />
+            )}
+            <div className="pc-detail-title-block">
+              <h2 className="pc-detail-title">{recipe.name}</h2>
+              <p className="pc-detail-author">by {recipe.authorName}</p>
+            </div>
+          </div>
+          <button className="pc-detail-close" onClick={onClose}>✕</button>
+        </div>
+
+        <div className="pc-detail-tags">
+          {(recipe.category ?? []).map((c) => <span key={c} className="tag">{c}</span>)}
+          <span className="tag tag-muted">強度: {STRENGTH_LABELS[recipe.strength]}</span>
+          <span className="tag tag-muted">甘さ: {SWEETNESS_LABELS[recipe.sweetness]}</span>
+        </div>
+
+        {(recipe.bowl || recipe.charcoal || recipe.packing) && (
+          <div className="pc-detail-fields">
+            {recipe.bowl && (
+              <div className="pc-detail-field">
+                <span className="pc-detail-field-label">ボウル</span>
+                <span>{recipe.bowl}</span>
+              </div>
+            )}
+            {recipe.charcoal && (
+              <div className="pc-detail-field">
+                <span className="pc-detail-field-label">炭</span>
+                <span>{recipe.charcoal}</span>
+              </div>
+            )}
+            {recipe.packing && (
+              <div className="pc-detail-field">
+                <span className="pc-detail-field-label">パッキング</span>
+                <span>{recipe.packing}</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {recipe.memo && <p className="pc-detail-memo">{recipe.memo}</p>}
+      </div>
+
+      {/* Right: flavor composition */}
+      <div className="pc-detail-right">
+        <p className="pc-detail-section-title">フレーバー構成</p>
+        {totalRatio > 0 && (
+          <div className="ratio-bar-container" style={{ height: 8, marginBottom: 10 }}>
+            {flavors.map((f, i) => (
+              <div
+                key={i}
+                className="ratio-bar-segment"
+                style={{ flex: f.ratio ?? 0, background: RATIO_COLORS[i % RATIO_COLORS.length] }}
+              />
+            ))}
+          </div>
+        )}
+        <div className="pc-detail-flavors">
+          {flavors.map((f, i) => (
+            <div key={i} className="pc-detail-flavor-row">
+              <span className="pc-detail-flavor-dot" style={{ background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
+              <span className="pc-detail-flavor-name">{f.name}</span>
+              <span className="pc-detail-flavor-brand">{f.brand}</span>
+              <span className="pc-detail-flavor-ratio">
+                {totalRatio > 0 ? Math.round(((f.ratio ?? 0) / totalRatio) * 100) : (f.ratio ?? 0)}%
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function SearchPage() {
   const { recipes: communityRecipes, loading } = usePublicRecipes()
   const isPC = useMediaQuery('(min-width: 768px)')
@@ -143,11 +228,11 @@ export default function SearchPage() {
       result = result.filter(
         (r) =>
           r.name.toLowerCase().includes(kw) ||
-          r.flavors.some((f) => f.name.toLowerCase().includes(kw) || f.brand.toLowerCase().includes(kw))
+          (r.flavors ?? []).some((f) => f.name.toLowerCase().includes(kw) || f.brand.toLowerCase().includes(kw))
       )
     }
-    if (selCategories.length) result = result.filter((r) => selCategories.some((c) => r.category.includes(c)))
-    if (selBrands.length) result = result.filter((r) => r.flavors.some((f) => selBrands.includes(f.brand)))
+    if (selCategories.length) result = result.filter((r) => selCategories.some((c) => (r.category ?? []).includes(c)))
+    if (selBrands.length) result = result.filter((r) => (r.flavors ?? []).some((f) => selBrands.includes(f.brand)))
     if (selStrengths.length) result = result.filter((r) => selStrengths.includes(r.strength))
     if (selSweetness.length) result = result.filter((r) => selSweetness.includes(r.sweetness))
     return result
@@ -164,50 +249,58 @@ export default function SearchPage() {
   }
 
   const hasFilter = selCategories.length + selBrands.length + selStrengths.length + selSweetness.length > 0
+  const toggleSelected = (recipe: Recipe) =>
+    setSelectedRecipe((prev) => prev?.id === recipe.id ? null : recipe)
 
   /* ===== PC layout ===== */
   if (isPC) {
     return (
-      <div className="search-pc-shell">
-        {/* Left: always-visible filter panel */}
-        <aside className="search-pc-filters">
-          <h2 className="search-pc-filters-title">検索・絞り込み</h2>
+      <div className="search-pc-wrap">
+        {/* Left: filter sidebar */}
+        <aside className="search-pc-sidebar">
+          <h2 className="search-pc-sidebar-title">絞り込み</h2>
           <FilterPanel {...filterProps} />
         </aside>
 
-        {/* Center: recipe grid */}
-        <div className={`search-pc-results${selectedRecipe ? ' has-detail' : ''}`}>
-          {filtered.length === 0 && !loading ? (
-            <div className="empty-state">
-              <div className="empty-state-icon">🔍</div>
-              <p className="empty-state-text">条件に一致するレシピが見つかりません</p>
-            </div>
-          ) : (
-            <div className={`recipe-grid${selectedRecipe ? ' grid-compact' : ''}`}>
-              {filtered.map((r) => (
-                <RecipeCard
-                  key={r.id}
-                  recipe={r}
-                  showAuthor
-                  selected={selectedRecipe?.id === r.id}
-                  onSelect={(recipe) => setSelectedRecipe(
-                    selectedRecipe?.id === recipe.id ? null : recipe
-                  )}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        {/* Main: top detail + bottom grid */}
+        <div className="search-pc-main">
+          {/* Top: detail panel (40vh) */}
+          <div className="search-pc-detail-top">
+            {selectedRecipe ? (
+              <PCDetailView
+                key={selectedRecipe.id}
+                recipe={selectedRecipe}
+                onClose={() => setSelectedRecipe(null)}
+              />
+            ) : (
+              <div className="search-pc-no-selection">
+                <span>👆</span>
+                <p>レシピを選択すると詳細が表示されます</p>
+              </div>
+            )}
+          </div>
 
-        {/* Right: detail panel (slide in) */}
-        <div className={`search-pc-detail${selectedRecipe ? ' open' : ''}`}>
-          {selectedRecipe && (
-            <RecipeDetailPanel
-              key={selectedRecipe.id}
-              recipe={selectedRecipe}
-              onClose={() => setSelectedRecipe(null)}
-            />
-          )}
+          {/* Bottom: 2-col recipe grid (60vh) */}
+          <div className="search-pc-grid-wrap">
+            {filtered.length === 0 && !loading ? (
+              <div className="empty-state">
+                <div className="empty-state-icon">🔍</div>
+                <p className="empty-state-text">条件に一致するレシピが見つかりません</p>
+              </div>
+            ) : (
+              <div className="recipe-grid-2col">
+                {filtered.map((r) => (
+                  <RecipeCard
+                    key={r.id}
+                    recipe={r}
+                    showAuthor
+                    selected={selectedRecipe?.id === r.id}
+                    onSelect={toggleSelected}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     )
