@@ -5,7 +5,7 @@ import { useMyRecipes, usePublicRecipes } from '../hooks/useRecipes'
 import { useInventory } from '../hooks/useInventory'
 import { presets } from '../data/presets'
 import { flavorDB } from '../data/flavorDB'
-import { CATEGORIES } from '../types'
+import { CATEGORIES, STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import type { Recipe } from '../types'
 import RecipeCard from '../components/RecipeCard'
 import './SuggestPage.css'
@@ -19,6 +19,8 @@ export default function SuggestPage() {
 
   const [baseFlavor, setBaseFlavor] = useState('')
   const [selCategories, setSelCategories] = useState<string[]>([])
+  const [selStrengths, setSelStrengths] = useState<Recipe['strength'][]>([])
+  const [selSweetness, setSelSweetness] = useState<Recipe['sweetness'][]>([])
   const [inventoryOnly, setInventoryOnly] = useState(false)
   const [suggested, setSuggested] = useState<Recipe | null>(null)
   const [saving, setSaving] = useState(false)
@@ -47,6 +49,12 @@ export default function SuggestPage() {
     }
     if (selCategories.length) {
       pool = pool.filter((r) => selCategories.some((c) => r.category.includes(c)))
+    }
+    if (selStrengths.length) {
+      pool = pool.filter((r) => selStrengths.includes(r.strength))
+    }
+    if (selSweetness.length) {
+      pool = pool.filter((r) => selSweetness.includes(r.sweetness))
     }
     if (inventoryOnly && inventory.length > 0) {
       pool = pool.filter((r) =>
@@ -143,6 +151,40 @@ export default function SuggestPage() {
                 onClick={() => setSelCategories((prev) => prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c])}
               >
                 {c}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 強度 */}
+        <div className="form-group">
+          <label className="field-label">強度（任意・複数可）</label>
+          <div className="suggest-categories">
+            {(Object.entries(STRENGTH_LABELS) as [Recipe['strength'], string][]).map(([k, v]) => (
+              <button
+                key={k}
+                type="button"
+                className={`filter-chip${selStrengths.includes(k) ? ' selected' : ''}`}
+                onClick={() => setSelStrengths((prev) => prev.includes(k) ? prev.filter((x) => x !== k) : [...prev, k])}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 甘さ */}
+        <div className="form-group">
+          <label className="field-label">甘さ（任意・複数可）</label>
+          <div className="suggest-categories">
+            {(Object.entries(SWEETNESS_LABELS) as [Recipe['sweetness'], string][]).map(([k, v]) => (
+              <button
+                key={k}
+                type="button"
+                className={`filter-chip${selSweetness.includes(k) ? ' selected' : ''}`}
+                onClick={() => setSelSweetness((prev) => prev.includes(k) ? prev.filter((x) => x !== k) : [...prev, k])}
+              >
+                {v}
               </button>
             ))}
           </div>
