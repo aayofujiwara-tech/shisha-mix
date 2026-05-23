@@ -49,31 +49,31 @@ export default function RecipeCard({ recipe, showAuthor = false, selected = fals
 
         <div className="recipe-card-flavors">
           {flavors.map((f, i) => (
-            <span key={i} className="recipe-card-flavor">
+            <div key={i} className="recipe-card-flavor">
               <span className="recipe-card-flavor-dot" style={{ background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
-              {f.name} <span className="recipe-card-flavor-brand">({f.brand})</span>
+              <span className="recipe-card-flavor-name">{f.name}</span>
+              <span className="recipe-card-flavor-brand">{f.brand}</span>
               <span className="recipe-card-flavor-ratio">
                 {totalRatio > 0 ? Math.round(((f.ratio ?? 0) / totalRatio) * 100) : (f.ratio ?? 0)}%
               </span>
-            </span>
+            </div>
           ))}
+          {totalRatio > 0 && (
+            <div className="ratio-bar-container">
+              {flavors.map((f, i) => (
+                <div
+                  key={i}
+                  className="ratio-bar-segment"
+                  style={{
+                    flex: f.ratio ?? 0,
+                    background: RATIO_COLORS[i % RATIO_COLORS.length],
+                    opacity: 0.85,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
-
-        {totalRatio > 0 && (
-          <div className="ratio-bar-container" style={{ marginTop: 8 }}>
-            {flavors.map((f, i) => (
-              <div
-                key={i}
-                className="ratio-bar-segment"
-                style={{
-                  flex: f.ratio ?? 0,
-                  background: RATIO_COLORS[i % RATIO_COLORS.length],
-                  opacity: 0.85,
-                }}
-              />
-            ))}
-          </div>
-        )}
 
         <div className="recipe-card-tags">
           {categories.map((c) => (
