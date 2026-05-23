@@ -68,7 +68,7 @@ export type Category = typeof CATEGORIES[number];
 
 export const BRANDS = [
   'Al Fakher', 'Fumari', 'Starbuzz', 'Adalya', 'Tangiers',
-  'Dozaj', 'Pan Rasna', 'Darkside', 'Azure', 'Nakhla',
+  'Dozaj', 'Al Waha', 'Darkside', 'Azure', 'Nakhla',
   'Mazaya', 'Musthave', 'Element', 'その他',
 ] as const;
 export type Brand = typeof BRANDS[number];

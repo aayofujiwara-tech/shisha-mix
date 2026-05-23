@@ -95,11 +95,8 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'tg-kashmiri-chai', name: 'カシミリチャイ', brand: 'Tangiers', category: 'スパイス系' },
   { id: 'tg-cream', name: 'クリーム', brand: 'Tangiers', category: 'デザート系' },
 
-  // ===== Pan Rasna =====
-  { id: 'pr-paan', name: 'パーン', brand: 'Pan Rasna', category: 'スパイス系' },
-  { id: 'pr-rose-paan', name: 'ローズパーン', brand: 'Pan Rasna', category: 'スパイス系' },
-  { id: 'pr-gulab', name: 'グラーブ', brand: 'Pan Rasna', category: 'フルーツ系' },
-  { id: 'pr-watermelon', name: 'スイカ', brand: 'Pan Rasna', category: 'フルーツ系' },
+  // ===== Al Waha =====
+  { id: 'aw-pan-rasna', name: 'パンラズナ', brand: 'Al Waha', category: 'スパイス系' },
 
   // ===== Nakhla =====
   { id: 'nk-blueberry', name: 'ブルーベリー', brand: 'Nakhla', category: 'フルーツ系' },

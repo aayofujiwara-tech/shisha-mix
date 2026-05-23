@@ -39,10 +39,10 @@ export const presets: Recipe[] = [
   },
   {
     ...sys, id: 'p5', likes: 178,
-    name: 'パーン×ローズ',
-    flavors: [{ name: 'パーン', brand: 'Pan Rasna', ratio: 60 }, { name: 'ローズ', brand: 'Al Fakher', ratio: 40 }],
+    name: 'パンラズナ×ローズ',
+    flavors: [{ name: 'パンラズナ', brand: 'Al Waha', ratio: 60 }, { name: 'ローズ', brand: 'Al Fakher', ratio: 40 }],
     category: ['スパイス系'], strength: 'strong', sweetness: 'medium',
-    memo: 'インド系スパイスの独特な香りが好きな方向け。個性的な一本。',
+    memo: 'Al Wahaパンラズナにローズを合わせたインド系スパイスの独特な香りが好きな方向け。個性的な一本。',
   },
   {
     ...sys, id: 'p6', likes: 243,
@@ -462,10 +462,10 @@ export const presets: Recipe[] = [
   },
   {
     ...sys, id: 'p60', likes: 176,
-    name: 'コールドウォーターメロン',
-    flavors: [{ name: 'スイカ', brand: 'Pan Rasna', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
-    category: ['アイス系'], strength: 'medium', sweetness: 'high',
-    memo: 'Pan Rasnaスイカにアイスミントを合わせた清涼感マックスのスイカアイス。',
+    name: 'パンラズナ×アイスミント',
+    flavors: [{ name: 'パンラズナ', brand: 'Al Waha', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
+    category: ['アイス系', 'スパイス系'], strength: 'medium', sweetness: 'high',
+    memo: 'Al Wahaパンラズナにアイスミントを合わせた清涼感マックスのスパイシーアイス。',
   },
 
   // ===== デザート系 (p61–p75) =====
@@ -727,14 +727,14 @@ export const presets: Recipe[] = [
   },
   {
     ...sys, id: 'p93', likes: 78,
-    name: 'スイカ×ストロベリー×ミント',
+    name: 'パンラズナ×ストロベリー×ミント',
     flavors: [
-      { name: 'スイカ', brand: 'Pan Rasna', ratio: 40 },
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
       { name: 'ストロベリー', brand: 'Fumari', ratio: 40 },
       { name: 'ミント', brand: 'Al Fakher', ratio: 20 },
     ],
-    category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
-    memo: 'Pan Rasnaスイカ×Fumariストロベリー×AFミントで作る爽やかサマーフルーツ。',
+    category: ['スパイス系', 'フルーツ系'], strength: 'weak', sweetness: 'high',
+    memo: 'Al Wahaパンラズナ×Fumariストロベリー×AFミントで作る爽やかスパイシーフルーツ。',
   },
   {
     ...sys, id: 'p94', likes: 143,
