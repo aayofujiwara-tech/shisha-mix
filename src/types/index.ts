@@ -66,7 +66,11 @@ export type StatusLabel = { full: string; low: string; empty: string };
 export const CATEGORIES = ['フルーツ系', 'ミント系', 'デザート系', 'スパイス系', 'アイス系', 'ダブルアップル系'] as const;
 export type Category = typeof CATEGORIES[number];
 
-export const BRANDS = ['Al Fakher', 'Starbuzz', 'Adalya', 'Dozaj', 'Tangiers', 'Pan Rasna', 'その他'] as const;
+export const BRANDS = [
+  'Al Fakher', 'Fumari', 'Starbuzz', 'Adalya', 'Tangiers',
+  'Dozaj', 'Pan Rasna', 'Darkside', 'Azure', 'Nakhla',
+  'Mazaya', 'Musthave', 'Element', 'その他',
+] as const;
 export type Brand = typeof BRANDS[number];
 
 export const STRENGTH_LABELS: StrengthLabel = { weak: '弱', medium: '中', strong: '強' };
