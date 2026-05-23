@@ -43,27 +43,37 @@ export default function RecipeFormPage() {
   const [isPublic, setIsPublic] = useState(false)
   const [visibility, setVisibility] = useState<RecipeVisibility>(EMPTY_VISIBILITY)
   const [loading, setLoading] = useState(false)
+  const [loadError, setLoadError] = useState(false)
   const [flavorSearch, setFlavorSearch] = useState<string[]>([])
   const [showSuggestions, setShowSuggestions] = useState<number | null>(null)
 
   useEffect(() => {
     if (!isEdit || !id) return
-    getRecipe(id).then((r) => {
-      if (!r) return
-      setName(r.name)
-      setFlavors(r.flavors)
-      setCategory(r.category)
-      setStrength(r.strength)
-      setSweetness(r.sweetness)
-      setPhotos(r.photos)
-      setBowl(r.bowl ?? '')
-      setCharcoal(r.charcoal ?? '')
-      setPacking(r.packing ?? '')
-      setMemo(r.memo ?? '')
-      setIsPublic(r.isPublic)
-      setVisibility(r.visibility)
-    })
-    setFlavorSearch(flavors.map(() => ''))
+    getRecipe(id)
+      .then((r) => {
+        if (!r) { setLoadError(true); return }
+        const loadedFlavors = (r.flavors ?? []).length > 0
+          ? r.flavors.map((f) => ({
+              name: f.name ?? '',
+              brand: f.brand ?? 'Al Fakher',
+              ratio: Number(f.ratio ?? 0),
+            }))
+          : [{ name: '', brand: 'Al Fakher', ratio: 100 }]
+        setName(r.name ?? '')
+        setFlavors(loadedFlavors)
+        setFlavorSearch(loadedFlavors.map(() => ''))
+        setCategory(r.category ?? [])
+        setStrength(r.strength ?? 'medium')
+        setSweetness(r.sweetness ?? 'medium')
+        setPhotos(r.photos ?? [])
+        setBowl(r.bowl ?? '')
+        setCharcoal(r.charcoal ?? '')
+        setPacking(r.packing ?? '')
+        setMemo(r.memo ?? '')
+        setIsPublic(r.isPublic ?? false)
+        setVisibility(r.visibility ?? EMPTY_VISIBILITY)
+      })
+      .catch(() => setLoadError(true))
   }, [isEdit, id])
 
   const addFlavor = () => setFlavors((prev) => [...prev, { name: '', brand: 'Al Fakher', ratio: 0 }])
@@ -91,7 +101,7 @@ export default function RecipeFormPage() {
         userId: user.uid,
         authorName: user.displayName || 'ゲスト',
         name: name.trim(),
-        flavors,
+        flavors: flavors.map((f) => ({ ...f, ratio: Number(f.ratio ?? 0) })),
         category,
         strength,
         sweetness,
@@ -115,6 +125,20 @@ export default function RecipeFormPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (loadError) {
+    return (
+      <div className="page">
+        <div className="empty-state">
+          <div className="empty-state-icon">⚠️</div>
+          <p className="empty-state-text">データの読み込みに失敗しました</p>
+          <button className="btn-primary" style={{ marginTop: 20 }} onClick={() => navigate('/my')}>
+            マイレシピ一覧に戻る
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (
