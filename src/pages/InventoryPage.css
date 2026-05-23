@@ -1,0 +1,227 @@
+.inv-filter-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.inv-filter-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.inv-filter-btn.active {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  background: rgba(245,158,11,0.1);
+}
+
+.shopping-list-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  background: rgba(245,158,11,0.08);
+  border-color: rgba(245,158,11,0.3);
+}
+
+.shopping-list-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.shopping-list-items {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.copy-btn {
+  background: var(--color-amber);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: var(--color-amber-light);
+}
+
+.inv-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.inv-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.inv-item-name {
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inv-item-brand {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.inv-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.inv-status-select {
+  width: auto;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.inv-status-select.status-full {
+  color: #86efac;
+  border-color: rgba(134,239,172,0.4);
+  background: rgba(34,197,94,0.08);
+}
+
+.inv-status-select.status-low {
+  color: var(--color-amber);
+  border-color: rgba(245,158,11,0.4);
+  background: rgba(245,158,11,0.08);
+}
+
+.inv-status-select.status-empty {
+  color: #f87171;
+  border-color: rgba(248,113,113,0.4);
+  background: rgba(239,68,68,0.08);
+}
+
+.inv-remove-btn {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.inv-remove-btn:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.add-mode-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 16px;
+}
+
+.add-mode-tab {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+
+.add-mode-tab.active {
+  color: var(--color-amber);
+  border-bottom-color: var(--color-amber);
+}
+
+.db-results {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.db-hint, .db-no-result {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 24px 0;
+}
+
+.db-result-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  background: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.db-result-item:hover:not(.already) {
+  background: rgba(245,158,11,0.08);
+}
+
+.db-result-item.already {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.db-result-name {
+  font-size: 14px;
+  color: var(--color-text);
+  flex: 1;
+}
+
+.db-result-meta {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.db-already-badge {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}

@@ -1,0 +1,24 @@
+{
+  "rules": {
+    "recipes": {
+      "$recipeId": {
+        ".read": "data.child('isPublic').val() === true || auth.uid === data.child('userId').val()",
+        ".write": "auth.uid === newData.child('userId').val()"
+      }
+    },
+    "inventory": {
+      "$userId": {
+        ".read": "auth.uid === $userId",
+        ".write": "auth.uid === $userId"
+      }
+    },
+    "users": {
+      "$userId": {
+        ".read": "auth.uid === $userId",
+        ".write": "auth.uid === $userId"
+      }
+    },
+    "presets": { ".read": true, ".write": false },
+    "flavorDB": { ".read": true, ".write": false }
+  }
+}
