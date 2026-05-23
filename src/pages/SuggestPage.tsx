@@ -25,6 +25,7 @@ export default function SuggestPage() {
   const [suggested, setSuggested] = useState<Recipe | null>(null)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [toast, setToast] = useState<string | null>(null)
   const [baseSearch, setBaseSearch] = useState('')
 
   const allRecipes = useMemo(() => {
@@ -94,6 +95,8 @@ export default function SuggestPage() {
     })
     setSaving(false)
     setSaved(true)
+    setToast('マイレシピに保存しました ✓')
+    setTimeout(() => setToast(null), 3000)
   }
 
   const baseFlavorSuggestions = baseSearch.trim()
@@ -212,7 +215,7 @@ export default function SuggestPage() {
       {suggested && (
         <div className="suggest-result">
           <p className="suggest-result-label">提案されたレシピ</p>
-          <RecipeCard recipe={suggested} showAuthor />
+          <RecipeCard recipe={suggested} showAuthor onSelect={() => {}} />
           <div className="suggest-result-actions">
             <button className="btn-secondary" onClick={suggest}>もう一度</button>
             <button
@@ -226,6 +229,8 @@ export default function SuggestPage() {
           </div>
         </div>
       )}
+
+      {toast && <div className="suggest-toast">{toast}</div>}
 
       {!suggested && (
         <div className="suggest-placeholder">

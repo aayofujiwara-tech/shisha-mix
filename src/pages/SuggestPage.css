@@ -107,8 +107,36 @@
 
 .suggest-result-actions {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 12px;
+}
+
+.suggest-result-actions .btn-secondary,
+.suggest-result-actions .btn-primary {
+  width: 100%;
+}
+
+.suggest-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-amber);
+  color: #000;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 200;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: suggest-toast-in 0.2s ease;
+}
+
+@keyframes suggest-toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 .suggest-placeholder {
