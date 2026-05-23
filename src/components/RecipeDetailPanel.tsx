@@ -17,6 +17,9 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
   const { user } = useAuth()
   const navigate = useNavigate()
   const [recipe, setRecipe] = useState(initial)
+  const flavors = recipe.flavors ?? []
+  const photos = recipe.photos ?? []
+  const categories = recipe.category ?? []
   const [photoIdx, setPhotoIdx] = useState(0)
   const [liked, setLiked] = useState(false)
 
@@ -46,14 +49,14 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
       </div>
 
       <div className="detail-panel-body">
-        {recipe.photos.length > 0 && canShowField('photos') && (
+        {photos.length > 0 && canShowField('photos') && (
           <div className="dp-photos">
             <div className="dp-photo-main">
-              <img src={recipe.photos[photoIdx]} alt={recipe.name} />
+              <img src={photos[photoIdx]} alt={recipe.name} />
             </div>
-            {recipe.photos.length > 1 && (
+            {photos.length > 1 && (
               <div className="dp-photo-thumbs">
-                {recipe.photos.map((url, i) => (
+                {photos.map((url, i) => (
                   <button
                     key={i}
                     className={`dp-photo-thumb${i === photoIdx ? ' active' : ''}`}
@@ -77,7 +80,7 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
         <p className="dp-author">by {recipe.authorName}</p>
 
         <div className="dp-tags">
-          {recipe.category.map((c) => <span key={c} className="tag">{c}</span>)}
+          {categories.map((c) => <span key={c} className="tag">{c}</span>)}
           <span className={`tag tag-muted strength-${recipe.strength}`}>
             強度: {STRENGTH_LABELS[recipe.strength]}
           </span>
@@ -88,17 +91,17 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
 
         <h3 className="dp-section-title">フレーバー構成</h3>
         <div className="ratio-bar-container" style={{ marginBottom: 12, height: 10 }}>
-          {recipe.flavors.map((f, i) => (
+          {flavors.map((f, i) => (
             <div key={i} className="ratio-bar-segment"
-              style={{ flex: f.ratio, background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
+              style={{ flex: f.ratio ?? 0, background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
           ))}
         </div>
-        {recipe.flavors.map((f, i) => (
+        {flavors.map((f, i) => (
           <div key={i} className="dp-flavor-row">
             <span className="dp-flavor-dot" style={{ background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
             <span className="dp-flavor-name">{f.name}</span>
             <span className="dp-flavor-brand">{f.brand}</span>
-            <span className="dp-flavor-ratio">{f.ratio}%</span>
+            <span className="dp-flavor-ratio">{f.ratio ?? 0}%</span>
           </div>
         ))}
 
