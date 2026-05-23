@@ -1,0 +1,128 @@
+.suggest-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.suggest-base-wrap {
+  position: relative;
+}
+
+.flavor-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-amber);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.flavor-suggestion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 14px;
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.flavor-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.flavor-suggestion-item:hover {
+  background: rgba(245,158,11,0.1);
+}
+
+.suggest-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-chip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-chip.selected {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  background: rgba(245,158,11,0.1);
+}
+
+.suggest-inventory-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: 4px;
+}
+
+.suggest-inventory-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.suggest-inventory-desc {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.suggest-result {
+  margin-top: 8px;
+}
+
+.suggest-result-label {
+  font-size: 12px;
+  color: var(--color-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.suggest-result-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.suggest-placeholder {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--color-text-muted);
+}
+
+.suggest-placeholder-icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+}
+
+.suggest-placeholder-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
