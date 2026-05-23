@@ -49,15 +49,17 @@ export default function MyRecipePage() {
       ) : (
         <>
           <p className="my-recipe-count">{recipes.length}件のレシピ</p>
-          {recipes.map((r) => (
-            <div key={r.id} className="my-recipe-item">
-              <RecipeCard recipe={r} />
-              <div className="my-recipe-actions">
-                <button className="my-recipe-edit" onClick={() => navigate(`/my/edit/${r.id}`)}>編集</button>
-                <button className="my-recipe-delete" onClick={() => setDeleteTarget(r.id)}>削除</button>
+          <div className="my-recipes-grid">
+            {recipes.map((r) => (
+              <div key={r.id} className="my-recipe-item">
+                <RecipeCard recipe={r} />
+                <div className="my-recipe-actions">
+                  <button className="my-recipe-edit" onClick={() => navigate(`/my/edit/${r.id}`)}>編集</button>
+                  <button className="my-recipe-delete" onClick={() => setDeleteTarget(r.id)}>削除</button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </>
       )}
 

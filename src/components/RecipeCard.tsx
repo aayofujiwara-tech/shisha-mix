@@ -11,14 +11,24 @@ const RATIO_COLORS = [
 interface Props {
   recipe: Recipe
   showAuthor?: boolean
+  selected?: boolean
+  onSelect?: (recipe: Recipe) => void
 }
 
-export default function RecipeCard({ recipe, showAuthor = false }: Props) {
+export default function RecipeCard({ recipe, showAuthor = false, selected = false, onSelect }: Props) {
   const navigate = useNavigate()
   const totalRatio = recipe.flavors.reduce((s, f) => s + f.ratio, 0)
 
+  const handleClick = () => {
+    if (onSelect) onSelect(recipe)
+    else navigate(`/recipe/${recipe.id}`)
+  }
+
   return (
-    <div className="recipe-card card" onClick={() => navigate(`/recipe/${recipe.id}`)}>
+    <div
+      className={`recipe-card card${selected ? ' selected' : ''}`}
+      onClick={handleClick}
+    >
       {recipe.photos.length > 0 && (
         <div className="recipe-card-photo">
           <img src={recipe.photos[0]} alt={recipe.name} />

@@ -1,0 +1,233 @@
+.detail-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.detail-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.detail-panel-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.detail-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-panel-edit {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.detail-panel-edit:hover {
+  border-color: var(--color-amber);
+}
+
+.detail-panel-close {
+  width: 30px;
+  height: 30px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.detail-panel-close:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.detail-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.dp-photos {
+  margin-bottom: 16px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.dp-photo-main {
+  width: 100%;
+  height: 200px;
+}
+
+.dp-photo-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dp-photo-thumbs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--color-surface);
+}
+
+.dp-photo-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+}
+
+.dp-photo-thumb.active {
+  border-color: var(--color-amber);
+}
+
+.dp-photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dp-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.dp-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.dp-like {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.dp-like.liked {
+  color: #f87171;
+  border-color: #f87171;
+  background: rgba(248,113,113,0.1);
+}
+
+.dp-author {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.dp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.dp-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-sans);
+}
+
+.dp-flavor-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dp-flavor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dp-flavor-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dp-flavor-brand {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.dp-flavor-ratio {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-amber);
+  min-width: 36px;
+  text-align: right;
+}
+
+.dp-field {
+  display: flex;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dp-field-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+.dp-field-value {
+  font-size: 13px;
+}
+
+.dp-memo {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text);
+  white-space: pre-wrap;
+}

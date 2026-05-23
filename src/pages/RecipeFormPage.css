@@ -181,3 +181,22 @@
   color: var(--color-text-muted);
   margin-top: 2px;
 }
+
+/* ===== PC adjustments ===== */
+@media (min-width: 768px) {
+  .form-row {
+    gap: 20px;
+  }
+
+  .flavor-input-row {
+    gap: 10px;
+  }
+
+  .flavor-ratio-input {
+    width: 72px;
+  }
+
+  .public-toggle-row {
+    padding: 16px 20px;
+  }
+}

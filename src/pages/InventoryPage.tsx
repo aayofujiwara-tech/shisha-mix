@@ -119,26 +119,28 @@ export default function InventoryPage() {
           </p>
         </div>
       ) : (
-        filtered.map((f) => (
-          <div key={f.id} className="inv-item card">
-            <div className="inv-item-info">
-              <p className="inv-item-name">{f.name}</p>
-              <p className="inv-item-brand">{f.brand} · {f.category}</p>
+        <div className="inv-grid">
+          {filtered.map((f) => (
+            <div key={f.id} className="inv-item card">
+              <div className="inv-item-info">
+                <p className="inv-item-name">{f.name}</p>
+                <p className="inv-item-brand">{f.brand} · {f.category}</p>
+              </div>
+              <div className="inv-item-controls">
+                <select
+                  value={f.status}
+                  onChange={(e) => updateStatus(f.id, e.target.value as InventoryFlavor['status'], user.uid)}
+                  className={`inv-status-select status-${f.status}`}
+                >
+                  <option value="full">あり</option>
+                  <option value="low">残り少し</option>
+                  <option value="empty">なし</option>
+                </select>
+                <button className="inv-remove-btn" onClick={() => removeFlavor(f.id, user.uid)}>✕</button>
+              </div>
             </div>
-            <div className="inv-item-controls">
-              <select
-                value={f.status}
-                onChange={(e) => updateStatus(f.id, e.target.value as InventoryFlavor['status'], user.uid)}
-                className={`inv-status-select status-${f.status}`}
-              >
-                <option value="full">あり</option>
-                <option value="low">残り少し</option>
-                <option value="empty">なし</option>
-              </select>
-              <button className="inv-remove-btn" onClick={() => removeFlavor(f.id, user.uid)}>✕</button>
-            </div>
-          </div>
-        ))
+          ))}
+        </div>
       )}
 
       {/* 追加モーダル */}
