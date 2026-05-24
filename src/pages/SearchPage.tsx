@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
+import RecipeDetailPanel from '../components/RecipeDetailPanel'
 import { usePublicRecipes } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { presets } from '../data/presets'
@@ -205,6 +207,7 @@ function PCDetailView({ recipe, onClose }: { recipe: Recipe; onClose: () => void
 export default function SearchPage() {
   const { recipes: communityRecipes, loading } = usePublicRecipes()
   const isPC = useMediaQuery('(min-width: 768px)')
+  const navigate = useNavigate()
 
   const [keyword, setKeyword] = useState('')
   const [selCategories, setSelCategories] = useState<string[]>([])
@@ -213,6 +216,7 @@ export default function SearchPage() {
   const [selSweetness, setSelSweetness] = useState<Recipe['sweetness'][]>([])
   const [showFilters, setShowFilters] = useState(false)
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null)
+  const [showMobileDetail, setShowMobileDetail] = useState(false)
 
   const allRecipes = useMemo(() => {
     const map = new Map<string, Recipe>()
@@ -251,6 +255,15 @@ export default function SearchPage() {
   const hasFilter = selCategories.length + selBrands.length + selStrengths.length + selSweetness.length > 0
   const toggleSelected = (recipe: Recipe) =>
     setSelectedRecipe((prev) => prev?.id === recipe.id ? null : recipe)
+
+  const handleMobileSelect = (recipe: Recipe) => {
+    if (recipe.userId === 'system') {
+      setSelectedRecipe(recipe)
+      setShowMobileDetail(true)
+    } else {
+      navigate(`/recipe/${recipe.id}`)
+    }
+  }
 
   /* ===== PC layout ===== */
   if (isPC) {
@@ -355,7 +368,19 @@ export default function SearchPage() {
           <p className="empty-state-text">条件に一致するレシピが見つかりません</p>
         </div>
       ) : (
-        filtered.map((r) => <RecipeCard key={r.id} recipe={r} showAuthor />)
+        filtered.map((r) => (
+          <RecipeCard key={r.id} recipe={r} showAuthor onSelect={handleMobileSelect} />
+        ))
+      )}
+
+      {showMobileDetail && selectedRecipe && (
+        <div className="mobile-detail-overlay">
+          <RecipeDetailPanel
+            key={selectedRecipe.id}
+            recipe={selectedRecipe}
+            onClose={() => setShowMobileDetail(false)}
+          />
+        </div>
       )}
     </div>
   )
