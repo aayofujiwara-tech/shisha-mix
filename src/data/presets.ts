@@ -49,7 +49,7 @@ export const presets: Recipe[] = [
     name: 'トリプルミント',
     flavors: [
       { name: 'ミント', brand: 'Al Fakher', ratio: 40 },
-      { name: 'カインミント', brand: 'Tangiers', ratio: 35 },
+      { name: 'ケインミント', brand: 'Tangiers', ratio: 35 },
       { name: 'ミントレモン', brand: 'Al Fakher', ratio: 25 },
     ],
     category: ['ミント系', 'フルーツ系'], strength: 'strong', sweetness: 'low',
@@ -356,7 +356,7 @@ export const presets: Recipe[] = [
     flavors: [
       { name: 'ミント', brand: 'Al Fakher', ratio: 40 },
       { name: 'スペアミント', brand: 'Al Fakher', ratio: 40 },
-      { name: 'カインミント', brand: 'Tangiers', ratio: 20 },
+      { name: 'ケインミント', brand: 'Tangiers', ratio: 20 },
     ],
     category: ['ミント系'], strength: 'strong', sweetness: 'low',
     memo: 'スペアミントをメインに据えた爽快感特化ブレンド。上級者向け。',
@@ -760,10 +760,10 @@ export const presets: Recipe[] = [
   },
   {
     ...sys, id: 'p96', likes: 98,
-    name: 'ダークアップル×カインミント',
-    flavors: [{ name: 'ダブルアップル', brand: 'Darkside', ratio: 70 }, { name: 'カインミント', brand: 'Tangiers', ratio: 30 }],
+    name: 'ダークアップル×ケインミント',
+    flavors: [{ name: 'ダブルアップル', brand: 'Darkside', ratio: 70 }, { name: 'ケインミント', brand: 'Tangiers', ratio: 30 }],
     category: ['ダブルアップル系'], strength: 'strong', sweetness: 'low',
-    memo: 'DarksideのパワフルなダブルアップルにTangiersカインミントを合わせた上級者向け。',
+    memo: 'DarksideのパワフルなダブルアップルにTangiersケインミントを合わせた上級者向け。',
   },
   {
     ...sys, id: 'p97', likes: 145,
