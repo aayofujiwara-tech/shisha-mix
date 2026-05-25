@@ -2,8 +2,10 @@ import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
 import RecipeDetailPanel from '../components/RecipeDetailPanel'
+import CommentSection from '../components/CommentSection'
 import { usePublicRecipes } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
+import { useAuth } from '../hooks/useAuth'
 import { presets } from '../data/presets'
 import { CATEGORIES, BRANDS, STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import type { Recipe } from '../types'
@@ -119,7 +121,9 @@ function FilterPanel({
   )
 }
 
-function PCDetailView({ recipe, onClose }: { recipe: Recipe; onClose: () => void }) {
+function PCDetailView({ recipe, onClose, userId, userName }: {
+  recipe: Recipe; onClose: () => void; userId?: string; userName?: string
+}) {
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
   const totalRatio = flavors.reduce((s, f) => s + (f.ratio ?? 0), 0)
@@ -171,6 +175,7 @@ function PCDetailView({ recipe, onClose }: { recipe: Recipe; onClose: () => void
         )}
 
         {recipe.memo && <p className="pc-detail-memo">{recipe.memo}</p>}
+        <CommentSection recipeId={recipe.id} userId={userId} userName={userName} />
       </div>
 
       {/* Right: flavor composition */}
@@ -208,6 +213,7 @@ export default function SearchPage() {
   const { recipes: communityRecipes, loading } = usePublicRecipes()
   const isPC = useMediaQuery('(min-width: 768px)')
   const navigate = useNavigate()
+  const { user } = useAuth()
 
   const [keyword, setKeyword] = useState('')
   const [selCategories, setSelCategories] = useState<string[]>([])
@@ -221,7 +227,7 @@ export default function SearchPage() {
   const allRecipes = useMemo(() => {
     const map = new Map<string, Recipe>()
     presets.forEach((r) => map.set(r.id, r))
-    communityRecipes.forEach((r) => { if (!map.has(r.id)) map.set(r.id, r) })
+    communityRecipes.forEach((r) => map.set(r.id, r)) // Firebase version takes precedence post-migration
     return Array.from(map.values())
   }, [communityRecipes])
 
@@ -257,7 +263,7 @@ export default function SearchPage() {
     setSelectedRecipe((prev) => prev?.id === recipe.id ? null : recipe)
 
   const handleMobileSelect = (recipe: Recipe) => {
-    if (recipe.userId === 'system') {
+    if (recipe.isPreset === true || recipe.userId === 'system') {
       setSelectedRecipe(recipe)
       setShowMobileDetail(true)
     } else {
@@ -284,6 +290,8 @@ export default function SearchPage() {
                 key={selectedRecipe.id}
                 recipe={selectedRecipe}
                 onClose={() => setSelectedRecipe(null)}
+                userId={user?.uid}
+                userName={user?.displayName || undefined}
               />
             ) : (
               <div className="search-pc-no-selection">

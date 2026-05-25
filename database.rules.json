@@ -3,7 +3,23 @@
     "recipes": {
       "$recipeId": {
         ".read": "data.child('isPublic').val() === true || auth.uid === data.child('userId').val()",
-        ".write": "auth.uid === newData.child('userId').val()"
+        ".write": "auth.uid === newData.child('userId').val() || (data.child('isPreset').val() === true && auth != null)"
+      }
+    },
+    "comments": {
+      "$recipeId": {
+        ".read": true,
+        "$commentId": {
+          ".write": "auth != null && (!data.exists() || data.child('userId').val() === auth.uid)"
+        }
+      }
+    },
+    "ratings": {
+      "$recipeId": {
+        ".read": true,
+        "$userId": {
+          ".write": "auth.uid === $userId"
+        }
       }
     },
     "inventory": {
@@ -17,8 +33,6 @@
         ".read": "auth.uid === $userId",
         ".write": "auth.uid === $userId"
       }
-    },
-    "presets": { ".read": true, ".write": false },
-    "flavorDB": { ".read": true, ".write": false }
+    }
   }
 }

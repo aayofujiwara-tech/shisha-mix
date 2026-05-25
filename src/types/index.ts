@@ -31,6 +31,7 @@ export interface Recipe {
   likes: number;
   createdAt: number;
   updatedAt: number;
+  isPreset?: boolean;
 }
 
 export interface InventoryFlavor {
