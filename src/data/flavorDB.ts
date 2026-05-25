@@ -87,7 +87,7 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'dz-lychee', name: 'ライチ', brand: 'Dozaj', category: 'フルーツ系' },
 
   // ===== Tangiers =====
-  { id: 'tg-cane-mint', name: 'カインミント', brand: 'Tangiers', category: 'ミント系' },
+  { id: 'tg-cane-mint', name: 'ケインミント', brand: 'Tangiers', category: 'ミント系' },
   { id: 'tg-horchata', name: 'Horchata', brand: 'Tangiers', category: 'デザート系' },
   { id: 'tg-watermelon', name: 'ウォーターメロン', brand: 'Tangiers', category: 'フルーツ系' },
   { id: 'tg-static-starfire', name: 'Static Starfire', brand: 'Tangiers', category: 'フルーツ系' },
