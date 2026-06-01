@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { StoreTable, Recipe } from '../types'
+import { presets } from '../data/presets'
 
 interface SessionStartOpts {
   customerCount: number
@@ -42,12 +43,12 @@ export default function TableDetailPanel({
   table, recipes, onClose, onStartSession, onCoalChange, onEndSession, onUpdateMemo, onEditTable,
 }: Props) {
   const [customerCount, setCustomerCount] = useState(table.customerCount || 1)
-  const [recipeSearch, setRecipeSearch] = useState(table.recipeName || '')
-  const [recipeId, setRecipeId] = useState(table.recipeId || '')
-  const [recipeName, setRecipeName] = useState(table.recipeName || '')
+  const [recipeSearch, setRecipeSearch] = useState('')
+  const [selectedRecipeId, setSelectedRecipeId] = useState(table.recipeId || '')
+  const [selectedRecipeName, setSelectedRecipeName] = useState(table.recipeName || '')
   const [coalInterval, setCoalInterval] = useState(table.coalInterval || 20)
   const [formMemo, setFormMemo] = useState('')
-  const [showRecipeDd, setShowRecipeDd] = useState(false)
+  const [showDd, setShowDd] = useState(false)
   const [starting, setStarting] = useState(false)
 
   const [localMemo, setLocalMemo] = useState(table.memo || '')
@@ -59,15 +60,43 @@ export default function TableDetailPanel({
   const coalRemaining = table.coalInterval * 60000 - (now - table.lastCoalChange)
   const elapsed = now - table.startTime
 
-  const recipeSuggs = recipeSearch.trim()
-    ? recipes.filter((r) => r.name.toLowerCase().includes(recipeSearch.toLowerCase())).slice(0, 5)
+  const allRecipes: Recipe[] = [...presets, ...recipes]
+  const suggs = recipeSearch.trim()
+    ? allRecipes
+        .filter((r) => {
+          const q = recipeSearch.toLowerCase()
+          return (
+            r.name.toLowerCase().includes(q) ||
+            (r.flavors ?? []).some((f) => f.name.toLowerCase().includes(q))
+          )
+        })
+        .slice(0, 5)
     : []
+
+  const selectRecipe = (r: Recipe) => {
+    setSelectedRecipeId(r.id)
+    setSelectedRecipeName(r.name)
+    setRecipeSearch('')
+    setShowDd(false)
+  }
+
+  const clearRecipe = () => {
+    setSelectedRecipeId('')
+    setSelectedRecipeName('')
+    setRecipeSearch('')
+  }
 
   const handleStart = async () => {
     if (customerCount < 1) return
     setStarting(true)
     try {
-      await onStartSession({ customerCount, recipeId, recipeName, memo: formMemo, coalInterval })
+      await onStartSession({
+        customerCount,
+        recipeId: selectedRecipeId,
+        recipeName: selectedRecipeName,
+        memo: formMemo,
+        coalInterval,
+      })
     } finally {
       setStarting(false)
     }
@@ -125,40 +154,41 @@ export default function TableDetailPanel({
 
             <div className="form-group">
               <label className="field-label">レシピ（任意）</label>
-              <div className="recipe-search-wrap">
-                <input
-                  type="text"
-                  placeholder="レシピ名で検索..."
-                  value={recipeSearch}
-                  onChange={(e) => {
-                    setRecipeSearch(e.target.value)
-                    setRecipeName(e.target.value)
-                    setRecipeId('')
-                    setShowRecipeDd(true)
-                  }}
-                  onFocus={() => setShowRecipeDd(true)}
-                  onBlur={() => setTimeout(() => setShowRecipeDd(false), 150)}
-                />
-                {showRecipeDd && recipeSuggs.length > 0 && (
-                  <div className="recipe-suggestions">
-                    {recipeSuggs.map((r) => (
-                      <button
-                        key={r.id}
-                        type="button"
-                        className="recipe-suggestion-item"
-                        onMouseDown={() => {
-                          setRecipeSearch(r.name)
-                          setRecipeName(r.name)
-                          setRecipeId(r.id)
-                          setShowRecipeDd(false)
-                        }}
-                      >
-                        {r.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {selectedRecipeId ? (
+                <div className="recipe-selected-chip">
+                  <span className="recipe-chip-name">🍃 {selectedRecipeName}</span>
+                  <button type="button" className="recipe-chip-clear" onClick={clearRecipe}>✕</button>
+                </div>
+              ) : (
+                <div className="recipe-search-wrap">
+                  <input
+                    type="text"
+                    placeholder="🔍 レシピを検索..."
+                    value={recipeSearch}
+                    onChange={(e) => { setRecipeSearch(e.target.value); setShowDd(true) }}
+                    onFocus={() => setShowDd(true)}
+                    onBlur={() => setTimeout(() => setShowDd(false), 150)}
+                    autoComplete="off"
+                  />
+                  {showDd && suggs.length > 0 && (
+                    <div className="recipe-suggestions">
+                      {suggs.map((r) => (
+                        <button
+                          key={r.id}
+                          type="button"
+                          className="recipe-suggestion-item"
+                          onMouseDown={() => selectRecipe(r)}
+                        >
+                          <span className="rs-name">{r.name}</span>
+                          <span className="rs-flavors">
+                            {(r.flavors ?? []).slice(0, 3).map((f) => f.name).join(' · ')}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="form-group">
