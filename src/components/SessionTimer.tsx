@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSessionTimer } from '../hooks/useSessionTimer'
 import './SessionTimer.css'
 
@@ -17,6 +17,12 @@ export default function SessionTimer() {
   const [interval, setIntervalMin] = useState(20)
   const [customVal, setCustomVal] = useState('')
   const [coalAnim, setCoalAnim] = useState(false)
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.style.setProperty('--session-bar-height', isActive ? '72px' : '0px')
+    return () => root.style.setProperty('--session-bar-height', '0px')
+  }, [isActive])
 
   const handleCoalChange = async () => {
     await changeCoal()
