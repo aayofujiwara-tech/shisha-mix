@@ -11,15 +11,20 @@ export function useMyRecipes(userId: string | null) {
     if (!userId) { setRecipes([]); return }
     setLoading(true)
     const recipesRef = query(ref(db, 'recipes'), orderByChild('userId'), equalTo(userId))
-    const unsub = onValue(recipesRef, (snap) => {
-      const list: Recipe[] = []
-      snap.forEach((child) => {
-        list.push({ id: child.key!, ...child.val() } as Recipe)
-      })
-      list.sort((a, b) => b.updatedAt - a.updatedAt)
-      setRecipes(list)
-      setLoading(false)
-    })
+    const unsub = onValue(
+      recipesRef,
+      (snap) => {
+        const list: Recipe[] = []
+        snap.forEach((child) => {
+          const r = { id: child.key!, ...child.val() } as Recipe
+          if (!r.isPreset) list.push(r)
+        })
+        list.sort((a, b) => b.updatedAt - a.updatedAt)
+        setRecipes(list)
+        setLoading(false)
+      },
+      () => { setRecipes([]); setLoading(false) }
+    )
     return unsub
   }, [userId])
 
@@ -53,15 +58,19 @@ export function usePublicRecipes() {
 
   useEffect(() => {
     const recipesRef = query(ref(db, 'recipes'), orderByChild('isPublic'), equalTo(true))
-    const unsub = onValue(recipesRef, (snap) => {
-      const list: Recipe[] = []
-      snap.forEach((child) => {
-        list.push({ id: child.key!, ...child.val() } as Recipe)
-      })
-      list.sort((a, b) => b.updatedAt - a.updatedAt)
-      setRecipes(list)
-      setLoading(false)
-    })
+    const unsub = onValue(
+      recipesRef,
+      (snap) => {
+        const list: Recipe[] = []
+        snap.forEach((child) => {
+          list.push({ id: child.key!, ...child.val() } as Recipe)
+        })
+        list.sort((a, b) => b.updatedAt - a.updatedAt)
+        setRecipes(list)
+        setLoading(false)
+      },
+      () => { setRecipes([]); setLoading(false) }
+    )
     return unsub
   }, [])
 
