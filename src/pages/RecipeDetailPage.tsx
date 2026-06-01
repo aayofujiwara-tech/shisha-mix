@@ -34,8 +34,13 @@ export default function RecipeDetailPage() {
   )
 
   const isOwner = user?.uid === recipe.userId
-  const canShowField = (field: keyof typeof recipe.visibility) =>
-    recipe.visibility[field] || isOwner
+  const visibility = recipe.visibility ?? { photos: true, bowl: true, charcoal: true, packing: true, memo: true }
+  const canShowField = (field: keyof typeof visibility) =>
+    visibility[field] || isOwner
+
+  const photos = recipe.photos ?? []
+  const categories = recipe.category ?? []
+  const flavors = recipe.flavors ?? []
 
   const handleLike = async () => {
     if (!user) { navigate('/login'); return }
@@ -51,14 +56,14 @@ export default function RecipeDetailPage() {
         )}
       </div>
 
-      {recipe.photos.length > 0 && canShowField('photos') && (
+      {photos.length > 0 && canShowField('photos') && (
         <div className="detail-photos">
           <div className="detail-photo-main">
-            <img src={recipe.photos[photoIdx]} alt={recipe.name} />
+            <img src={photos[photoIdx]} alt={recipe.name} />
           </div>
-          {recipe.photos.length > 1 && (
+          {photos.length > 1 && (
             <div className="detail-photo-thumbs">
-              {recipe.photos.map((url, i) => (
+              {photos.map((url, i) => (
                 <button
                   key={i}
                   className={`detail-photo-thumb${i === photoIdx ? ' active' : ''}`}
@@ -87,7 +92,7 @@ export default function RecipeDetailPage() {
         <p className="detail-author">by {recipe.authorName}</p>
 
         <div className="detail-tags">
-          {recipe.category.map((c) => <span key={c} className="tag">{c}</span>)}
+          {categories.map((c) => <span key={c} className="tag">{c}</span>)}
           <span className={`tag tag-muted strength-${recipe.strength}`}>強度: {STRENGTH_LABELS[recipe.strength]}</span>
           <span className="tag tag-muted">甘さ: {SWEETNESS_LABELS[recipe.sweetness]}</span>
         </div>
@@ -96,11 +101,11 @@ export default function RecipeDetailPage() {
 
         <h2 className="detail-section-title">フレーバー構成</h2>
         <div className="ratio-bar-container" style={{ marginBottom: 12, height: 12 }}>
-          {recipe.flavors.map((f, i) => (
+          {flavors.map((f, i) => (
             <div key={i} className="ratio-bar-segment" style={{ flex: f.ratio, background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
           ))}
         </div>
-        {recipe.flavors.map((f, i) => (
+        {flavors.map((f, i) => (
           <div key={i} className="flavor-row">
             <span className="flavor-dot" style={{ background: RATIO_COLORS[i % RATIO_COLORS.length] }} />
             <span className="flavor-name">{f.name}</span>
