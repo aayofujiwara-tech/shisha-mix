@@ -15,7 +15,7 @@ export default function RecipeDetailPage() {
   const [recipe, setRecipe] = useState<Recipe | null>(null)
   const [loading, setLoading] = useState(true)
   const [photoIdx, setPhotoIdx] = useState(0)
-  const { liked, loading: likesLoading, toggle } = useLikes(id ?? '', user?.uid)
+  const { liked, loading: likesLoading, likesCount, toggle } = useLikes(id ?? '', user?.uid)
 
   useEffect(() => {
     if (!id) return
@@ -39,8 +39,6 @@ export default function RecipeDetailPage() {
 
   const handleLike = async () => {
     if (!user) { navigate('/login'); return }
-    const delta = liked ? -1 : 1
-    setRecipe((r) => r ? { ...r, likes: r.likes + delta } : r)
     await toggle()
   }
 
@@ -82,7 +80,7 @@ export default function RecipeDetailPage() {
             onClick={handleLike}
             disabled={likesLoading}
           >
-            {liked ? '❤️' : '🤍'} {recipe.likes}
+            {liked ? '❤️' : '🤍'} {likesCount}
           </button>
         </div>
 

@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
+import { useAuth } from '../hooks/useAuth'
+import { useLikes } from '../hooks/useRecipes'
 import './RecipeCard.css'
 
 const RATIO_COLORS = [
@@ -17,6 +19,8 @@ interface Props {
 
 export default function RecipeCard({ recipe, showAuthor = false, selected = false, onSelect }: Props) {
   const navigate = useNavigate()
+  const { user } = useAuth()
+  const { liked, likesCount } = useLikes(recipe.id, user?.uid, recipe.likes ?? 0)
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
   const categories = recipe.category ?? []
@@ -90,7 +94,7 @@ export default function RecipeCard({ recipe, showAuthor = false, selected = fals
             甘さ: {SWEETNESS_LABELS[recipe.sweetness]}
           </span>
           <span className="recipe-card-divider">·</span>
-          <span className="recipe-card-likes">❤️ {recipe.likes}</span>
+          <span className={`recipe-card-likes${liked ? ' liked' : ''}`}>{liked ? '❤️' : '🤍'} {likesCount}</span>
         </div>
       </div>
     </div>
