@@ -4,7 +4,7 @@
       ".read": "(auth != null && query.orderByChild == 'userId' && query.equalTo == auth.uid) || (query.orderByChild == 'isPublic' && query.equalTo == true)",
       "$recipeId": {
         ".read": "data.child('isPublic').val() === true || auth.uid === data.child('userId').val()",
-        ".write": "auth.uid === newData.child('userId').val() || (data.child('isPreset').val() === true && auth != null)"
+        ".write": "auth.uid === newData.child('userId').val() || auth.uid === data.child('userId').val() || (data.child('isPreset').val() === true && auth != null)"
       }
     },
     "comments": {

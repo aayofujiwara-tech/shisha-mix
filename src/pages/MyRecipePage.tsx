@@ -27,9 +27,14 @@ export default function MyRecipePage() {
   const confirmDelete = async () => {
     if (!deleteTarget) return
     setDeleting(true)
-    await deleteRecipe(deleteTarget)
-    setDeleteTarget(null)
-    setDeleting(false)
+    try {
+      await deleteRecipe(deleteTarget)
+      setDeleteTarget(null)
+    } catch (err) {
+      console.error('Delete error:', err)
+    } finally {
+      setDeleting(false)
+    }
   }
 
   return (

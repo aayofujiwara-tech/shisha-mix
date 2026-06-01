@@ -44,6 +44,9 @@ export default function RecipeFormPage() {
   const [visibility, setVisibility] = useState<RecipeVisibility>(EMPTY_VISIBILITY)
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
+  const [existingLikes, setExistingLikes] = useState(0)
+  const [existingCreatedAt, setExistingCreatedAt] = useState(0)
   const [flavorSearch, setFlavorSearch] = useState<string[]>([])
   const [showSuggestions, setShowSuggestions] = useState<number | null>(null)
 
@@ -72,6 +75,8 @@ export default function RecipeFormPage() {
         setMemo(r.memo ?? '')
         setIsPublic(r.isPublic ?? false)
         setVisibility(r.visibility ?? EMPTY_VISIBILITY)
+        setExistingLikes(r.likes ?? 0)
+        setExistingCreatedAt(r.createdAt ?? Date.now())
       })
       .catch(() => setLoadError(true))
   }, [isEdit, id])
@@ -95,6 +100,7 @@ export default function RecipeFormPage() {
     if (flavors.some((f) => !f.name.trim())) return
 
     setLoading(true)
+    setSaveError(null)
     try {
       const now = Date.now()
       const data: Omit<Recipe, 'id'> = {
@@ -112,8 +118,8 @@ export default function RecipeFormPage() {
         memo: memo.trim() || undefined,
         isPublic,
         visibility,
-        likes: 0,
-        createdAt: now,
+        likes: isEdit ? existingLikes : 0,
+        createdAt: isEdit ? existingCreatedAt : now,
         updatedAt: now,
       }
       if (isEdit && id) {
@@ -122,6 +128,9 @@ export default function RecipeFormPage() {
         await createRecipe(data)
       }
       navigate('/my')
+    } catch (err) {
+      console.error('Save error:', err)
+      setSaveError('保存に失敗しました。もう一度お試しください。')
     } finally {
       setLoading(false)
     }
@@ -332,6 +341,7 @@ export default function RecipeFormPage() {
           </div>
         </div>
 
+        {saveError && <p className="form-save-error">{saveError}</p>}
         <button type="submit" className="btn-primary" disabled={loading}>
           {loading ? '保存中...' : isEdit ? '変更を保存' : 'レシピを作成'}
         </button>
