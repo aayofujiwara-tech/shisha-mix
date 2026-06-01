@@ -21,7 +21,7 @@ export function useComments(recipeId: string) {
     const q = query(ref(db, `comments/${recipeId}`), orderByChild('createdAt'))
     const unsub = onValue(q, (snap) => {
       const list: Comment[] = []
-      snap.forEach((child) => list.push({ id: child.key!, ...child.val() } as Comment))
+      snap.forEach((child) => { list.push({ id: child.key!, ...child.val() } as Comment) })
       setComments(list.reverse())
       setLoading(false)
     })
