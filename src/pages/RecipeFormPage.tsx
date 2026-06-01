@@ -87,6 +87,8 @@ export default function RecipeFormPage() {
     setFlavors((prev) => prev.map((f, idx) => idx === i ? { ...f, [field]: value } : f))
   }
 
+  const totalRatio = flavors.reduce((sum, f) => sum + Number(f.ratio ?? 0), 0)
+
   const getSuggestions = (idx: number) => {
     const q = flavorSearch[idx] ?? ''
     if (!q.trim()) return []
@@ -98,6 +100,10 @@ export default function RecipeFormPage() {
     if (!user) return
     if (!name.trim()) return
     if (flavors.some((f) => !f.name.trim())) return
+    if (totalRatio !== 100) {
+      setSaveError(`フレーバーの合計が ${totalRatio}% です。100% になるよう調整してください。`)
+      return
+    }
 
     setLoading(true)
     setSaveError(null)
@@ -129,8 +135,13 @@ export default function RecipeFormPage() {
       }
       navigate('/my')
     } catch (err) {
-      console.error('Save error:', err)
-      setSaveError('保存に失敗しました。もう一度お試しください。')
+      const msg = err instanceof Error ? err.message : String(err)
+      console.error('Save error:', { code: (err as { code?: string })?.code, message: msg, err })
+      if (msg.includes('PERMISSION_DENIED') || msg.includes('permission')) {
+        setSaveError('保存権限がありません。再ログインしてお試しください。')
+      } else {
+        setSaveError(`保存に失敗しました: ${msg}`)
+      }
     } finally {
       setLoading(false)
     }
@@ -237,6 +248,10 @@ export default function RecipeFormPage() {
           {flavors.length < 8 && (
             <button type="button" className="add-flavor-btn" onClick={addFlavor}>+ フレーバーを追加</button>
           )}
+          <div className={`ratio-total-indicator${totalRatio === 100 ? ' ok' : ''}`}>
+            合計: <strong>{totalRatio}%</strong> / 100%
+            {totalRatio !== 100 && <span className="ratio-total-hint"> （100% になるよう調整してください）</span>}
+          </div>
         </div>
 
         {/* 系統タグ */}
