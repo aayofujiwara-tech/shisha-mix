@@ -809,4 +809,109 @@ export const presets: Recipe[] = [
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'Fumari公式オリジナルブレンド。コットンキャンディをベースにした究極の甘口。',
   },
+  {
+    ...sys, id: 'p101', likes: 145,
+    name: 'パンラズナ×キウイ',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 60 },
+      { name: 'キウイ', brand: 'Al Fakher', ratio: 40 },
+    ],
+    category: ['スパイス系', 'フルーツ系'], strength: 'medium', sweetness: 'medium',
+    memo: 'パンラズナとフルーツの定番。キウイの甘酸っぱさがエスニックな香りを引き立てる。',
+  },
+  {
+    ...sys, id: 'p102', likes: 198,
+    name: 'パンラズナ×ダブルアップル',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
+      { name: 'ダブルアップル', brand: 'Al Fakher', ratio: 60 },
+    ],
+    category: ['スパイス系', 'ダブルアップル系'], strength: 'strong', sweetness: 'medium',
+    memo: '王道同士の最強ミックス。中東テイスト全開。',
+  },
+  {
+    ...sys, id: 'p103', likes: 167,
+    name: 'パンラズナ×ローズ×ミント',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 50 },
+      { name: 'ローズ', brand: 'Al Fakher', ratio: 30 },
+      { name: 'ミント', brand: 'Al Fakher', ratio: 20 },
+    ],
+    category: ['スパイス系'], strength: 'medium', sweetness: 'medium',
+    memo: 'フローラルとスパイスの一体感。ローズのまったりした甘みがパンラズナと溶け合う。',
+  },
+  {
+    ...sys, id: 'p104', likes: 132,
+    name: 'パンラズナ×グレープ',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
+      { name: 'グレープ', brand: 'Al Fakher', ratio: 60 },
+    ],
+    category: ['スパイス系', 'フルーツ系'], strength: 'medium', sweetness: 'high',
+    memo: 'グレープの甘さがパンラズナのスパイス感を包み込む飲みやすいミックス。',
+  },
+  {
+    ...sys, id: 'p105', likes: 178,
+    name: 'パンラズナ×ピーチ×ティー',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 30 },
+      { name: 'ピーチ', brand: 'Al Fakher', ratio: 40 },
+      { name: 'ミントティー', brand: 'Al Fakher', ratio: 30 },
+    ],
+    category: ['スパイス系', 'フルーツ系'], strength: 'weak', sweetness: 'high',
+    memo: 'カツカレー理論の極み。三つの相性抜群フレーバーの掛け合わせ。',
+  },
+  {
+    ...sys, id: 'p106', likes: 121,
+    name: 'パンラズナ×レモン×ミント',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 50 },
+      { name: 'レモン', brand: 'Al Fakher', ratio: 30 },
+      { name: 'ミント', brand: 'Al Fakher', ratio: 20 },
+    ],
+    category: ['スパイス系', 'ミント系'], strength: 'medium', sweetness: 'low',
+    memo: 'さっぱりさせたいときの定番。柑橘がパンラズナの重さを抜く。',
+  },
+  {
+    ...sys, id: 'p107', likes: 98,
+    name: 'パンラズナ×グレープ×コーラ',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 33 },
+      { name: 'グレープ', brand: 'Al Fakher', ratio: 34 },
+      { name: 'コーラ', brand: 'Starbuzz', ratio: 33 },
+    ],
+    category: ['スパイス系'], strength: 'medium', sweetness: 'high',
+    memo: 'エスニック×甘み×コーラの炭酸感が独特の世界観。',
+  },
+  {
+    ...sys, id: 'p108', likes: 112,
+    name: 'パンラズナ×グァバ',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
+      { name: 'グァバ', brand: 'Al Fakher', ratio: 60 },
+    ],
+    category: ['スパイス系', 'フルーツ系'], strength: 'medium', sweetness: 'high',
+    memo: '南国フルーツのグァバとエスニックなパンラズナの相性が抜群。',
+  },
+  {
+    ...sys, id: 'p109', likes: 87,
+    name: 'パンラズナ×レバニーズボムシェル',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 50 },
+      { name: 'Lebanese Bombshell', brand: 'Starbuzz', ratio: 50 },
+    ],
+    category: ['スパイス系'], strength: 'strong', sweetness: 'low',
+    memo: '香木×レバノン杉。森の中でリラックスするような深い香り。',
+  },
+  {
+    ...sys, id: 'p110', likes: 143,
+    name: 'パンラズナ×カルダモン×ダブルアップル',
+    flavors: [
+      { name: 'パンラズナ', brand: 'Al Waha', ratio: 30 },
+      { name: 'カルダモン', brand: 'Starbuzz', ratio: 20 },
+      { name: 'ダブルアップル', brand: 'Al Fakher', ratio: 50 },
+    ],
+    category: ['スパイス系', 'ダブルアップル系'], strength: 'strong', sweetness: 'medium',
+    memo: 'スパイス全開の本格中東ミックス。上級者向け。',
+  },
 ]
