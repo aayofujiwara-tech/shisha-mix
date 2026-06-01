@@ -1,0 +1,268 @@
+/* ── Wrapper ────────────────────────────────────────────────────────────── */
+.fc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Selector card ──────────────────────────────────────────────────────── */
+.fc-selector-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+/* ── Chips (selected flavors) ───────────────────────────────────────────── */
+.fc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.fc-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px 5px 12px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1.5px solid var(--color-amber);
+  border-radius: 999px;
+  color: var(--color-amber);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fc-chip button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-amber);
+  font-size: 11px;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+/* ── Input row ──────────────────────────────────────────────────────────── */
+.fc-input-wrap {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.fc-search-input {
+  flex: 1;
+}
+
+.fc-add-btn {
+  padding: 0 14px;
+  background: var(--color-amber);
+  color: var(--color-bg, #0d1b2a);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ── Suggestions dropdown ───────────────────────────────────────────────── */
+.fc-suggestions {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.fc-suggestion-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 12px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  gap: 8px;
+}
+
+.fc-suggestion-item:hover,
+.fc-suggestion-item.selected {
+  background: var(--color-surface);
+}
+
+.fc-sug-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fc-sug-brand {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* ── Inventory-only toggle ──────────────────────────────────────────────── */
+.fc-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.fc-toggle-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.fc-toggle-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* ── Results label ──────────────────────────────────────────────────────── */
+.fc-results-label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: 2px 0;
+}
+
+/* ── Placeholder (no flavors selected) ─────────────────────────────────── */
+.fc-placeholder {
+  text-align: center;
+  padding: 40px 16px;
+}
+
+/* ── Result cards ───────────────────────────────────────────────────────── */
+.fc-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.fc-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.fc-card-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.fc-card-author {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.fc-card-score-box {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.fc-score-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-amber);
+}
+
+.fc-score-unit {
+  font-size: 12px;
+  color: var(--color-amber);
+  margin-left: 1px;
+}
+
+/* ── Tags row ───────────────────────────────────────────────────────────── */
+.fc-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+/* ── Score bar ──────────────────────────────────────────────────────────── */
+.fc-score-bar-wrap {
+  height: 6px;
+  background: var(--color-surface-2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.fc-score-bar {
+  height: 100%;
+  background: var(--color-amber);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* ── Flavor tag list ────────────────────────────────────────────────────── */
+.fc-flavor-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.fc-flavor-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.fc-flavor-tag--hl {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-amber);
+  border-color: var(--color-amber);
+  font-weight: 600;
+}
+
+/* ── Partner flavors ────────────────────────────────────────────────────── */
+.fc-partners {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.fc-partners-label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fc-partner-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.fc-partner-item {
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.fc-partner-brand {
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
