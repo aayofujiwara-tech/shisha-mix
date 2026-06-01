@@ -1,0 +1,313 @@
+/* ===== Floating Start Button (FAB) ===== */
+.st-fab {
+  position: fixed;
+  bottom: calc(var(--tab-height) + 12px);
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.st-fab:hover {
+  border-color: var(--color-amber);
+  background: var(--color-surface-2);
+}
+
+@media (min-width: 768px) {
+  .st-fab {
+    bottom: 24px;
+    right: 24px;
+  }
+}
+
+/* ===== Active Session Bar ===== */
+.st-bar {
+  position: fixed;
+  bottom: calc(var(--tab-height) + 8px);
+  left: 8px;
+  right: 8px;
+  z-index: 150;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  transition: border-color 0.4s, background 0.4s;
+}
+
+.st-bar--warning {
+  border-color: var(--color-amber);
+  background: rgba(245,158,11,0.07);
+  animation: stPulse 2s ease-in-out infinite;
+}
+
+.st-bar--overdue {
+  border-color: #e8607a;
+  background: rgba(232,96,122,0.08);
+  animation: stShake 0.5s ease-in-out infinite;
+}
+
+@keyframes stPulse {
+  0%, 100% { background: rgba(245,158,11,0.07); }
+  50%       { background: rgba(245,158,11,0.14); }
+}
+
+@keyframes stShake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-4px); }
+  40%      { transform: translateX(4px); }
+  60%      { transform: translateX(-3px); }
+  80%      { transform: translateX(3px); }
+}
+
+@media (min-width: 768px) {
+  .st-bar {
+    bottom: 24px;
+    left: auto;
+    right: 24px;
+    width: 420px;
+    border-radius: var(--radius);
+  }
+}
+
+.st-bar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.st-bar-name {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.st-bar-times {
+  display: flex;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  flex-wrap: wrap;
+}
+
+.st-bar-dot {
+  opacity: 0.4;
+}
+
+.st-bar-coal--warning { color: var(--color-amber); font-weight: 600; }
+.st-bar-coal--overdue { color: #e8607a; font-weight: 700; }
+
+.st-bar-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.st-coal-btn {
+  padding: 7px 12px;
+  background: #4ecdc4;
+  color: #0d1b2a;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 56px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.st-coal-btn:hover {
+  background: #3db5ad;
+}
+
+.st-coal-btn:active {
+  transform: scale(0.95);
+}
+
+.st-coal-btn--done {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.st-end-btn {
+  padding: 7px 10px;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.st-end-btn:hover {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* ===== Interval Picker Modal ===== */
+.st-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+}
+
+.st-interval-modal {
+  background: var(--color-surface);
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 20px 16px 40px;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .st-overlay {
+    align-items: center;
+    justify-content: center;
+  }
+  .st-interval-modal {
+    width: 400px;
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    max-height: 70vh;
+  }
+}
+
+.st-interval-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.st-interval-recipe {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.st-interval-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.st-interval-opt {
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.st-interval-opt.selected {
+  border-color: var(--color-amber);
+  background: rgba(245,158,11,0.12);
+  color: var(--color-amber);
+}
+
+.st-interval-custom-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.st-interval-footer {
+  display: flex;
+  gap: 8px;
+}
+
+.st-interval-start {
+  flex: 1;
+  display: block;
+}
+
+/* ===== Start session button (used in recipe panels) ===== */
+.btn-start-session {
+  width: 100%;
+  padding: 11px 16px;
+  background: transparent;
+  color: var(--color-amber);
+  border: 1.5px solid var(--color-amber);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+  margin-top: 12px;
+  display: block;
+}
+
+.btn-start-session:hover {
+  background: rgba(245,158,11,0.1);
+}
+
+/* ===== Busy alert toast ===== */
+.st-busy-toast {
+  position: fixed;
+  bottom: calc(var(--tab-height) + 8px);
+  left: 8px;
+  right: 8px;
+  z-index: 500;
+  background: rgba(239,68,68,0.15);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.st-busy-close {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  padding: 4px 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .st-busy-toast {
+    bottom: 24px;
+    left: auto;
+    right: 24px;
+    width: 380px;
+  }
+}

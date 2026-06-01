@@ -6,10 +6,12 @@ import CommentSection from '../components/CommentSection'
 import { usePublicRecipes, useLikes } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAuth } from '../hooks/useAuth'
+import { useSessionTimer } from '../hooks/useSessionTimer'
 import { presets } from '../data/presets'
 import { CATEGORIES, BRANDS, STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import type { Recipe } from '../types'
 import './SearchPage.css'
+import '../components/SessionTimer.css'
 
 const STRENGTH_OPTS = Object.entries(STRENGTH_LABELS) as [Recipe['strength'], string][]
 const SWEET_OPTS = Object.entries(SWEETNESS_LABELS) as [Recipe['sweetness'], string][]
@@ -126,6 +128,7 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
 }) {
   const navigate = useNavigate()
   const { liked, loading: likesLoading, likesCount, toggle } = useLikes(recipe.id, userId, recipe.likes)
+  const { requestStart } = useSessionTimer()
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
   const totalRatio = flavors.reduce((s, f) => s + (f.ratio ?? 0), 0)
@@ -220,6 +223,12 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
             </div>
           ))}
         </div>
+        <button
+          className="btn-start-session"
+          onClick={() => requestStart(recipe.id, recipe.name)}
+        >
+          ▶ このレシピでセッション開始
+        </button>
       </div>
     </div>
   )

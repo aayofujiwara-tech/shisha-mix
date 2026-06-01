@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getRecipe, useLikes } from '../hooks/useRecipes'
 import { useAuth } from '../hooks/useAuth'
+import { useSessionTimer } from '../hooks/useSessionTimer'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import './RecipeDetailPage.css'
+import '../components/SessionTimer.css'
 
 const RATIO_COLORS = ['#f59e0b','#3b82f6','#22c55e','#a855f7','#ef4444','#06b6d4','#f97316','#14b8a6']
 
@@ -12,6 +14,7 @@ export default function RecipeDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { user } = useAuth()
+  const { requestStart } = useSessionTimer()
   const [recipe, setRecipe] = useState<Recipe | null>(null)
   const [loading, setLoading] = useState(true)
   const [photoIdx, setPhotoIdx] = useState(0)
@@ -150,6 +153,13 @@ export default function RecipeDetailPage() {
             </span>
           </div>
         )}
+
+        <button
+          className="btn-start-session"
+          onClick={() => requestStart(recipe.id, recipe.name)}
+        >
+          ▶ このレシピでセッション開始
+        </button>
       </div>
     </div>
   )

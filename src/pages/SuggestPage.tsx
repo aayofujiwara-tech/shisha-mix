@@ -3,16 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useMyRecipes, usePublicRecipes } from '../hooks/useRecipes'
 import { useInventory } from '../hooks/useInventory'
+import { useSessionTimer } from '../hooks/useSessionTimer'
 import { presets } from '../data/presets'
 import { flavorDB } from '../data/flavorDB'
 import { CATEGORIES, STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import type { Recipe } from '../types'
 import RecipeCard from '../components/RecipeCard'
 import './SuggestPage.css'
+import '../components/SessionTimer.css'
 
 export default function SuggestPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { requestStart } = useSessionTimer()
   const { recipes: communityRecipes } = usePublicRecipes()
   const { flavors: inventory } = useInventory(user?.uid ?? null)
   const { createRecipe } = useMyRecipes(user?.uid ?? null)
@@ -227,6 +230,12 @@ export default function SuggestPage() {
               {saved ? '✓ 保存済み' : saving ? '保存中...' : '📝 マイレシピに保存'}
             </button>
           </div>
+          <button
+            className="btn-start-session"
+            onClick={() => requestStart(suggested.id, suggested.name)}
+          >
+            ▶ このレシピでセッション開始
+          </button>
         </div>
       )}
 
