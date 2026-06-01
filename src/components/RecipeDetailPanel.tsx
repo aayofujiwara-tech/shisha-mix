@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 import { toggleLike } from '../hooks/useRecipes'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
+import CommentSection from './CommentSection'
 import './RecipeDetailPanel.css'
 
 const RATIO_COLORS = ['#f59e0b','#3b82f6','#22c55e','#a855f7','#ef4444','#06b6d4','#f97316','#14b8a6']
@@ -138,6 +139,12 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
             <p className="dp-memo">{recipe.memo}</p>
           </>
         )}
+
+        <CommentSection
+          recipeId={recipe.id}
+          userId={user?.uid}
+          userName={user?.displayName || undefined}
+        />
       </div>
     </div>
   )

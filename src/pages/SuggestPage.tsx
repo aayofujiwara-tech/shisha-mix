@@ -30,8 +30,8 @@ export default function SuggestPage() {
 
   const allRecipes = useMemo(() => {
     const map = new Map<string, Recipe>()
-    presets.forEach((r) => map.set(r.id, { ...r, _weight: 1 } as Recipe))
-    communityRecipes.forEach((r) => { if (!map.has(r.id)) map.set(r.id, { ...r, _weight: 1 } as Recipe) })
+    presets.forEach((r) => map.set(r.id, r))
+    communityRecipes.forEach((r) => map.set(r.id, r)) // Firebase version takes precedence post-migration
     return Array.from(map.values())
   }, [communityRecipes])
 
@@ -67,7 +67,7 @@ export default function SuggestPage() {
       alert('条件に合うレシピが見つかりません。条件を緩めてみてください。')
       return
     }
-    const weights = pool.map((r) => r.userId === 'system' ? 2 : 1)
+    const weights = pool.map((r) => (r.isPreset === true || r.userId === 'system') ? 2 : 1)
     const total = weights.reduce((s, w) => s + w, 0)
     let rand = Math.random() * total
     let pick = pool[0]
