@@ -11,6 +11,7 @@ import RecipeFormPage from './pages/RecipeFormPage'
 import InventoryPage from './pages/InventoryPage'
 import SuggestPage from './pages/SuggestPage'
 import ProfilePage from './pages/ProfilePage'
+import StorePage from './pages/StorePage'
 
 function AppRoutes() {
   const { user, loading } = useAuth()
@@ -47,6 +48,11 @@ function AppRoutes() {
           <Route path="/profile" element={
             <ProtectedRoute user={user} loading={loading}>
               <ProfilePage />
+            </ProtectedRoute>
+          } />
+          <Route path="/store" element={
+            <ProtectedRoute user={user} loading={loading}>
+              <StorePage />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/" replace />} />
