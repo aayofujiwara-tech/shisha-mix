@@ -42,6 +42,12 @@
         ".read": "auth.uid === $userId",
         ".write": "auth.uid === $userId"
       }
+    },
+    "stores": {
+      "$userId": {
+        ".read": "auth.uid === $userId",
+        ".write": "auth.uid === $userId"
+      }
     }
   }
 }

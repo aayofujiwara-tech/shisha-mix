@@ -1,0 +1,359 @@
+.store-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.store-name {
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.store-name-edit-icon {
+  font-size: 13px;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.store-name:hover .store-name-edit-icon {
+  opacity: 1;
+}
+
+.store-name-input {
+  font-size: 18px;
+  font-weight: 700;
+  width: 200px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-amber);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  color: var(--color-text);
+}
+
+.add-table-btn {
+  background: var(--color-amber);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.add-table-btn:hover {
+  background: var(--color-amber-light);
+}
+
+/* ===== Warning Banner ===== */
+.coal-alert-banner {
+  background: rgba(232,96,122,0.08);
+  border: 1px solid rgba(232,96,122,0.3);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.alert-overdue {
+  color: #e8607a;
+  font-weight: 600;
+}
+
+.alert-warning {
+  color: var(--color-amber);
+  font-weight: 600;
+}
+
+/* ===== Tables Grid ===== */
+.tables-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .tables-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .tables-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===== TableDetailPanel ===== */
+.table-detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+}
+
+.table-detail-panel {
+  background: var(--color-surface);
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 20px 16px 40px;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .table-detail-overlay {
+    align-items: center;
+    justify-content: center;
+  }
+  .table-detail-panel {
+    width: 480px;
+    max-height: 85vh;
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+.table-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.table-detail-title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* ===== Session Start Form ===== */
+.session-form .form-group {
+  margin-bottom: 16px;
+}
+
+.count-stepper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 6px 0;
+}
+
+.stepper-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.stepper-btn:hover {
+  border-color: var(--color-amber);
+}
+
+.stepper-val {
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 52px;
+  text-align: center;
+}
+
+.recipe-search-wrap {
+  position: relative;
+}
+
+.recipe-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-amber);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  z-index: 20;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.recipe-suggestion-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--color-text);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.recipe-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.recipe-suggestion-item:hover {
+  background: rgba(245,158,11,0.1);
+}
+
+/* ===== Active Session ===== */
+.session-info-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.session-info-item {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.coal-countdown-block {
+  text-align: center;
+  padding: 16px;
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+  border: 1px solid var(--color-border);
+}
+
+.coal-countdown-block.coal-countdown--active {
+  border-color: #4ecdc4;
+  background: rgba(78,205,196,0.05);
+}
+
+.coal-countdown-block.coal-countdown--warning {
+  border-color: var(--color-amber);
+  background: rgba(245,158,11,0.05);
+}
+
+.coal-countdown-block.coal-countdown--overdue {
+  border-color: #e8607a;
+  background: rgba(232,96,122,0.05);
+}
+
+.coal-countdown-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.coal-countdown-time {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.coal-countdown--active  .coal-countdown-time { color: #4ecdc4; }
+.coal-countdown--warning .coal-countdown-time { color: var(--color-amber); animation: blink 1s infinite; }
+.coal-countdown--overdue .coal-countdown-time { color: #e8607a; animation: blink 0.7s infinite; }
+
+.coal-countdown-sub {
+  font-size: 12px;
+  margin-top: 6px;
+  color: var(--color-text-muted);
+}
+
+/* ===== Coal Change Button ===== */
+.coal-change-btn {
+  width: 100%;
+  padding: 20px;
+  background: #4ecdc4;
+  color: #0d1b2a;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 14px;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+
+.coal-change-btn:hover {
+  background: #3db5ad;
+}
+
+.coal-change-btn:active {
+  transform: scale(0.98);
+}
+
+.coal-change-btn--loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Coal History ===== */
+.coal-history {
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.coal-history-title {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.coal-history-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.coal-history-item:last-child {
+  border-bottom: none;
+}
+
+.coal-history-elapsed {
+  opacity: 0.7;
+}
+
+.session-recipe {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.end-confirm {
+  margin-top: 12px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}

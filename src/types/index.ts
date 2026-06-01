@@ -77,3 +77,27 @@ export type Brand = typeof BRANDS[number];
 export const STRENGTH_LABELS: StrengthLabel = { weak: '弱', medium: '中', strong: '強' };
 export const SWEETNESS_LABELS: SweetnessLabel = { low: '低', medium: '中', high: '高' };
 export const STATUS_LABELS: StatusLabel = { full: 'あり', low: '残り少し', empty: 'なし' };
+
+export type TableStatus = 'empty' | 'active' | 'warning' | 'overdue';
+
+export interface CoalChangeRecord {
+  time: number;
+  memo: string;
+}
+
+export interface StoreTable {
+  id: string;
+  tableNumber: string;
+  pipeNumber: number;
+  label: string;
+  status: TableStatus;
+  customerCount: number;
+  startTime: number;
+  recipeId: string;
+  recipeName: string;
+  coalInterval: number;
+  lastCoalChange: number;
+  coalChangeCount: number;
+  coalChangeHistory: CoalChangeRecord[];
+  memo: string;
+}
