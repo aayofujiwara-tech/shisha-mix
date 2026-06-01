@@ -7,7 +7,7 @@ const sys = { userId: 'system', authorName: 'SheeshaMix公式', photos: [] as st
 export const presets: Recipe[] = [
   // ===== 既存10件（日本語名に統一） =====
   {
-    ...sys, id: 'p1', likes: 287,
+    ...sys, id: 'p1', likes: 0,
     name: 'クラシック・ダブルアップル',
     flavors: [{ name: 'ダブルアップル', brand: 'Al Fakher', ratio: 100 }],
     category: ['ダブルアップル系'], strength: 'medium', sweetness: 'medium',
@@ -15,7 +15,7 @@ export const presets: Recipe[] = [
     memo: 'シーシャの定番中の定番。シナモンとアニスの香りが特徴。',
   },
   {
-    ...sys, id: 'p2', likes: 334,
+    ...sys, id: 'p2', likes: 0,
     name: 'ウォーターメロン×ミント',
     flavors: [{ name: 'ウォーターメロン', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['フルーツ系', 'ミント系'], strength: 'medium', sweetness: 'high',
@@ -23,7 +23,7 @@ export const presets: Recipe[] = [
     memo: '夏にぴったりのさっぱりミックス。スイカの甘さとミントの清涼感が抜群。',
   },
   {
-    ...sys, id: 'p3', likes: 312,
+    ...sys, id: 'p3', likes: 0,
     name: 'Love 66×アイスピーチ',
     flavors: [{ name: 'Love 66', brand: 'Adalya', ratio: 60 }, { name: 'アイスピーチ', brand: 'Adalya', ratio: 40 }],
     category: ['フルーツ系', 'アイス系'], strength: 'weak', sweetness: 'high',
@@ -31,21 +31,21 @@ export const presets: Recipe[] = [
     memo: 'Adalya同士の相性抜群コンビ。甘くてアイシーな定番ミックス。',
   },
   {
-    ...sys, id: 'p4', likes: 265,
+    ...sys, id: 'p4', likes: 0,
     name: 'ブルーミスト×ウォーターメロン',
     flavors: [{ name: 'ブルーミスト', brand: 'Starbuzz', ratio: 50 }, { name: 'ウォーターメロン', brand: 'Al Fakher', ratio: 50 }],
     category: ['ミント系', 'フルーツ系'], strength: 'medium', sweetness: 'medium',
     memo: 'Starbuzzの名作ブルーミストとAFウォーターメロンの王道ブレンド。',
   },
   {
-    ...sys, id: 'p5', likes: 178,
+    ...sys, id: 'p5', likes: 0,
     name: 'パンラズナ×ローズ',
     flavors: [{ name: 'パンラズナ', brand: 'Al Waha', ratio: 60 }, { name: 'ローズ', brand: 'Al Fakher', ratio: 40 }],
     category: ['スパイス系'], strength: 'strong', sweetness: 'medium',
     memo: 'Al Wahaパンラズナにローズを合わせたインド系スパイスの独特な香りが好きな方向け。個性的な一本。',
   },
   {
-    ...sys, id: 'p6', likes: 243,
+    ...sys, id: 'p6', likes: 0,
     name: 'トリプルミント',
     flavors: [
       { name: 'ミント', brand: 'Al Fakher', ratio: 40 },
@@ -56,7 +56,7 @@ export const presets: Recipe[] = [
     memo: '3種のミントを組み合わせた清涼感マックスミックス。',
   },
   {
-    ...sys, id: 'p7', likes: 196,
+    ...sys, id: 'p7', likes: 0,
     name: 'マンゴー×ライム×ミント',
     flavors: [
       { name: 'マンゴー', brand: 'Al Fakher', ratio: 50 },
@@ -67,21 +67,21 @@ export const presets: Recipe[] = [
     memo: 'トロピカル感あふれるマンゴーをライムの酸味とミントがさっぱりさせる。',
   },
   {
-    ...sys, id: 'p8', likes: 228,
+    ...sys, id: 'p8', likes: 0,
     name: 'Horchata×バニラ',
     flavors: [{ name: 'Horchata', brand: 'Tangiers', ratio: 70 }, { name: 'バニラ', brand: 'Al Fakher', ratio: 30 }],
     category: ['デザート系'], strength: 'medium', sweetness: 'high',
     memo: 'Tangiersの名作HorchataにAFバニラを足した濃厚デザート系。',
   },
   {
-    ...sys, id: 'p9', likes: 301,
+    ...sys, id: 'p9', likes: 0,
     name: 'アイスウォーターメロン×ミント',
     flavors: [{ name: 'アイスウォーターメロン', brand: 'Dozaj', ratio: 60 }, { name: 'ミント', brand: 'Al Fakher', ratio: 40 }],
     category: ['アイス系', 'フルーツ系'], strength: 'medium', sweetness: 'medium',
     memo: 'DozajのアイスシリーズとAFミントの鉄板コンビ。',
   },
   {
-    ...sys, id: 'p10', likes: 158,
+    ...sys, id: 'p10', likes: 0,
     name: 'スパイスマンゴー×ミント',
     flavors: [{ name: 'スパイスマンゴー', brand: 'Adalya', ratio: 65 }, { name: 'ミント', brand: 'Al Fakher', ratio: 35 }],
     category: ['スパイス系', 'フルーツ系'], strength: 'strong', sweetness: 'medium',
@@ -90,49 +90,49 @@ export const presets: Recipe[] = [
 
   // ===== 定番・初心者向け (p11–p25) =====
   {
-    ...sys, id: 'p11', likes: 245,
+    ...sys, id: 'p11', likes: 0,
     name: 'ブルーベリー×ミント',
     flavors: [{ name: 'ブルーベリー', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['ミント系'], strength: 'weak', sweetness: 'high',
     memo: 'AFブルーベリーの甘みにミントの清涼感。初心者にも人気の定番コンビ。',
   },
   {
-    ...sys, id: 'p12', likes: 318,
+    ...sys, id: 'p12', likes: 0,
     name: 'グレープ×ミント',
     flavors: [{ name: 'グレープ', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['ミント系'], strength: 'weak', sweetness: 'medium',
     memo: 'AFグレープの上品な甘みとミントのバランスが絶妙。はじめての一本に。',
   },
   {
-    ...sys, id: 'p13', likes: 289,
+    ...sys, id: 'p13', likes: 0,
     name: 'ピーチ×ミント',
     flavors: [{ name: 'ピーチ', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['ミント系'], strength: 'weak', sweetness: 'high',
     memo: 'ジューシーなピーチの甘みとミントの爽やかさが合わさった万人受けミックス。',
   },
   {
-    ...sys, id: 'p14', likes: 167,
+    ...sys, id: 'p14', likes: 0,
     name: 'ストロベリー×バニラ',
     flavors: [{ name: 'ストロベリー', brand: 'Fumari', ratio: 60 }, { name: 'バニラ', brand: 'Al Fakher', ratio: 40 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'Fumariストロベリーの甘みにバニラのコクをプラス。デザート系の入門レシピ。',
   },
   {
-    ...sys, id: 'p15', likes: 312,
+    ...sys, id: 'p15', likes: 0,
     name: 'レモン×ミント',
     flavors: [{ name: 'レモン', brand: 'Al Fakher', ratio: 70 }, { name: 'スペアミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['ミント系'], strength: 'weak', sweetness: 'low',
     memo: 'レモンの酸味×スペアミントのすっきり感。さっぱり系の定番。',
   },
   {
-    ...sys, id: 'p16', likes: 198,
+    ...sys, id: 'p16', likes: 0,
     name: 'スイカ×ミント',
     flavors: [{ name: 'スイカ', brand: 'Al Fakher', ratio: 60 }, { name: 'ミント', brand: 'Al Fakher', ratio: 40 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'AF定番スイカにミントをしっかりめに効かせた夏の一本。',
   },
   {
-    ...sys, id: 'p17', likes: 267,
+    ...sys, id: 'p17', likes: 0,
     name: 'グレープ×レモン×ミント',
     flavors: [
       { name: 'グレープ', brand: 'Al Fakher', ratio: 50 },
@@ -143,56 +143,56 @@ export const presets: Recipe[] = [
     memo: 'グレープの甘さにレモンの酸味とミントを足した定番トリオ。',
   },
   {
-    ...sys, id: 'p18', likes: 154,
+    ...sys, id: 'p18', likes: 0,
     name: 'ピーチ×バニラ',
     flavors: [{ name: 'ピーチ', brand: 'Al Fakher', ratio: 60 }, { name: 'バニラ', brand: 'Al Fakher', ratio: 40 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'ピーチの果実感にバニラのまろやかさが合わさった穏やかなデザート系。',
   },
   {
-    ...sys, id: 'p19', likes: 334,
+    ...sys, id: 'p19', likes: 0,
     name: 'ミントティー',
     flavors: [{ name: 'ミントティー', brand: 'Al Fakher', ratio: 100 }],
     category: ['ミント系'], strength: 'weak', sweetness: 'low',
     memo: 'AFミントティー単品。紅茶×ミントのほのかな渋みが心地よい。',
   },
   {
-    ...sys, id: 'p20', likes: 187,
+    ...sys, id: 'p20', likes: 0,
     name: 'ダブルアップル×ミント',
     flavors: [{ name: 'ダブルアップル', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['ダブルアップル系'], strength: 'medium', sweetness: 'medium',
     memo: 'クラシックなダブルアップルにミントを足してすっきりさせた王道アレンジ。',
   },
   {
-    ...sys, id: 'p21', likes: 256,
+    ...sys, id: 'p21', likes: 0,
     name: 'ブルーベリー×レモン',
     flavors: [{ name: 'ブルーベリー', brand: 'Al Fakher', ratio: 60 }, { name: 'レモン', brand: 'Al Fakher', ratio: 40 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'medium',
     memo: 'ブルーベリーの甘さをレモンの酸味で引き締めたシンプルコンビ。',
   },
   {
-    ...sys, id: 'p22', likes: 223,
+    ...sys, id: 'p22', likes: 0,
     name: 'マンゴー×ミント',
     flavors: [{ name: 'マンゴー', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'AFマンゴーの濃厚な甘みにミントをアクセントとして加えた一本。',
   },
   {
-    ...sys, id: 'p23', likes: 178,
+    ...sys, id: 'p23', likes: 0,
     name: 'ストロベリー×ミント',
     flavors: [{ name: 'ストロベリー', brand: 'Fumari', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['ミント系'], strength: 'weak', sweetness: 'high',
     memo: 'Fumariストロベリーのリアルな果実感とミントの清涼感。初心者歓迎。',
   },
   {
-    ...sys, id: 'p24', likes: 342,
+    ...sys, id: 'p24', likes: 0,
     name: 'グレープ×ブルーベリー',
     flavors: [{ name: 'グレープ', brand: 'Al Fakher', ratio: 50 }, { name: 'ブルーベリー', brand: 'Al Fakher', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'ダブルベリーの甘いフルーツミックス。重くならずに吸いやすい。',
   },
   {
-    ...sys, id: 'p25', likes: 201,
+    ...sys, id: 'p25', likes: 0,
     name: 'ピーチ×ストロベリー',
     flavors: [{ name: 'ピーチ', brand: 'Al Fakher', ratio: 50 }, { name: 'ストロベリー', brand: 'Fumari', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
@@ -201,21 +201,21 @@ export const presets: Recipe[] = [
 
   // ===== フルーツ系 (p26–p45) =====
   {
-    ...sys, id: 'p26', likes: 143,
+    ...sys, id: 'p26', likes: 0,
     name: 'ブルーベリー×オレンジ',
     flavors: [{ name: 'ブルーベリー', brand: 'Starbuzz', ratio: 60 }, { name: 'オレンジ', brand: 'Adalya', ratio: 40 }],
     category: ['フルーツ系'], strength: 'medium', sweetness: 'medium',
     memo: 'Starbuzzブルーベリーのコクとのオレンジ感が絶妙にマッチ。',
   },
   {
-    ...sys, id: 'p27', likes: 167,
+    ...sys, id: 'p27', likes: 0,
     name: 'マンゴー×ライム',
     flavors: [{ name: 'マンゴー', brand: 'Al Fakher', ratio: 70 }, { name: 'レモン', brand: 'Al Fakher', ratio: 30 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'トロピカルマンゴーにライムの酸味をきかせたさっぱりフルーツ系。',
   },
   {
-    ...sys, id: 'p28', likes: 98,
+    ...sys, id: 'p28', likes: 0,
     name: 'チェリー×アプリコット×ピーチ',
     flavors: [
       { name: 'チェリー', brand: 'Al Fakher', ratio: 40 },
@@ -226,70 +226,70 @@ export const presets: Recipe[] = [
     memo: '3種のAFフルーツが重なり合う複雑な甘み。石果系フルーツ好きに。',
   },
   {
-    ...sys, id: 'p29', likes: 185,
+    ...sys, id: 'p29', likes: 0,
     name: 'メロン×ミント',
     flavors: [{ name: 'メロン', brand: 'Fumari', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'Fumariメロンの甘くジューシーな香りにミントをかるく加えた爽快ミックス。',
   },
   {
-    ...sys, id: 'p30', likes: 112,
+    ...sys, id: 'p30', likes: 0,
     name: 'スイカ×グレープ',
     flavors: [{ name: 'スイカ', brand: 'Al Fakher', ratio: 50 }, { name: 'グレープ', brand: 'Al Fakher', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'AFスイカとグレープを50:50で合わせたシンプルなフルーツコンビ。',
   },
   {
-    ...sys, id: 'p31', likes: 134,
+    ...sys, id: 'p31', likes: 0,
     name: 'パイナップル×ストロベリー',
     flavors: [{ name: 'ストロベリー', brand: 'Fumari', ratio: 50 }, { name: 'パイナップル', brand: 'Al Fakher', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'トロピカルなパイナップルとFumariストロベリーの甘みが合わさったサマーミックス。',
   },
   {
-    ...sys, id: 'p32', likes: 89,
+    ...sys, id: 'p32', likes: 0,
     name: 'グレープフルーツ×スイカ',
     flavors: [{ name: 'グレープフルーツ', brand: 'Al Fakher', ratio: 50 }, { name: 'スイカ', brand: 'Fumari', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'medium',
     memo: 'グレープフルーツのほろ苦さとFumariスイカの甘みが相反するユニークな組み合わせ。',
   },
   {
-    ...sys, id: 'p33', likes: 176,
+    ...sys, id: 'p33', likes: 0,
     name: 'ライチ×ローズ',
     flavors: [{ name: 'ライチ', brand: 'Al Fakher', ratio: 60 }, { name: 'ローズ', brand: 'Al Fakher', ratio: 40 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'ライチの上品な甘みにローズの花香が漂う、エレガントなフルーツフローラル。',
   },
   {
-    ...sys, id: 'p34', likes: 121,
+    ...sys, id: 'p34', likes: 0,
     name: 'キウイ×ストロベリー',
     flavors: [{ name: 'キウイ', brand: 'Al Fakher', ratio: 50 }, { name: 'ストロベリー', brand: 'Fumari', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'キウイの爽やかな酸味とFumariストロベリーの甘みのバランスが良い一本。',
   },
   {
-    ...sys, id: 'p35', likes: 154,
+    ...sys, id: 'p35', likes: 0,
     name: 'ピーチ×ラズベリー',
     flavors: [{ name: 'ピーチ', brand: 'Al Fakher', ratio: 60 }, { name: 'ラズベリー', brand: 'Fumari', ratio: 40 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'ピーチの甘みにFumariラズベリーの鮮やかな酸味がアクセント。',
   },
   {
-    ...sys, id: 'p36', likes: 93,
+    ...sys, id: 'p36', likes: 0,
     name: 'グレープ×ストロベリー',
     flavors: [{ name: 'グレープ', brand: 'Al Fakher', ratio: 50 }, { name: 'ストロベリー', brand: 'Fumari', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: '王道グレープとFumariストロベリーのシンプルなダブルフルーツ。',
   },
   {
-    ...sys, id: 'p37', likes: 168,
+    ...sys, id: 'p37', likes: 0,
     name: 'ブルーベリーミント×キウイ',
     flavors: [{ name: 'ブルーベリーミント', brand: 'Adalya', ratio: 50 }, { name: 'キウイ', brand: 'Al Fakher', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'medium',
     memo: 'Adalyaブルーベリーミントの甘ミント感とキウイの爽やかさが融合。',
   },
   {
-    ...sys, id: 'p38', likes: 145,
+    ...sys, id: 'p38', likes: 0,
     name: 'パッションフルーツ×マンゴー×ライチ',
     flavors: [
       { name: 'パッションフルーツ', brand: 'Starbuzz', ratio: 40 },
@@ -300,49 +300,49 @@ export const presets: Recipe[] = [
     memo: '3ブランドのトロピカルフルーツが層を成すリッチなフルーツカクテル。',
   },
   {
-    ...sys, id: 'p39', likes: 87,
+    ...sys, id: 'p39', likes: 0,
     name: 'メロン×ピーチ',
     flavors: [{ name: 'メロン', brand: 'Fumari', ratio: 50 }, { name: 'ピーチ', brand: 'Al Fakher', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'FumariメロンとAFピーチの甘い果実感がやさしく重なる穏やかな一本。',
   },
   {
-    ...sys, id: 'p40', likes: 193,
+    ...sys, id: 'p40', likes: 0,
     name: 'オレンジ×マンゴー',
     flavors: [{ name: 'オレンジ', brand: 'Adalya', ratio: 50 }, { name: 'マンゴー', brand: 'Al Fakher', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'Adalyaオレンジの鮮やかな柑橘感とマンゴーの濃厚さが合わさったトロピカル系。',
   },
   {
-    ...sys, id: 'p41', likes: 112,
+    ...sys, id: 'p41', likes: 0,
     name: 'グアバ×ストロベリー',
     flavors: [{ name: 'グアバ', brand: 'Musthave', ratio: 60 }, { name: 'ストロベリー', brand: 'Fumari', ratio: 40 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'Musthaveグアバのトロピカル感とFumariストロベリーで南国気分。',
   },
   {
-    ...sys, id: 'p42', likes: 178,
+    ...sys, id: 'p42', likes: 0,
     name: 'チェリー×バニラ',
     flavors: [{ name: 'チェリー', brand: 'Al Fakher', ratio: 60 }, { name: 'バニラ', brand: 'Al Fakher', ratio: 40 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'AFチェリーの甘酸っぱさにバニラのまろやかさが合わさった贅沢な一本。',
   },
   {
-    ...sys, id: 'p43', likes: 96,
+    ...sys, id: 'p43', likes: 0,
     name: 'アプリコット×ピーチ',
     flavors: [{ name: 'アプリコット', brand: 'Al Fakher', ratio: 50 }, { name: 'ピーチ', brand: 'Al Fakher', ratio: 50 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'AF同士の石果系コンビ。穏やかで飲みやすい甘口フルーツ系。',
   },
   {
-    ...sys, id: 'p44', likes: 155,
+    ...sys, id: 'p44', likes: 0,
     name: 'パイナップル×ミント',
     flavors: [{ name: 'パイナップル', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'high',
     memo: 'パイナップルの甘酸っぱさにミントをひとさじ。さっぱりリフレッシュ系。',
   },
   {
-    ...sys, id: 'p45', likes: 134,
+    ...sys, id: 'p45', likes: 0,
     name: 'ライム×ミント',
     flavors: [{ name: 'レモン', brand: 'Al Fakher', ratio: 60 }, { name: 'スペアミント', brand: 'Al Fakher', ratio: 40 }],
     category: ['フルーツ系'], strength: 'weak', sweetness: 'low',
@@ -351,7 +351,7 @@ export const presets: Recipe[] = [
 
   // ===== ミント・アイス系 (p46–p60) =====
   {
-    ...sys, id: 'p46', likes: 234,
+    ...sys, id: 'p46', likes: 0,
     name: 'トリプルミント Spearmint Ver.',
     flavors: [
       { name: 'ミント', brand: 'Al Fakher', ratio: 40 },
@@ -362,84 +362,84 @@ export const presets: Recipe[] = [
     memo: 'スペアミントをメインに据えた爽快感特化ブレンド。上級者向け。',
   },
   {
-    ...sys, id: 'p47', likes: 187,
+    ...sys, id: 'p47', likes: 0,
     name: 'アイスレモン',
     flavors: [{ name: 'レモン', brand: 'Al Fakher', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'low',
     memo: 'AFレモンにDozajアイスミントを合わせたキレのある酸っぱ冷涼系。',
   },
   {
-    ...sys, id: 'p48', likes: 143,
+    ...sys, id: 'p48', likes: 0,
     name: 'アイスグレープ',
     flavors: [{ name: 'グレープ', brand: 'Al Fakher', ratio: 65 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 35 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'medium',
     memo: 'グレープの甘みをDozajアイスミントで冷却した人気のアイス系。',
   },
   {
-    ...sys, id: 'p49', likes: 218,
+    ...sys, id: 'p49', likes: 0,
     name: 'ブルーベリーアイス',
     flavors: [{ name: 'Love 66', brand: 'Adalya', ratio: 50 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 50 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'high',
     memo: 'Adalya Love 66のフルーティさにDozajの強冷感。甘くて冷たい人気作。',
   },
   {
-    ...sys, id: 'p50', likes: 156,
+    ...sys, id: 'p50', likes: 0,
     name: 'ミント単品',
     flavors: [{ name: 'ミント', brand: 'Al Fakher', ratio: 100 }],
     category: ['ミント系'], strength: 'medium', sweetness: 'low',
     memo: 'AFミント一択。シンプル・イズ・ベスト。ベースフレーバーにも。',
   },
   {
-    ...sys, id: 'p51', likes: 189,
+    ...sys, id: 'p51', likes: 0,
     name: 'アイスピーチ×ミント',
     flavors: [{ name: 'アイスピーチ', brand: 'Adalya', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'high',
     memo: 'Adalyaアイスピーチのメンソール感にAFミントを足してさらに清涼。',
   },
   {
-    ...sys, id: 'p52', likes: 124,
+    ...sys, id: 'p52', likes: 0,
     name: 'アイスストロベリー',
     flavors: [{ name: 'ストロベリー', brand: 'Fumari', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'high',
     memo: 'Fumariストロベリーの甘さとDozajアイスミントの冷涼感が合わさったさわやか系。',
   },
   {
-    ...sys, id: 'p53', likes: 247,
+    ...sys, id: 'p53', likes: 0,
     name: 'ブルーミスト (Fumari版)',
     flavors: [{ name: 'ミント', brand: 'Fumari', ratio: 60 }, { name: 'ブルーベリー', brand: 'Nakhla', ratio: 40 }],
     category: ['ミント系'], strength: 'medium', sweetness: 'medium',
     memo: 'Fumariミント×Nakhlaブルーベリーで作るオリジナルブルーミスト風ブレンド。',
   },
   {
-    ...sys, id: 'p54', likes: 167,
+    ...sys, id: 'p54', likes: 0,
     name: 'スペアミント×グレープ',
     flavors: [{ name: 'スペアミント', brand: 'Al Fakher', ratio: 30 }, { name: 'グレープ', brand: 'Al Fakher', ratio: 70 }],
     category: ['ミント系'], strength: 'weak', sweetness: 'medium',
     memo: 'スペアミントの控えめな爽やかさとグレープの甘み。マイルドなミント系。',
   },
   {
-    ...sys, id: 'p55', likes: 213,
+    ...sys, id: 'p55', likes: 0,
     name: 'アイスメロン',
     flavors: [{ name: 'メロン', brand: 'Fumari', ratio: 60 }, { name: 'アイスミント', brand: 'Azure', ratio: 40 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'high',
     memo: 'FumariメロンとAzureアイスミントの組み合わせ。甘冷ミックスの定番。',
   },
   {
-    ...sys, id: 'p56', likes: 145,
+    ...sys, id: 'p56', likes: 0,
     name: 'アイスマンゴー',
     flavors: [{ name: 'マンゴー', brand: 'Al Fakher', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'high',
     memo: 'マンゴーの濃厚な甘みをDozajのアイス感で爽やかに仕上げた一本。',
   },
   {
-    ...sys, id: 'p57', likes: 198,
+    ...sys, id: 'p57', likes: 0,
     name: 'アイスパイナップル',
     flavors: [{ name: 'パイナップル', brand: 'Al Fakher', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'high',
     memo: 'パイナップルの甘酸っぱさとアイスミントで南国リゾート感を演出。',
   },
   {
-    ...sys, id: 'p58', likes: 132,
+    ...sys, id: 'p58', likes: 0,
     name: 'アイスキウイ×ストロベリー',
     flavors: [
       { name: 'キウイ', brand: 'Al Fakher', ratio: 40 },
@@ -450,7 +450,7 @@ export const presets: Recipe[] = [
     memo: 'キウイ・ストロベリー・アイスミントのトリオ。甘みと冷涼感が複雑に絡む。',
   },
   {
-    ...sys, id: 'p59', likes: 223,
+    ...sys, id: 'p59', likes: 0,
     name: 'ミント×レモン×ブルーベリー',
     flavors: [
       { name: 'ミント', brand: 'Al Fakher', ratio: 25 },
@@ -461,7 +461,7 @@ export const presets: Recipe[] = [
     memo: '酸味・甘み・爽快感の3要素がバランス良く絡む多層型ミックス。',
   },
   {
-    ...sys, id: 'p60', likes: 176,
+    ...sys, id: 'p60', likes: 0,
     name: 'パンラズナ×アイスミント',
     flavors: [{ name: 'パンラズナ', brand: 'Al Waha', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
     category: ['アイス系', 'スパイス系'], strength: 'medium', sweetness: 'high',
@@ -470,42 +470,42 @@ export const presets: Recipe[] = [
 
   // ===== デザート系 (p61–p75) =====
   {
-    ...sys, id: 'p61', likes: 134,
+    ...sys, id: 'p61', likes: 0,
     name: 'コットンキャンディ',
     flavors: [{ name: 'コットンキャンディ', brand: 'Fumari', ratio: 100 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'Fumariの大人気フレーバー。まさに綿菓子そのものの甘さ。',
   },
   {
-    ...sys, id: 'p62', likes: 167,
+    ...sys, id: 'p62', likes: 0,
     name: 'チョコミント',
     flavors: [{ name: 'チョコレート', brand: 'Fumari', ratio: 60 }, { name: 'ミント', brand: 'Al Fakher', ratio: 40 }],
     category: ['デザート系'], strength: 'medium', sweetness: 'high',
     memo: 'Fumariチョコレートの濃厚なコクにAFミントを合わせたチョコミントアイス感覚。',
   },
   {
-    ...sys, id: 'p63', likes: 89,
+    ...sys, id: 'p63', likes: 0,
     name: 'バニラキャラメル',
     flavors: [{ name: 'バニラ', brand: 'Al Fakher', ratio: 50 }, { name: 'キャラメル', brand: 'Starbuzz', ratio: 50 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'バニラの優しい甘みとキャラメルの焦がし甘さが合わさったスイーツ系。',
   },
   {
-    ...sys, id: 'p64', likes: 145,
+    ...sys, id: 'p64', likes: 0,
     name: 'ハニーバニラ',
     flavors: [{ name: 'ハニー', brand: 'Al Fakher', ratio: 60 }, { name: 'バニラ', brand: 'Al Fakher', ratio: 40 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'ハチミツとバニラのAFコンビ。甘いもの好きには堪らない一本。',
   },
   {
-    ...sys, id: 'p65', likes: 112,
+    ...sys, id: 'p65', likes: 0,
     name: 'クリームピーチ',
     flavors: [{ name: 'クリーム', brand: 'Tangiers', ratio: 40 }, { name: 'ピーチ', brand: 'Al Fakher', ratio: 60 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'TangiersクリームとAFピーチで作る濃厚なピーチクリームデザート。',
   },
   {
-    ...sys, id: 'p66', likes: 178,
+    ...sys, id: 'p66', likes: 0,
     name: 'ピーチ×ココナッツ×バニラ',
     flavors: [
       { name: 'ピーチ', brand: 'Al Fakher', ratio: 40 },
@@ -516,56 +516,56 @@ export const presets: Recipe[] = [
     memo: 'ピーチ・ココナッツ・バニラのAFトリオ。トロピカルデザートのような甘み。',
   },
   {
-    ...sys, id: 'p67', likes: 65,
+    ...sys, id: 'p67', likes: 0,
     name: 'ブルーベリーマフィン',
     flavors: [{ name: 'ブルーベリーマフィン', brand: 'Fumari', ratio: 100 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'Fumariの定番デザートフレーバー。焼きたてマフィンのような甘い香り。',
   },
   {
-    ...sys, id: 'p68', likes: 156,
+    ...sys, id: 'p68', likes: 0,
     name: 'チェリー×クリーム',
     flavors: [{ name: 'チェリー', brand: 'Starbuzz', ratio: 60 }, { name: 'クリーム', brand: 'Tangiers', ratio: 40 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'Starbuzzチェリーの甘酸っぱさとTangiersクリームが合わさったチェリークリーム。',
   },
   {
-    ...sys, id: 'p69', likes: 98,
+    ...sys, id: 'p69', likes: 0,
     name: 'コーヒー×バニラ',
     flavors: [{ name: 'コーヒー', brand: 'Al Fakher', ratio: 60 }, { name: 'バニラ', brand: 'Al Fakher', ratio: 40 }],
     category: ['デザート系'], strength: 'strong', sweetness: 'medium',
     memo: 'コーヒーの苦みとバニラの甘みが融合したカフェオレ感覚の大人系デザート。',
   },
   {
-    ...sys, id: 'p70', likes: 143,
+    ...sys, id: 'p70', likes: 0,
     name: 'カラメルストロベリー',
     flavors: [{ name: 'キャラメル', brand: 'Starbuzz', ratio: 40 }, { name: 'ストロベリー', brand: 'Fumari', ratio: 60 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'Fumariストロベリーの果実感とキャラメルの香ばしい甘みのデザートコンビ。',
   },
   {
-    ...sys, id: 'p71', likes: 87,
+    ...sys, id: 'p71', likes: 0,
     name: 'チョコレートオレンジ',
     flavors: [{ name: 'チョコレート', brand: 'Fumari', ratio: 50 }, { name: 'オレンジ', brand: 'Adalya', ratio: 50 }],
     category: ['デザート系'], strength: 'medium', sweetness: 'high',
     memo: 'チョコオレンジの定番コンビをシーシャで再現。テリーズ感覚で楽しむ。',
   },
   {
-    ...sys, id: 'p72', likes: 176,
+    ...sys, id: 'p72', likes: 0,
     name: 'バニラミント',
     flavors: [{ name: 'バニラ', brand: 'Al Fakher', ratio: 60 }, { name: 'ミント', brand: 'Al Fakher', ratio: 40 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'バニラの甘みをミントですっきりさせた、食後にぴったりの一本。',
   },
   {
-    ...sys, id: 'p73', likes: 123,
+    ...sys, id: 'p73', likes: 0,
     name: 'ハニーレモン',
     flavors: [{ name: 'ハニー', brand: 'Al Fakher', ratio: 50 }, { name: 'レモン', brand: 'Al Fakher', ratio: 50 }],
     category: ['デザート系'], strength: 'weak', sweetness: 'high',
     memo: 'ハチミツとレモンのはちみつレモン感覚。甘さと酸味のバランスが絶妙。',
   },
   {
-    ...sys, id: 'p74', likes: 154,
+    ...sys, id: 'p74', likes: 0,
     name: 'ストロベリーチーズケーキ',
     flavors: [
       { name: 'ストロベリー', brand: 'Fumari', ratio: 50 },
@@ -576,7 +576,7 @@ export const presets: Recipe[] = [
     memo: '3フレーバーでチーズケーキを表現。Fumariストロベリーが際立つ上質デザート系。',
   },
   {
-    ...sys, id: 'p75', likes: 78,
+    ...sys, id: 'p75', likes: 0,
     name: 'コーヒーキャラメルミント',
     flavors: [
       { name: 'コーヒー', brand: 'Al Fakher', ratio: 40 },
@@ -589,70 +589,70 @@ export const presets: Recipe[] = [
 
   // ===== スパイス・フローラル系 (p76–p85) =====
   {
-    ...sys, id: 'p76', likes: 89,
+    ...sys, id: 'p76', likes: 0,
     name: 'ローズミント',
     flavors: [{ name: 'ローズ', brand: 'Al Fakher', ratio: 60 }, { name: 'ミント', brand: 'Al Fakher', ratio: 40 }],
     category: ['スパイス系'], strength: 'weak', sweetness: 'medium',
     memo: 'ローズの花の甘みにミントがさっぱり感を加えたフローラルミントミックス。',
   },
   {
-    ...sys, id: 'p77', likes: 67,
+    ...sys, id: 'p77', likes: 0,
     name: 'ジャスミングリーンティー',
     flavors: [{ name: 'ジャスミン', brand: 'Fumari', ratio: 50 }, { name: 'グリーンティー', brand: 'Al Fakher', ratio: 50 }],
     category: ['スパイス系'], strength: 'weak', sweetness: 'low',
     memo: 'Fumariジャスミンの上品な花香とグリーンティーの渋みが調和したアジアン系。',
   },
   {
-    ...sys, id: 'p78', likes: 112,
+    ...sys, id: 'p78', likes: 0,
     name: 'シナモンアップル',
     flavors: [{ name: 'シナモン', brand: 'Al Fakher', ratio: 30 }, { name: 'ダブルアップル', brand: 'Al Fakher', ratio: 70 }],
     category: ['ダブルアップル系'], strength: 'medium', sweetness: 'medium',
     memo: 'ダブルアップルにシナモンをプラスしてスパイシーさを増したアレンジ版。',
   },
   {
-    ...sys, id: 'p79', likes: 78,
+    ...sys, id: 'p79', likes: 0,
     name: 'カルダモン×ローズ',
     flavors: [{ name: 'カルダモン', brand: 'Starbuzz', ratio: 50 }, { name: 'ローズ', brand: 'Al Fakher', ratio: 50 }],
     category: ['スパイス系'], strength: 'medium', sweetness: 'low',
     memo: 'カルダモンのスパイシーな香りとローズの甘みが交差する中東系フレーバー。',
   },
   {
-    ...sys, id: 'p80', likes: 45,
+    ...sys, id: 'p80', likes: 0,
     name: 'ラベンダーバニラ',
     flavors: [{ name: 'ラベンダー', brand: 'Fumari', ratio: 60 }, { name: 'バニラ', brand: 'Al Fakher', ratio: 40 }],
     category: ['スパイス系'], strength: 'weak', sweetness: 'medium',
     memo: 'Fumariラベンダーの紫の香りとバニラが融合した癒し系リラックスミックス。',
   },
   {
-    ...sys, id: 'p81', likes: 98,
+    ...sys, id: 'p81', likes: 0,
     name: 'グリーンティー×ミント',
     flavors: [{ name: 'グリーンティー', brand: 'Al Fakher', ratio: 70 }, { name: 'ミント', brand: 'Al Fakher', ratio: 30 }],
     category: ['スパイス系'], strength: 'weak', sweetness: 'low',
     memo: 'グリーンティーの渋みとミントのさっぱり感。重くなりすぎない和テイスト。',
   },
   {
-    ...sys, id: 'p82', likes: 56,
+    ...sys, id: 'p82', likes: 0,
     name: 'ローズ×ライチ',
     flavors: [{ name: 'ローズ', brand: 'Al Fakher', ratio: 40 }, { name: 'ライチ', brand: 'Al Fakher', ratio: 60 }],
     category: ['スパイス系'], strength: 'weak', sweetness: 'high',
     memo: 'ローズのフローラル感とライチの甘みが合わさったエレガントな一本。',
   },
   {
-    ...sys, id: 'p83', likes: 87,
+    ...sys, id: 'p83', likes: 0,
     name: 'シーシャコーラ',
     flavors: [{ name: 'コーラ', brand: 'Starbuzz', ratio: 70 }, { name: 'レモン', brand: 'Al Fakher', ratio: 30 }],
     category: ['スパイス系'], strength: 'medium', sweetness: 'high',
     memo: 'Starbuzzコーラのスパイシーな炭酸感にレモンを加えたコーラ系。',
   },
   {
-    ...sys, id: 'p84', likes: 43,
+    ...sys, id: 'p84', likes: 0,
     name: 'エナジードリンク×レモン',
     flavors: [{ name: 'エナジードリンク', brand: 'Adalya', ratio: 60 }, { name: 'レモン', brand: 'Al Fakher', ratio: 40 }],
     category: ['スパイス系'], strength: 'medium', sweetness: 'medium',
     memo: 'エナジードリンクのケミカルな甘さにレモンで酸味をプラスした変わり種。',
   },
   {
-    ...sys, id: 'p85', likes: 115,
+    ...sys, id: 'p85', likes: 0,
     name: 'モヒート',
     flavors: [{ name: 'モヒート', brand: 'Fumari', ratio: 100 }],
     category: ['スパイス系'], strength: 'medium', sweetness: 'medium',
@@ -661,7 +661,7 @@ export const presets: Recipe[] = [
 
   // ===== 上級・個性派ミックス (p86–p100) =====
   {
-    ...sys, id: 'p86', likes: 123,
+    ...sys, id: 'p86', likes: 0,
     name: 'Zesty（コンテスト優勝レシピ）',
     flavors: [
       { name: 'ミント', brand: 'Fumari', ratio: 50 },
@@ -672,14 +672,14 @@ export const presets: Recipe[] = [
     memo: 'Fumariオンリーで組む受賞経験ありの上質ブレンド。ミント×柑橘の神バランス。',
   },
   {
-    ...sys, id: 'p87', likes: 87,
+    ...sys, id: 'p87', likes: 0,
     name: 'ダブルアップル×シーシャコーラ',
     flavors: [{ name: 'ダブルアップル', brand: 'Al Fakher', ratio: 60 }, { name: 'コーラ', brand: 'Starbuzz', ratio: 40 }],
     category: ['ダブルアップル系'], strength: 'medium', sweetness: 'medium',
     memo: 'ダブルアップルの複雑なアニス感にコーラのスパイシーさを掛け合わせた個性派。',
   },
   {
-    ...sys, id: 'p88', likes: 145,
+    ...sys, id: 'p88', likes: 0,
     name: 'グレープ×ミント×レモン',
     flavors: [
       { name: 'グレープ', brand: 'Al Fakher', ratio: 50 },
@@ -690,21 +690,21 @@ export const presets: Recipe[] = [
     memo: 'AFだけで完結するトリプルミックス。グレープの甘みを酸味と爽快感が引き立てる。',
   },
   {
-    ...sys, id: 'p89', likes: 98,
+    ...sys, id: 'p89', likes: 0,
     name: 'Love 66アイス',
     flavors: [{ name: 'Love 66', brand: 'Adalya', ratio: 60 }, { name: 'アイスミント', brand: 'Dozaj', ratio: 40 }],
     category: ['アイス系'], strength: 'medium', sweetness: 'high',
     memo: 'Love 66の甘さをアイスミントで大幅に冷却。夏の定番として外せない。',
   },
   {
-    ...sys, id: 'p90', likes: 134,
+    ...sys, id: 'p90', likes: 0,
     name: 'エナジードリンク×グレープ',
     flavors: [{ name: 'エナジードリンク', brand: 'Adalya', ratio: 50 }, { name: 'グレープ', brand: 'Al Fakher', ratio: 50 }],
     category: ['スパイス系'], strength: 'medium', sweetness: 'medium',
     memo: 'エナジードリンクの金属っぽい甘さをグレープでまろやかにした変わり種コンビ。',
   },
   {
-    ...sys, id: 'p91', likes: 67,
+    ...sys, id: 'p91', likes: 0,
     name: 'ブルーベリー×ミント×バニラ',
     flavors: [
       { name: 'ブルーベリー', brand: 'Al Fakher', ratio: 50 },
@@ -715,7 +715,7 @@ export const presets: Recipe[] = [
     memo: 'ブルーベリーの甘みにミントの清涼感、バニラのまろやかさを加えたトリオ。',
   },
   {
-    ...sys, id: 'p92', likes: 112,
+    ...sys, id: 'p92', likes: 0,
     name: 'ピーチ×グレープ×ミント',
     flavors: [
       { name: 'ピーチ', brand: 'Al Fakher', ratio: 40 },
@@ -726,7 +726,7 @@ export const presets: Recipe[] = [
     memo: 'ピーチ×グレープのフルーツコンビにミントをさっとかけた爽やか系三重奏。',
   },
   {
-    ...sys, id: 'p93', likes: 78,
+    ...sys, id: 'p93', likes: 0,
     name: 'パンラズナ×ストロベリー×ミント',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
@@ -737,7 +737,7 @@ export const presets: Recipe[] = [
     memo: 'Al Wahaパンラズナ×Fumariストロベリー×AFミントで作る爽やかスパイシーフルーツ。',
   },
   {
-    ...sys, id: 'p94', likes: 143,
+    ...sys, id: 'p94', likes: 0,
     name: 'グレープ×ブルーベリー×ミント',
     flavors: [
       { name: 'グレープ', brand: 'Al Fakher', ratio: 40 },
@@ -748,7 +748,7 @@ export const presets: Recipe[] = [
     memo: 'AFダブルベリー×ミントで作るシンプルだが奥深いミントフルーツ。',
   },
   {
-    ...sys, id: 'p95', likes: 56,
+    ...sys, id: 'p95', likes: 0,
     name: 'チェリー×レモン×ミント',
     flavors: [
       { name: 'チェリー', brand: 'Al Fakher', ratio: 45 },
@@ -759,14 +759,14 @@ export const presets: Recipe[] = [
     memo: 'チェリーの甘酸っぱさ×レモンの酸味×スペアミントのさっぱり感が交わる一本。',
   },
   {
-    ...sys, id: 'p96', likes: 98,
+    ...sys, id: 'p96', likes: 0,
     name: 'ダークアップル×ケインミント',
     flavors: [{ name: 'ダブルアップル', brand: 'Darkside', ratio: 70 }, { name: 'ケインミント', brand: 'Tangiers', ratio: 30 }],
     category: ['ダブルアップル系'], strength: 'strong', sweetness: 'low',
     memo: 'DarksideのパワフルなダブルアップルにTangiersケインミントを合わせた上級者向け。',
   },
   {
-    ...sys, id: 'p97', likes: 145,
+    ...sys, id: 'p97', likes: 0,
     name: 'ピーチ×ミント×コーヒー',
     flavors: [
       { name: 'ピーチ', brand: 'Al Fakher', ratio: 40 },
@@ -777,7 +777,7 @@ export const presets: Recipe[] = [
     memo: 'ピーチ×ミント×コーヒーの異色トリオ。甘み・爽快感・苦みが複雑に絡む。',
   },
   {
-    ...sys, id: 'p98', likes: 87,
+    ...sys, id: 'p98', likes: 0,
     name: 'トロピカルフルーツミックス',
     flavors: [
       { name: 'パッションフルーツ', brand: 'Starbuzz', ratio: 35 },
@@ -788,7 +788,7 @@ export const presets: Recipe[] = [
     memo: '3ブランドのトロピカルフルーツが融合した南国感満載のリッチミックス。',
   },
   {
-    ...sys, id: 'p99', likes: 123,
+    ...sys, id: 'p99', likes: 0,
     name: 'グレープフルーツ×ミント×エナジー',
     flavors: [
       { name: 'グレープフルーツ', brand: 'Al Fakher', ratio: 40 },
@@ -799,7 +799,7 @@ export const presets: Recipe[] = [
     memo: 'グレープフルーツ×ミント×エナジードリンクの刺激的なミックス。個性派向け。',
   },
   {
-    ...sys, id: 'p100', likes: 67,
+    ...sys, id: 'p100', likes: 0,
     name: 'Ultimate Sugar Rush (Fumari公式)',
     flavors: [
       { name: 'コットンキャンディ', brand: 'Fumari', ratio: 50 },
@@ -810,7 +810,7 @@ export const presets: Recipe[] = [
     memo: 'Fumari公式オリジナルブレンド。コットンキャンディをベースにした究極の甘口。',
   },
   {
-    ...sys, id: 'p101', likes: 145,
+    ...sys, id: 'p101', likes: 0,
     name: 'パンラズナ×キウイ',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 60 },
@@ -820,7 +820,7 @@ export const presets: Recipe[] = [
     memo: 'パンラズナとフルーツの定番。キウイの甘酸っぱさがエスニックな香りを引き立てる。',
   },
   {
-    ...sys, id: 'p102', likes: 198,
+    ...sys, id: 'p102', likes: 0,
     name: 'パンラズナ×ダブルアップル',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
@@ -830,7 +830,7 @@ export const presets: Recipe[] = [
     memo: '王道同士の最強ミックス。中東テイスト全開。',
   },
   {
-    ...sys, id: 'p103', likes: 167,
+    ...sys, id: 'p103', likes: 0,
     name: 'パンラズナ×ローズ×ミント',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 50 },
@@ -841,7 +841,7 @@ export const presets: Recipe[] = [
     memo: 'フローラルとスパイスの一体感。ローズのまったりした甘みがパンラズナと溶け合う。',
   },
   {
-    ...sys, id: 'p104', likes: 132,
+    ...sys, id: 'p104', likes: 0,
     name: 'パンラズナ×グレープ',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
@@ -851,7 +851,7 @@ export const presets: Recipe[] = [
     memo: 'グレープの甘さがパンラズナのスパイス感を包み込む飲みやすいミックス。',
   },
   {
-    ...sys, id: 'p105', likes: 178,
+    ...sys, id: 'p105', likes: 0,
     name: 'パンラズナ×ピーチ×ティー',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 30 },
@@ -862,7 +862,7 @@ export const presets: Recipe[] = [
     memo: 'カツカレー理論の極み。三つの相性抜群フレーバーの掛け合わせ。',
   },
   {
-    ...sys, id: 'p106', likes: 121,
+    ...sys, id: 'p106', likes: 0,
     name: 'パンラズナ×レモン×ミント',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 50 },
@@ -873,7 +873,7 @@ export const presets: Recipe[] = [
     memo: 'さっぱりさせたいときの定番。柑橘がパンラズナの重さを抜く。',
   },
   {
-    ...sys, id: 'p107', likes: 98,
+    ...sys, id: 'p107', likes: 0,
     name: 'パンラズナ×グレープ×コーラ',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 33 },
@@ -884,7 +884,7 @@ export const presets: Recipe[] = [
     memo: 'エスニック×甘み×コーラの炭酸感が独特の世界観。',
   },
   {
-    ...sys, id: 'p108', likes: 112,
+    ...sys, id: 'p108', likes: 0,
     name: 'パンラズナ×グァバ',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 40 },
@@ -894,7 +894,7 @@ export const presets: Recipe[] = [
     memo: '南国フルーツのグァバとエスニックなパンラズナの相性が抜群。',
   },
   {
-    ...sys, id: 'p109', likes: 87,
+    ...sys, id: 'p109', likes: 0,
     name: 'パンラズナ×レバニーズボムシェル',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 50 },
@@ -904,7 +904,7 @@ export const presets: Recipe[] = [
     memo: '香木×レバノン杉。森の中でリラックスするような深い香り。',
   },
   {
-    ...sys, id: 'p110', likes: 143,
+    ...sys, id: 'p110', likes: 0,
     name: 'パンラズナ×カルダモン×ダブルアップル',
     flavors: [
       { name: 'パンラズナ', brand: 'Al Waha', ratio: 30 },

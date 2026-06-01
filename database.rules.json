@@ -54,6 +54,12 @@
         ".read": "auth.uid === $userId",
         ".write": "auth.uid === $userId"
       }
+    },
+    "user-likes": {
+      "$userId": {
+        ".read": "auth.uid === $userId",
+        ".write": "auth.uid === $userId"
+      }
     }
   }
 }
