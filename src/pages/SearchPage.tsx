@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
 import RecipeDetailPanel from '../components/RecipeDetailPanel'
 import CommentSection from '../components/CommentSection'
-import { usePublicRecipes, useLikes } from '../hooks/useRecipes'
+import { usePublicRecipes, useLikes, useMyLikedRecipeIds } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAuth } from '../hooks/useAuth'
 import { useSessionTimer } from '../hooks/useSessionTimer'
@@ -23,6 +23,8 @@ function FilterPanel({
   selBrands, setSelBrands,
   selStrengths, setSelStrengths,
   selSweetness, setSelSweetness,
+  showLikedOnly, setShowLikedOnly,
+  hasLikedFilter,
   resultCount,
   loading,
 }: {
@@ -35,6 +37,8 @@ function FilterPanel({
   selStrengths: Recipe['strength'][]; setSelStrengths: (v: any) => void
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   selSweetness: Recipe['sweetness'][]; setSelSweetness: (v: any) => void
+  showLikedOnly: boolean; setShowLikedOnly: (v: boolean) => void
+  hasLikedFilter: boolean
   resultCount: number
   loading: boolean
 }) {
@@ -42,10 +46,10 @@ function FilterPanel({
     set(arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val])
   }
 
-  const hasFilter = selCategories.length + selBrands.length + selStrengths.length + selSweetness.length > 0
+  const hasFilter = selCategories.length + selBrands.length + selStrengths.length + selSweetness.length + (showLikedOnly ? 1 : 0) > 0
 
   const clearAll = () => {
-    setSelCategories([]); setSelBrands([]); setSelStrengths([]); setSelSweetness([])
+    setSelCategories([]); setSelBrands([]); setSelStrengths([]); setSelSweetness([]); setShowLikedOnly(false)
   }
 
   return (
@@ -119,6 +123,19 @@ function FilterPanel({
           >{v}</button>
         ))}
       </div>
+
+      {/* Liked only (shown only when user is logged in) */}
+      {hasLikedFilter && (
+        <>
+          <p className="filter-section-label">いいね</p>
+          <div className="filter-chips">
+            <button
+              className={`filter-chip${showLikedOnly ? ' selected' : ''}`}
+              onClick={() => setShowLikedOnly(!showLikedOnly)}
+            >❤️ いいね済みのみ</button>
+          </div>
+        </>
+      )}
     </div>
   )
 }
@@ -239,12 +256,14 @@ export default function SearchPage() {
   const isPC = useMediaQuery('(min-width: 768px)')
   const navigate = useNavigate()
   const { user } = useAuth()
+  const likedIds = useMyLikedRecipeIds(user?.uid)
 
   const [keyword, setKeyword] = useState('')
   const [selCategories, setSelCategories] = useState<string[]>([])
   const [selBrands, setSelBrands] = useState<string[]>([])
   const [selStrengths, setSelStrengths] = useState<Recipe['strength'][]>([])
   const [selSweetness, setSelSweetness] = useState<Recipe['sweetness'][]>([])
+  const [showLikedOnly, setShowLikedOnly] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null)
   const [showMobileDetail, setShowMobileDetail] = useState(false)
@@ -270,8 +289,9 @@ export default function SearchPage() {
     if (selBrands.length) result = result.filter((r) => (r.flavors ?? []).some((f) => selBrands.includes(f.brand)))
     if (selStrengths.length) result = result.filter((r) => selStrengths.includes(r.strength))
     if (selSweetness.length) result = result.filter((r) => selSweetness.includes(r.sweetness))
+    if (showLikedOnly) result = result.filter((r) => likedIds.has(r.id))
     return result
-  }, [allRecipes, keyword, selCategories, selBrands, selStrengths, selSweetness])
+  }, [allRecipes, keyword, selCategories, selBrands, selStrengths, selSweetness, showLikedOnly, likedIds])
 
   const filterProps = {
     keyword, setKeyword,
@@ -279,11 +299,13 @@ export default function SearchPage() {
     selBrands, setSelBrands,
     selStrengths, setSelStrengths,
     selSweetness, setSelSweetness,
+    showLikedOnly, setShowLikedOnly,
+    hasLikedFilter: !!user,
     resultCount: filtered.length,
     loading,
   }
 
-  const hasFilter = selCategories.length + selBrands.length + selStrengths.length + selSweetness.length > 0
+  const hasFilter = selCategories.length + selBrands.length + selStrengths.length + selSweetness.length + (showLikedOnly ? 1 : 0) > 0
   const toggleSelected = (recipe: Recipe) =>
     setSelectedRecipe((prev) => prev?.id === recipe.id ? null : recipe)
 
@@ -382,7 +404,7 @@ export default function SearchPage() {
           <FilterPanel {...filterProps} />
           {hasFilter && (
             <button className="btn-ghost" style={{ marginTop: 8 }} onClick={() => {
-              setSelCategories([]); setSelBrands([]); setSelStrengths([]); setSelSweetness([])
+              setSelCategories([]); setSelBrands([]); setSelStrengths([]); setSelSweetness([]); setShowLikedOnly(false)
             }}>
               フィルタークリア
             </button>

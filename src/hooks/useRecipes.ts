@@ -102,15 +102,33 @@ export function useLikes(recipeId: string, userId: string | undefined, initialLi
   const toggle = useCallback(async () => {
     if (!userId || loading) return
     const likeRef = ref(db, `likes/${recipeId}/${userId}`)
+    const userLikeRef = ref(db, `user-likes/${userId}/${recipeId}`)
     const countRef = ref(db, `recipes/${recipeId}/likes`)
     if (liked) {
       await remove(likeRef)
+      await remove(userLikeRef)
       await runTransaction(countRef, (v) => Math.max(0, (v ?? 0) - 1))
     } else {
       await set(likeRef, true)
+      await set(userLikeRef, true)
       await runTransaction(countRef, (v) => (v ?? 0) + 1)
     }
   }, [recipeId, userId, liked, loading])
 
   return { liked, loading, likesCount, toggle }
+}
+
+export function useMyLikedRecipeIds(userId: string | undefined): Set<string> {
+  const [likedIds, setLikedIds] = useState<Set<string>>(new Set())
+
+  useEffect(() => {
+    if (!userId) { setLikedIds(new Set()); return }
+    return onValue(ref(db, `user-likes/${userId}`), (snap) => {
+      const ids = new Set<string>()
+      snap.forEach((child) => { if (child.val()) ids.add(child.key!) })
+      setLikedIds(ids)
+    })
+  }, [userId])
+
+  return likedIds
 }
