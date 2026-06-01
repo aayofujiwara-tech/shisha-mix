@@ -1,3 +1,18 @@
+.ratio-total-indicator {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--color-error);
+}
+
+.ratio-total-indicator.ok {
+  color: #22c55e;
+}
+
+.ratio-total-hint {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 .form-save-error {
   color: var(--color-error);
   font-size: 14px;
