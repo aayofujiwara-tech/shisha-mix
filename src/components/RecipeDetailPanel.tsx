@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useLikes } from '../hooks/useRecipes'
+import { useSessionTimer } from '../hooks/useSessionTimer'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import CommentSection from './CommentSection'
 import './RecipeDetailPanel.css'
+import './SessionTimer.css'
 
 const RATIO_COLORS = ['#f59e0b','#3b82f6','#22c55e','#a855f7','#ef4444','#06b6d4','#f97316','#14b8a6']
 
@@ -17,6 +19,7 @@ interface Props {
 export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { requestStart } = useSessionTimer()
   const [recipe] = useState(initial)
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
@@ -141,6 +144,13 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
             <p className="dp-memo">{recipe.memo}</p>
           </>
         )}
+
+        <button
+          className="btn-start-session"
+          onClick={() => requestStart(recipe.id, recipe.name)}
+        >
+          ▶ このレシピでセッション開始
+        </button>
 
         <CommentSection
           recipeId={recipe.id}

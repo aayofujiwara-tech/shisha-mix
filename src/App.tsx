@@ -12,6 +12,8 @@ import InventoryPage from './pages/InventoryPage'
 import SuggestPage from './pages/SuggestPage'
 import ProfilePage from './pages/ProfilePage'
 import StorePage from './pages/StorePage'
+import SessionTimer from './components/SessionTimer'
+import { SessionTimerProvider } from './hooks/useSessionTimer'
 
 function AppRoutes() {
   const { user, loading } = useAuth()
@@ -59,6 +61,7 @@ function AppRoutes() {
         </Routes>
       </main>
       <BottomNav />
+      <SessionTimer />
     </div>
   )
 }
@@ -66,7 +69,9 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <SessionTimerProvider>
+        <AppRoutes />
+      </SessionTimerProvider>
     </BrowserRouter>
   )
 }

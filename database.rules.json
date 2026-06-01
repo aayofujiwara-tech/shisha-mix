@@ -48,6 +48,12 @@
         ".read": "auth.uid === $userId",
         ".write": "auth.uid === $userId"
       }
+    },
+    "sessions": {
+      "$userId": {
+        ".read": "auth.uid === $userId",
+        ".write": "auth.uid === $userId"
+      }
     }
   }
 }
