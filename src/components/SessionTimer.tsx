@@ -20,7 +20,7 @@ export default function SessionTimer() {
 
   useEffect(() => {
     const root = document.documentElement
-    root.style.setProperty('--session-bar-height', isActive ? '72px' : '0px')
+    root.style.setProperty('--session-bar-height', isActive ? '60px' : '0px')
     return () => root.style.setProperty('--session-bar-height', '0px')
   }, [isActive])
 
