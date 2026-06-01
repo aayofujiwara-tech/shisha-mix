@@ -117,7 +117,7 @@ export default function TableDetailPanel({
   }
 
   return (
-    <div className="table-detail-overlay" onClick={onClose}>
+    <div className="table-detail-overlay" onClick={isActive ? onClose : undefined}>
       <div className="table-detail-panel" onClick={(e) => e.stopPropagation()}>
         <div className="modal-handle" />
 
