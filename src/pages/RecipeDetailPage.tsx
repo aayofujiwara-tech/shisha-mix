@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getRecipe, toggleLike } from '../hooks/useRecipes'
+import { getRecipe, useLikes } from '../hooks/useRecipes'
 import { useAuth } from '../hooks/useAuth'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
@@ -15,7 +15,7 @@ export default function RecipeDetailPage() {
   const [recipe, setRecipe] = useState<Recipe | null>(null)
   const [loading, setLoading] = useState(true)
   const [photoIdx, setPhotoIdx] = useState(0)
-  const [liked, setLiked] = useState(false)
+  const { liked, loading: likesLoading, toggle } = useLikes(id ?? '', user?.uid)
 
   useEffect(() => {
     if (!id) return
@@ -38,10 +38,10 @@ export default function RecipeDetailPage() {
     recipe.visibility[field] || isOwner
 
   const handleLike = async () => {
-    if (liked) return
-    setLiked(true)
-    await toggleLike(recipe.id, recipe.likes)
-    setRecipe((r) => r ? { ...r, likes: r.likes + 1 } : r)
+    if (!user) { navigate('/login'); return }
+    const delta = liked ? -1 : 1
+    setRecipe((r) => r ? { ...r, likes: r.likes + delta } : r)
+    await toggle()
   }
 
   return (
@@ -77,8 +77,12 @@ export default function RecipeDetailPage() {
       <div className="detail-body">
         <div className="detail-title-row">
           <h1 className="detail-title">{recipe.name}</h1>
-          <button className={`like-btn${liked ? ' liked' : ''}`} onClick={handleLike}>
-            ❤️ {recipe.likes}
+          <button
+            className={`like-btn${liked ? ' liked' : ''}`}
+            onClick={handleLike}
+            disabled={likesLoading}
+          >
+            {liked ? '❤️' : '🤍'} {recipe.likes}
           </button>
         </div>
 

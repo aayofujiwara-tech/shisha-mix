@@ -309,6 +309,12 @@
     flex: 1;
   }
 
+  .pc-detail-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
   .pc-detail-title {
     font-size: 18px;
     font-weight: 700;
@@ -316,6 +322,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    flex: 1;
+    min-width: 0;
   }
 
   .pc-detail-author {

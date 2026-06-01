@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { ref, set, get, remove, push, query, orderByChild, equalTo, onValue } from 'firebase/database'
+import { ref, set, get, remove, push, query, orderByChild, equalTo, onValue, runTransaction } from 'firebase/database'
 import { db } from '../firebase'
 import type { Recipe } from '../types'
 
@@ -68,6 +68,30 @@ export function usePublicRecipes() {
   return { recipes, loading }
 }
 
-export async function toggleLike(recipeId: string, currentLikes: number) {
-  await set(ref(db, `recipes/${recipeId}/likes`), currentLikes + 1)
+export function useLikes(recipeId: string, userId: string | undefined) {
+  const [liked, setLiked] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (!recipeId || !userId) { setLiked(false); setLoading(false); return }
+    return onValue(ref(db, `likes/${recipeId}/${userId}`), (snap) => {
+      setLiked(snap.exists())
+      setLoading(false)
+    })
+  }, [recipeId, userId])
+
+  const toggle = useCallback(async () => {
+    if (!userId || loading) return
+    const likeRef = ref(db, `likes/${recipeId}/${userId}`)
+    const countRef = ref(db, `recipes/${recipeId}/likes`)
+    if (liked) {
+      await remove(likeRef)
+      await runTransaction(countRef, (v) => Math.max(0, (v ?? 0) - 1))
+    } else {
+      await set(likeRef, true)
+      await runTransaction(countRef, (v) => (v ?? 0) + 1)
+    }
+  }, [recipeId, userId, liked, loading])
+
+  return { liked, loading, toggle }
 }
