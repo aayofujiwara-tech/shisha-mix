@@ -1,7 +1,7 @@
 /* ===== Floating Start Button (FAB) ===== */
 .st-fab {
   position: fixed;
-  bottom: calc(var(--tab-height) + 12px);
+  bottom: calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 12px);
   right: 14px;
   width: 44px;
   height: 44px;
@@ -33,7 +33,7 @@
 /* ===== Active Session Bar ===== */
 .st-bar {
   position: fixed;
-  bottom: calc(var(--tab-height) + 8px);
+  bottom: calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 4px);
   left: 8px;
   right: 8px;
   z-index: 150;
@@ -278,7 +278,7 @@
 /* ===== Busy alert toast ===== */
 .st-busy-toast {
   position: fixed;
-  bottom: calc(var(--tab-height) + 8px);
+  bottom: calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 4px);
   left: 8px;
   right: 8px;
   z-index: 500;
