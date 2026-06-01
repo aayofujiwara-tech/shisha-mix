@@ -71,7 +71,6 @@ html, body {
     max-width: none;
     overflow-y: auto;
     margin: 0;
-    padding-bottom: var(--session-bar-height, 0px);
   }
 }
 
@@ -234,7 +233,7 @@ h1, h2, h3 {
 @media (min-width: 768px) {
   .page {
     padding: 28px 32px;
-    padding-bottom: calc(var(--session-bar-height, 0px) + 32px);
+    padding-bottom: 32px;
     max-width: 900px;
   }
 }
