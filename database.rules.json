@@ -22,6 +22,14 @@
         }
       }
     },
+    "likes": {
+      "$recipeId": {
+        ".read": true,
+        "$userId": {
+          ".write": "auth.uid === $userId"
+        }
+      }
+    },
     "inventory": {
       "$userId": {
         ".read": "auth.uid === $userId",

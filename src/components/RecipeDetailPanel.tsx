@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
-import { toggleLike } from '../hooks/useRecipes'
+import { useLikes } from '../hooks/useRecipes'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import CommentSection from './CommentSection'
@@ -22,17 +22,17 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
   const photos = recipe.photos ?? []
   const categories = recipe.category ?? []
   const [photoIdx, setPhotoIdx] = useState(0)
-  const [liked, setLiked] = useState(false)
+  const { liked, loading: likesLoading, toggle } = useLikes(recipe.id, user?.uid)
 
   const isOwner = user?.uid === recipe.userId
   const canShowField = (field: keyof typeof recipe.visibility) =>
     recipe.visibility[field] || isOwner
 
   const handleLike = async () => {
-    if (liked) return
-    setLiked(true)
-    await toggleLike(recipe.id, recipe.likes)
-    setRecipe((r) => ({ ...r, likes: r.likes + 1 }))
+    if (!user) { navigate('/login'); return }
+    const delta = liked ? -1 : 1
+    setRecipe((r) => ({ ...r, likes: r.likes + delta }))
+    await toggle()
   }
 
   return (
@@ -73,8 +73,12 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
 
         <div className="dp-title-row">
           <h1 className="dp-title">{recipe.name}</h1>
-          <button className={`dp-like${liked ? ' liked' : ''}`} onClick={handleLike}>
-            ❤️ {recipe.likes}
+          <button
+            className={`dp-like${liked ? ' liked' : ''}`}
+            onClick={handleLike}
+            disabled={likesLoading}
+          >
+            {liked ? '❤️' : '🤍'} {recipe.likes}
           </button>
         </div>
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
 import RecipeDetailPanel from '../components/RecipeDetailPanel'
 import CommentSection from '../components/CommentSection'
-import { usePublicRecipes } from '../hooks/useRecipes'
+import { usePublicRecipes, useLikes } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAuth } from '../hooks/useAuth'
 import { presets } from '../data/presets'
@@ -124,9 +124,18 @@ function FilterPanel({
 function PCDetailView({ recipe, onClose, userId, userName }: {
   recipe: Recipe; onClose: () => void; userId?: string; userName?: string
 }) {
+  const navigate = useNavigate()
+  const { liked, loading: likesLoading, toggle } = useLikes(recipe.id, userId)
+  const [localLikes, setLocalLikes] = useState(recipe.likes)
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
   const totalRatio = flavors.reduce((s, f) => s + (f.ratio ?? 0), 0)
+
+  const handleLike = async () => {
+    if (!userId) { navigate('/login'); return }
+    setLocalLikes((c) => c + (liked ? -1 : 1))
+    await toggle()
+  }
 
   return (
     <div className="pc-detail-view">
@@ -138,7 +147,16 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
               <img src={photos[0]} alt={recipe.name} className="pc-detail-photo" />
             )}
             <div className="pc-detail-title-block">
-              <h2 className="pc-detail-title">{recipe.name}</h2>
+              <div className="pc-detail-title-row">
+                <h2 className="pc-detail-title">{recipe.name}</h2>
+                <button
+                  className={`dp-like${liked ? ' liked' : ''}`}
+                  onClick={handleLike}
+                  disabled={likesLoading}
+                >
+                  {liked ? '❤️' : '🤍'} {localLikes}
+                </button>
+              </div>
               <p className="pc-detail-author">by {recipe.authorName}</p>
             </div>
           </div>
