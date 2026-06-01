@@ -1,3 +1,13 @@
+.form-save-error {
+  color: var(--color-error);
+  font-size: 14px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-sm);
+}
+
 .back-btn-sm {
   background: none;
   border: none;
