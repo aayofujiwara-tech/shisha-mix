@@ -125,15 +125,13 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
   recipe: Recipe; onClose: () => void; userId?: string; userName?: string
 }) {
   const navigate = useNavigate()
-  const { liked, loading: likesLoading, toggle } = useLikes(recipe.id, userId)
-  const [localLikes, setLocalLikes] = useState(recipe.likes)
+  const { liked, loading: likesLoading, likesCount, toggle } = useLikes(recipe.id, userId, recipe.likes)
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
   const totalRatio = flavors.reduce((s, f) => s + (f.ratio ?? 0), 0)
 
   const handleLike = async () => {
     if (!userId) { navigate('/login'); return }
-    setLocalLikes((c) => c + (liked ? -1 : 1))
     await toggle()
   }
 
@@ -154,7 +152,7 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
                   onClick={handleLike}
                   disabled={likesLoading}
                 >
-                  {liked ? '❤️' : '🤍'} {localLikes}
+                  {liked ? '❤️' : '🤍'} {likesCount}
                 </button>
               </div>
               <p className="pc-detail-author">by {recipe.authorName}</p>

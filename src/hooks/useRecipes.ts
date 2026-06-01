@@ -68,9 +68,19 @@ export function usePublicRecipes() {
   return { recipes, loading }
 }
 
-export function useLikes(recipeId: string, userId: string | undefined) {
+export function useLikes(recipeId: string, userId: string | undefined, initialLikes = 0) {
   const [liked, setLiked] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [likesCount, setLikesCount] = useState(initialLikes)
+
+  useEffect(() => {
+    if (!recipeId) return
+    return onValue(ref(db, `recipes/${recipeId}/likes`), (snap) => {
+      setLikesCount(snap.val() ?? initialLikes)
+    })
+    // initialLikes is intentionally excluded: we only use it as a one-time seed
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recipeId])
 
   useEffect(() => {
     if (!recipeId || !userId) { setLiked(false); setLoading(false); return }
@@ -93,5 +103,5 @@ export function useLikes(recipeId: string, userId: string | undefined) {
     }
   }, [recipeId, userId, liked, loading])
 
-  return { liked, loading, toggle }
+  return { liked, loading, likesCount, toggle }
 }

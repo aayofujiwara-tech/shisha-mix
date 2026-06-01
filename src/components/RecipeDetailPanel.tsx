@@ -17,12 +17,12 @@ interface Props {
 export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
   const { user } = useAuth()
   const navigate = useNavigate()
-  const [recipe, setRecipe] = useState(initial)
+  const [recipe] = useState(initial)
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
   const categories = recipe.category ?? []
   const [photoIdx, setPhotoIdx] = useState(0)
-  const { liked, loading: likesLoading, toggle } = useLikes(recipe.id, user?.uid)
+  const { liked, loading: likesLoading, likesCount, toggle } = useLikes(recipe.id, user?.uid, initial.likes)
 
   const isOwner = user?.uid === recipe.userId
   const canShowField = (field: keyof typeof recipe.visibility) =>
@@ -30,8 +30,6 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
 
   const handleLike = async () => {
     if (!user) { navigate('/login'); return }
-    const delta = liked ? -1 : 1
-    setRecipe((r) => ({ ...r, likes: r.likes + delta }))
     await toggle()
   }
 
@@ -78,7 +76,7 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
             onClick={handleLike}
             disabled={likesLoading}
           >
-            {liked ? '❤️' : '🤍'} {recipe.likes}
+            {liked ? '❤️' : '🤍'} {likesCount}
           </button>
         </div>
 
