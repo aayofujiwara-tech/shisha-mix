@@ -31,12 +31,12 @@ export function useMyRecipes(userId: string | null) {
   const createRecipe = useCallback(async (data: Omit<Recipe, 'id'>) => {
     const newRef = push(ref(db, 'recipes'))
     const recipe: Recipe = { ...data, id: newRef.key! }
-    await set(newRef, recipe)
+    await set(newRef, JSON.parse(JSON.stringify(recipe)))
     return recipe
   }, [])
 
   const updateRecipe = useCallback(async (id: string, data: Partial<Recipe>) => {
-    await set(ref(db, `recipes/${id}`), { ...data, id })
+    await set(ref(db, `recipes/${id}`), JSON.parse(JSON.stringify({ ...data, id })))
   }, [])
 
   const deleteRecipe = useCallback(async (id: string) => {
