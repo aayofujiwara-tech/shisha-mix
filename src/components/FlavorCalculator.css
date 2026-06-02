@@ -1,0 +1,248 @@
+.fc-calc {
+  margin-top: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.fc-calc-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--color-surface-2);
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-amber);
+  font-family: var(--font-sans);
+  transition: background 0.15s;
+}
+
+.fc-calc-toggle:hover {
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.fc-calc-chevron {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.fc-calc-body {
+  padding: 0 14px 14px;
+  background: var(--color-surface);
+}
+
+.fc-calc-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 10px 0;
+}
+
+/* Input row */
+.fc-calc-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.fc-calc-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.fc-calc-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fc-calc-input {
+  width: 56px;
+  padding: 4px 8px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  font-family: var(--font-sans);
+  -moz-appearance: textfield;
+}
+
+.fc-calc-input::-webkit-outer-spin-button,
+.fc-calc-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.fc-calc-input:focus {
+  outline: none;
+  border-color: var(--color-amber);
+}
+
+.fc-calc-unit {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.fc-calc-spin {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-left: 2px;
+}
+
+.fc-calc-spin-btn {
+  width: 22px;
+  height: 18px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  font-size: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.fc-calc-spin-btn:hover {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+}
+
+/* Preset buttons */
+.fc-calc-presets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.fc-calc-preset {
+  padding: 4px 10px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.fc-calc-preset:hover {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+}
+
+.fc-calc-preset.active {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  font-weight: 600;
+}
+
+/* Flavor rows */
+.fc-calc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fc-calc-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.fc-calc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fc-calc-fname {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.fc-calc-fbrand {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.fc-calc-fratio {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.fc-calc-arrow {
+  color: var(--color-text-muted);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.fc-calc-fgrams {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-amber);
+  width: 44px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Total row */
+.fc-calc-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fc-calc-total-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.fc-calc-total-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Copy button */
+.fc-calc-copy {
+  width: 100%;
+  margin-top: 10px;
+  padding: 7px 0;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: var(--font-sans);
+}
+
+.fc-calc-copy:hover {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+}
