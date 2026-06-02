@@ -6,6 +6,7 @@ import { useSessionTimer } from '../hooks/useSessionTimer'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import FlavorCalculator from '../components/FlavorCalculator'
+import RecipeShare from '../components/RecipeShare'
 import './RecipeDetailPage.css'
 import '../components/SessionTimer.css'
 
@@ -163,6 +164,7 @@ export default function RecipeDetailPage() {
         </button>
 
         <FlavorCalculator recipe={recipe} />
+        <RecipeShare recipe={recipe} />
       </div>
     </div>
   )

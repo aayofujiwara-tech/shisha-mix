@@ -4,6 +4,7 @@ import RecipeCard from '../components/RecipeCard'
 import RecipeDetailPanel from '../components/RecipeDetailPanel'
 import CommentSection from '../components/CommentSection'
 import FlavorCalculator from '../components/FlavorCalculator'
+import RecipeShare from '../components/RecipeShare'
 import { usePublicRecipes, useLikes, useMyLikedRecipeIds } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAuth } from '../hooks/useAuth'
@@ -248,6 +249,7 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
           ▶ このレシピでセッション開始
         </button>
         <FlavorCalculator recipe={recipe} />
+        <RecipeShare recipe={recipe} />
       </div>
     </div>
   )

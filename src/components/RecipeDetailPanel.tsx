@@ -7,6 +7,7 @@ import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import CommentSection from './CommentSection'
 import FlavorCalculator from './FlavorCalculator'
+import RecipeShare from './RecipeShare'
 import './RecipeDetailPanel.css'
 import './SessionTimer.css'
 
@@ -154,6 +155,7 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
         </button>
 
         <FlavorCalculator recipe={recipe} />
+        <RecipeShare recipe={recipe} />
 
         <CommentSection
           recipeId={recipe.id}
