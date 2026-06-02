@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import type { Recipe } from '../types'
-import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import './RecipeShare.css'
 
 const APP_ORIGIN = 'https://shisha-mix-eight.vercel.app'
+
+const STRENGTH: Record<string, string> = { weak: '弱', medium: '中', strong: '強' }
+const SWEETNESS: Record<string, string> = { low: '低', medium: '中', high: '高' }
 
 interface RecipeShareProps {
   recipe: Recipe
@@ -14,24 +16,43 @@ function buildPageUrl(recipe: Recipe): string {
   return `${APP_ORIGIN}/recipe/${recipe.id}`
 }
 
-function buildShareText(recipe: Recipe): string {
-  const flavors = (recipe.flavors ?? [])
+function buildShareText(recipe: Recipe, url: string): string {
+  const flavorsText = (recipe.flavors ?? [])
     .map((f) => `${f.name}（${f.brand}）${f.ratio ?? 0}%`)
     .join('\n')
-
-  const tags = (recipe.category ?? []).join(' ')
-  const strength = STRENGTH_LABELS[recipe.strength]
-  const sweetness = SWEETNESS_LABELS[recipe.sweetness]
+  const categories = (recipe.category ?? []).join(' ') || 'なし'
+  const strength = STRENGTH[recipe.strength] ?? recipe.strength
+  const sweetness = SWEETNESS[recipe.sweetness] ?? recipe.sweetness
 
   return [
-    '【シーシャミックス】',
-    recipe.name,
+    `【シーシャミックス】${recipe.name}`,
     '',
-    flavors,
+    flavorsText,
     '',
-    `系統：${tags || 'なし'} 強度：${strength} 甘さ：${sweetness}`,
+    `系統：${categories}`,
+    `強度：${strength} 甘さ：${sweetness}`,
     '',
     '#シーシャ #シーシャミックス #SheeshaMix',
+    url,
+  ].join('\n')
+}
+
+function buildLineText(recipe: Recipe, url: string): string {
+  const flavorsText = (recipe.flavors ?? [])
+    .map((f) => `${f.name}（${f.brand}）${f.ratio ?? 0}%`)
+    .join('\n')
+  const categories = (recipe.category ?? []).join(' ') || 'なし'
+  const strength = STRENGTH[recipe.strength] ?? recipe.strength
+  const sweetness = SWEETNESS[recipe.sweetness] ?? recipe.sweetness
+
+  return [
+    `【シーシャミックス】${recipe.name}`,
+    '',
+    flavorsText,
+    '',
+    `系統：${categories} 強度：${strength} 甘さ：${sweetness}`,
+    '',
+    `SheeshaMixで見る→ ${url}`,
   ].join('\n')
 }
 
@@ -40,16 +61,17 @@ export default function RecipeShare({ recipe }: RecipeShareProps) {
   const [copied, setCopied] = useState(false)
 
   const pageUrl = buildPageUrl(recipe)
-  const shareText = buildShareText(recipe)
+  const xText = buildShareText(recipe, pageUrl)
+  const lineText = buildLineText(recipe, pageUrl)
   const hasWebShare = typeof navigator !== 'undefined' && !!navigator.share
 
   const openX = () => {
-    const text = encodeURIComponent(shareText + '\n' + pageUrl)
-    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank')
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(xText)}`, '_blank')
   }
 
   const openLine = () => {
-    const text = encodeURIComponent(shareText)
+    // LINE share: テキストにURLを含めて送る（url パラメータは最低限）
+    const text = encodeURIComponent(lineText)
     const url = encodeURIComponent(pageUrl)
     window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`, '_blank')
   }
@@ -61,7 +83,7 @@ export default function RecipeShare({ recipe }: RecipeShareProps) {
   }
 
   const shareNative = async () => {
-    await navigator.share({ title: recipe.name, text: shareText, url: pageUrl })
+    await navigator.share({ title: recipe.name, text: xText, url: pageUrl })
   }
 
   return (
