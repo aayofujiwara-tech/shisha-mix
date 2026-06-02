@@ -72,10 +72,8 @@ export default function RecipeShare({ recipe }: RecipeShareProps) {
   }
 
   const openLine = () => {
-    // LINE share: テキストにURLを含めて送る（url パラメータは最低限）
-    const text = encodeURIComponent(lineText)
-    const url = encodeURIComponent(pageUrl)
-    window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`, '_blank')
+    // line.me/R/share を使用。lineText にURLが含まれているため text のみで完結
+    window.open(`https://line.me/R/share?text=${encodeURIComponent(lineText)}`, '_blank')
   }
 
   const copyUrl = async () => {
