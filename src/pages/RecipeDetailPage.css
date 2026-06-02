@@ -92,6 +92,8 @@
   font-weight: 700;
   line-height: 1.3;
   flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .like-btn {
@@ -151,6 +153,8 @@
 .flavor-name {
   flex: 1;
   font-weight: 500;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .flavor-brand {

@@ -14,6 +14,11 @@ function isIOS(): boolean {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as Window & { MSStream?: unknown }).MSStream
 }
 
+function isAndroidNonChrome(): boolean {
+  const ua = navigator.userAgent
+  return /Android/.test(ua) && !(/Chrome\//.test(ua) && !/EdgA/.test(ua))
+}
+
 function isInStandaloneMode(): boolean {
   return (
     ('standalone' in navigator && (navigator as Navigator & { standalone?: boolean }).standalone === true) ||
@@ -36,6 +41,12 @@ export default function InstallPrompt() {
     if (dismissed || count < MIN_VISITS) return
 
     if (isIOS()) {
+      setShowIOSGuide(true)
+      setVisible(true)
+      return
+    }
+
+    if (isAndroidNonChrome()) {
       setShowIOSGuide(true)
       setVisible(true)
       return
@@ -67,13 +78,16 @@ export default function InstallPrompt() {
   if (!visible) return null
 
   if (showIOSGuide) {
+    const isAndroid = /Android/.test(navigator.userAgent)
     return (
       <div className="install-prompt install-prompt--ios">
         <div className="install-prompt-icon">🪔</div>
         <div className="install-prompt-text">
           <p className="install-prompt-title">ホーム画面に追加できます</p>
           <p className="install-prompt-desc">
-            Safariの <span className="install-prompt-share-icon">⎦↑</span> ボタン →「ホーム画面に追加」
+            {isAndroid
+              ? 'ブラウザのメニュー →「ホーム画面に追加」'
+              : <>Safari の <span className="install-prompt-share-icon">⎦↑</span> →「ホーム画面に追加」</>}
           </p>
         </div>
         <div className="install-prompt-actions">
