@@ -88,3 +88,20 @@
 .install-prompt-add:hover {
   background: #d4922a;
 }
+
+/* iOS guide variant */
+.install-prompt--ios .install-prompt-desc {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.install-prompt-share-icon {
+  display: inline-block;
+  padding: 1px 5px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--color-text);
+  vertical-align: middle;
+}

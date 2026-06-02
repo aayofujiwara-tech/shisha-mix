@@ -183,9 +183,15 @@
 
 .st-interval-options {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   margin-bottom: 16px;
+}
+
+@media (min-width: 400px) {
+  .st-interval-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .st-interval-opt {
