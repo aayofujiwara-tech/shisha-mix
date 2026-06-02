@@ -77,9 +77,25 @@ export default function RecipeShare({ recipe }: RecipeShareProps) {
   }
 
   const copyUrl = async () => {
-    await navigator.clipboard.writeText(pageUrl)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(pageUrl)
+      } else {
+        // HTTP環境・iOS Safari フォールバック
+        const ta = document.createElement('textarea')
+        ta.value = pageUrl
+        ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none'
+        document.body.appendChild(ta)
+        ta.focus()
+        ta.select()
+        document.execCommand('copy')
+        document.body.removeChild(ta)
+      }
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('[RecipeShare] コピー失敗:', err)
+    }
   }
 
   const shareNative = async () => {
