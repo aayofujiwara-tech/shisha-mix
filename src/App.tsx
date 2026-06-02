@@ -13,6 +13,7 @@ import SuggestPage from './pages/SuggestPage'
 import ProfilePage from './pages/ProfilePage'
 import StorePage from './pages/StorePage'
 import SessionTimer from './components/SessionTimer'
+import InstallPrompt from './components/InstallPrompt'
 import { SessionTimerProvider } from './hooks/useSessionTimer'
 
 function AppRoutes() {
@@ -62,6 +63,7 @@ function AppRoutes() {
       </main>
       <BottomNav />
       <SessionTimer />
+      <InstallPrompt />
     </div>
   )
 }
