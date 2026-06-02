@@ -12,8 +12,17 @@ interface RecipeShareProps {
 }
 
 function buildPageUrl(recipe: Recipe): string {
-  if (recipe.isPreset) return APP_ORIGIN + '/'
-  return `${APP_ORIGIN}/recipe/${recipe.id}`
+  if (recipe.isPreset) {
+    console.log('[RecipeShare] share url: preset → origin | id:', recipe.id)
+    return APP_ORIGIN + '/'
+  }
+  if (recipe.id) {
+    const url = `${APP_ORIGIN}/recipe/${recipe.id}`
+    console.log('[RecipeShare] share url:', url)
+    return url
+  }
+  console.log('[RecipeShare] share url: id missing → origin | recipe:', recipe)
+  return APP_ORIGIN + '/'
 }
 
 function buildShareText(recipe: Recipe, url: string): string {
