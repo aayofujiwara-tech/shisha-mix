@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
 import RecipeDetailPanel from '../components/RecipeDetailPanel'
 import CommentSection from '../components/CommentSection'
+import FlavorCalculator from '../components/FlavorCalculator'
 import { usePublicRecipes, useLikes, useMyLikedRecipeIds } from '../hooks/useRecipes'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAuth } from '../hooks/useAuth'
@@ -246,6 +247,7 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
         >
           ▶ このレシピでセッション開始
         </button>
+        <FlavorCalculator recipe={recipe} />
       </div>
     </div>
   )
