@@ -130,6 +130,9 @@
   font-weight: 600;
   z-index: 200;
   white-space: nowrap;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+  text-overflow: ellipsis;
   pointer-events: none;
   animation: suggest-toast-in 0.2s ease;
 }
