@@ -5,9 +5,8 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: var(--max-width);
-  /* safe-area対応: iPhone のホームインジケーター分を確保 */
-  height: calc(var(--tab-height) + env(safe-area-inset-bottom, 0px));
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  height: calc(var(--tab-height) + env(safe-area-inset-bottom, 16px));
+  padding-bottom: env(safe-area-inset-bottom, 16px);
   background: var(--color-surface);
   border-top: 1px solid var(--color-border);
   display: flex;
@@ -32,7 +31,8 @@
   color: var(--color-text-muted);
   text-decoration: none;
   transition: color 0.2s;
-  padding: 6px 4px 0;
+  padding: 6px 2px 0;
+  min-height: 44px;
   overflow: hidden;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .bottom-nav-icon {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
   flex-shrink: 0;
 }
