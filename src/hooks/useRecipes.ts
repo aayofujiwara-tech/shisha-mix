@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { ref, set, get, remove, push, query, orderByChild, equalTo, onValue, runTransaction } from 'firebase/database'
 import { db } from '../firebase'
 import type { Recipe } from '../types'
+import { presets } from '../data/presets'
 
 export function useMyRecipes(userId: string | null) {
   const [recipes, setRecipes] = useState<Recipe[]>([])
@@ -48,8 +49,10 @@ export function useMyRecipes(userId: string | null) {
 
 export async function getRecipe(id: string): Promise<Recipe | null> {
   const snap = await get(ref(db, `recipes/${id}`))
-  if (!snap.exists()) return null
-  return { id: snap.key!, ...snap.val() } as Recipe
+  if (snap.exists()) return { id: snap.key!, ...snap.val() } as Recipe
+  // Firebase にない場合はプリセットからフォールバック
+  const preset = presets.find((p) => p.id === id)
+  return preset ? (preset as Recipe) : null
 }
 
 export function usePublicRecipes() {
