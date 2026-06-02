@@ -9,7 +9,6 @@ import { flavorDB } from '../data/flavorDB'
 import { CATEGORIES, STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import type { Recipe } from '../types'
 import RecipeCard from '../components/RecipeCard'
-import AIRecipeGenerator from '../components/AIRecipeGenerator'
 import './SuggestPage.css'
 import '../components/SessionTimer.css'
 
@@ -109,9 +108,7 @@ export default function SuggestPage() {
 
   return (
     <div className="page">
-      <AIRecipeGenerator />
-
-      <div className="page-header" style={{ marginTop: 8 }}>
+      <div className="page-header">
         <h1 className="page-title">🎲 ランダム提案</h1>
       </div>
 
