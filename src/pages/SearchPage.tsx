@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
 import RecipeRanking from '../components/RecipeRanking'
@@ -10,7 +10,6 @@ import { usePublicRecipes, useLikes, useMyLikedRecipeIds } from '../hooks/useRec
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAuth } from '../hooks/useAuth'
 import { useSessionTimer } from '../hooks/useSessionTimer'
-import { presets } from '../data/presets'
 import { CATEGORIES, BRANDS, STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import type { Recipe } from '../types'
 import './SearchPage.css'
@@ -266,6 +265,9 @@ export default function SearchPage() {
   const { user } = useAuth()
   const likedIds = useMyLikedRecipeIds(user?.uid)
 
+  const [presets, setPresets] = useState<Recipe[]>([])
+  useEffect(() => { import('../data/presets').then((m) => setPresets(m.presets as Recipe[])) }, [])
+
   const [keyword, setKeyword] = useState('')
   const [selCategories, setSelCategories] = useState<string[]>([])
   const [selBrands, setSelBrands] = useState<string[]>([])
@@ -281,7 +283,7 @@ export default function SearchPage() {
     presets.forEach((r) => map.set(r.id, r))
     communityRecipes.forEach((r) => map.set(r.id, r)) // Firebase version takes precedence post-migration
     return Array.from(map.values())
-  }, [communityRecipes])
+  }, [communityRecipes, presets])
 
   const filtered = useMemo(() => {
     let result = allRecipes

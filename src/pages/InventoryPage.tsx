@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useInventory } from '../hooks/useInventory'
-import { flavorDB } from '../data/flavorDB'
 import { BRANDS, CATEGORIES, STATUS_LABELS } from '../types'
-import type { InventoryFlavor } from '../types'
+import type { InventoryFlavor, FlavorDBItem } from '../types'
 import FlavorCompatibility from '../components/FlavorCompatibility'
 import './InventoryPage.css'
 
@@ -19,6 +18,9 @@ export default function InventoryPage() {
   const [customBrand, setCustomBrand] = useState('Al Fakher')
   const [customCategory, setCustomCategory] = useState('フルーツ系')
   const [filterStatus, setFilterStatus] = useState<InventoryFlavor['status'] | 'all'>('all')
+  const [flavorDB, setFlavorDB] = useState<FlavorDBItem[]>([])
+  useEffect(() => { import('../data/flavorDB').then((m) => setFlavorDB(m.flavorDB)) }, [])
+
   const [adding, setAdding] = useState(false)
   const [activeTab, setActiveTab] = useState<'inventory' | 'compat'>('inventory')
   const [confirmDeleteFlavorId, setConfirmDeleteFlavorId] = useState<string | null>(null)

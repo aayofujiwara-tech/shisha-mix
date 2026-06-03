@@ -1,13 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useMyRecipes, usePublicRecipes } from '../hooks/useRecipes'
 import { useInventory } from '../hooks/useInventory'
 import { useSessionTimer } from '../hooks/useSessionTimer'
-import { presets } from '../data/presets'
-import { flavorDB } from '../data/flavorDB'
 import { CATEGORIES, STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
-import type { Recipe } from '../types'
+import type { Recipe, FlavorDBItem } from '../types'
 import RecipeCard from '../components/RecipeCard'
 import './SuggestPage.css'
 import '../components/SessionTimer.css'
@@ -30,13 +28,19 @@ export default function SuggestPage() {
   const [saved, setSaved] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
   const [baseSearch, setBaseSearch] = useState('')
+  const [presets, setPresets] = useState<Recipe[]>([])
+  const [flavorDB, setFlavorDB] = useState<FlavorDBItem[]>([])
+  useEffect(() => {
+    import('../data/presets').then((m) => setPresets(m.presets as Recipe[]))
+    import('../data/flavorDB').then((m) => setFlavorDB(m.flavorDB))
+  }, [])
 
   const allRecipes = useMemo(() => {
     const map = new Map<string, Recipe>()
     presets.forEach((r) => map.set(r.id, r))
     communityRecipes.forEach((r) => map.set(r.id, r)) // Firebase version takes precedence post-migration
     return Array.from(map.values())
-  }, [communityRecipes])
+  }, [communityRecipes, presets])
 
   const availableFlavorNames = useMemo(() =>
     inventory.filter((f) => f.status !== 'empty').map((f) => f.name.toLowerCase()),
