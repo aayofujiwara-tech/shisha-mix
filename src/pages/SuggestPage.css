@@ -119,7 +119,7 @@
 
 .suggest-toast {
   position: fixed;
-  bottom: 80px;
+  bottom: calc(var(--tab-height, 64px) + env(safe-area-inset-bottom, 16px) + var(--session-bar-height, 0px) + 12px);
   left: 50%;
   transform: translateX(-50%);
   background: var(--color-amber);

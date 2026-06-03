@@ -24,9 +24,10 @@ interface Props {
   entries: DiaryEntry[]
   selectedDate: string | null
   onSelectDate: (date: string | null) => void
+  onMonthChange?: (year: number, month: number) => void
 }
 
-export default function SessionCalendar({ entries, selectedDate, onSelectDate }: Props) {
+export default function SessionCalendar({ entries, selectedDate, onSelectDate, onMonthChange }: Props) {
   const today = new Date()
   const [calYear, setCalYear] = useState(today.getFullYear())
   const [calMonth, setCalMonth] = useState(today.getMonth())
@@ -36,12 +37,28 @@ export default function SessionCalendar({ entries, selectedDate, onSelectDate }:
   const todayStr = toDateStr(today)
 
   const prevMonth = () => {
-    if (calMonth === 0) { setCalYear(y => y - 1); setCalMonth(11) }
-    else setCalMonth(m => m - 1)
+    if (calMonth === 0) {
+      const newYear = calYear - 1
+      setCalYear(newYear)
+      setCalMonth(11)
+      onMonthChange?.(newYear, 11)
+    } else {
+      const newMonth = calMonth - 1
+      setCalMonth(newMonth)
+      onMonthChange?.(calYear, newMonth)
+    }
   }
   const nextMonth = () => {
-    if (calMonth === 11) { setCalYear(y => y + 1); setCalMonth(0) }
-    else setCalMonth(m => m + 1)
+    if (calMonth === 11) {
+      const newYear = calYear + 1
+      setCalYear(newYear)
+      setCalMonth(0)
+      onMonthChange?.(newYear, 0)
+    } else {
+      const newMonth = calMonth + 1
+      setCalMonth(newMonth)
+      onMonthChange?.(calYear, newMonth)
+    }
   }
 
   const handleDayClick = (d: Date, isCurrentMonth: boolean) => {

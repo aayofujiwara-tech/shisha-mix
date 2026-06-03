@@ -50,6 +50,8 @@ export default function DiaryPage() {
 
   const { entries, loading, deleteEntry } = useDiary(user?.uid ?? null)
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
+  const [statsYear, setStatsYear] = useState(new Date().getFullYear())
+  const [statsMonth, setStatsMonth] = useState(new Date().getMonth())
   const [showForm, setShowForm] = useState(false)
   const [editEntry, setEditEntry] = useState<DiaryEntry | undefined>(undefined)
   const [formPrefill, setFormPrefill] = useState<Prefill | undefined>(undefined)
@@ -81,10 +83,7 @@ export default function DiaryPage() {
     )
   }
 
-  const now = new Date()
-  const thisYear = now.getFullYear()
-  const thisMonth = now.getMonth()
-  const monthPrefix = `${thisYear}-${String(thisMonth + 1).padStart(2, '0')}`
+  const monthPrefix = `${statsYear}-${String(statsMonth + 1).padStart(2, '0')}`
   const monthEntries = entries.filter((e) => e.date.startsWith(monthPrefix))
 
   const totalDuration = monthEntries.reduce((s, e) => s + e.sessionDuration, 0)
@@ -134,19 +133,20 @@ export default function DiaryPage() {
             entries={entries}
             selectedDate={selectedDate}
             onSelectDate={setSelectedDate}
+            onMonthChange={(y, m) => { setStatsYear(y); setStatsMonth(m) }}
           />
 
           {/* Stats */}
           <div className="dp-stats">
             <div className="dp-stat-card">
               <span className="dp-stat-value">{monthEntries.length}</span>
-              <span className="dp-stat-label">今月のセッション</span>
+              <span className="dp-stat-label">{statsMonth + 1}月のセッション</span>
             </div>
             <div className="dp-stat-card">
               <span className="dp-stat-value dp-stat-value--sm">
                 {monthEntries.length > 0 ? formatMinutes(totalDuration) : '—'}
               </span>
-              <span className="dp-stat-label">今月の合計時間</span>
+              <span className="dp-stat-label">{statsMonth + 1}月の合計時間</span>
             </div>
             <div className="dp-stat-card">
               <span className="dp-stat-value dp-stat-value--sm dp-stat-value--ellipsis">
