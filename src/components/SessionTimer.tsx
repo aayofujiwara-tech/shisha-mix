@@ -51,7 +51,7 @@ export default function SessionTimer() {
     const duration = Math.max(1, Math.floor(completedElapsed / 60))
     const handleRecord = () => {
       clearCompletedSession()
-      navigate('/diary', { state: { prefill: { recipeName: completedSession.recipeName, duration } } })
+      navigate('/diary', { state: { prefill: { recipeName: completedSession.recipeName, duration, coalCount: completedSession.coalChangeCount } } })
     }
     return (
       <div className="st-busy-toast st-diary-toast">

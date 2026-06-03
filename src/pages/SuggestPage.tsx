@@ -60,7 +60,12 @@ export default function SuggestPage() {
     if (selSweetness.length) {
       pool = pool.filter((r) => selSweetness.includes(r.sweetness))
     }
-    if (inventoryOnly && inventory.length > 0) {
+    if (inventoryOnly) {
+      if (inventory.length === 0) {
+        setSuggested(null)
+        alert('在庫にフレーバーが登録されていません。まず在庫管理からフレーバーを追加してください。')
+        return
+      }
       pool = pool.filter((r) =>
         r.flavors.every((f) => availableFlavorNames.includes(f.name.toLowerCase()))
       )

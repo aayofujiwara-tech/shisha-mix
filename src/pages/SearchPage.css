@@ -178,7 +178,7 @@
 @media (min-width: 768px) {
   .search-pc-wrap {
     display: flex;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
   }
 

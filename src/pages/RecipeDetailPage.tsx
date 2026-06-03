@@ -7,6 +7,7 @@ import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import FlavorCalculator from '../components/FlavorCalculator'
 import RecipeShare from '../components/RecipeShare'
+import CommentSection from '../components/CommentSection'
 import './RecipeDetailPage.css'
 import '../components/SessionTimer.css'
 
@@ -27,7 +28,7 @@ export default function RecipeDetailPage() {
     getRecipe(id).then((r) => { setRecipe(r); setLoading(false) }).catch(() => { setRecipe(null); setLoading(false) })
   }, [id])
 
-  if (loading) return <div className="loading"><div className="spinner" />読み込み中...</div>
+  if (loading) return <div className="page"><div className="loading"><div className="spinner" />読み込み中...</div></div>
   if (!recipe) return (
     <div className="page">
       <div className="empty-state">
@@ -165,6 +166,11 @@ export default function RecipeDetailPage() {
 
         <FlavorCalculator recipe={recipe} />
         <RecipeShare recipe={recipe} />
+        <CommentSection
+          recipeId={recipe.id}
+          userId={user?.uid}
+          userName={user?.displayName || undefined}
+        />
       </div>
     </div>
   )

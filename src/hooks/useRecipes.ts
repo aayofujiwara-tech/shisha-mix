@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { ref, set, get, remove, push, query, orderByChild, equalTo, onValue, runTransaction } from 'firebase/database'
+import { ref, set, get, update, remove, push, query, orderByChild, equalTo, onValue, runTransaction } from 'firebase/database'
 import { db } from '../firebase'
 import type { Recipe } from '../types'
 import { presets } from '../data/presets'
@@ -39,7 +39,7 @@ export function useMyRecipes(userId: string | null) {
   const updateRecipe = useCallback(async (id: string, data: Partial<Recipe>) => {
     const likesSnap = await get(ref(db, `recipes/${id}/likes`))
     const currentLikes = typeof likesSnap.val() === 'number' ? likesSnap.val() : (data.likes ?? 0)
-    await set(ref(db, `recipes/${id}`), JSON.parse(JSON.stringify({ ...data, id, likes: currentLikes })))
+    await update(ref(db, `recipes/${id}`), JSON.parse(JSON.stringify({ ...data, id, likes: currentLikes })))
   }, [])
 
   const deleteRecipe = useCallback(async (id: string) => {

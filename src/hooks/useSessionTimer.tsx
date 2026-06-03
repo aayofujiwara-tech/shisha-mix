@@ -42,10 +42,10 @@ const Ctx = createContext<ContextValue | null>(null)
 const SS_KEY = 'sheeshamix_session'
 
 function readSS(): SessionData | null {
-  try { return JSON.parse(sessionStorage.getItem(SS_KEY) ?? 'null') } catch { return null }
+  try { return JSON.parse(localStorage.getItem(SS_KEY) ?? 'null') } catch { return null }
 }
 function writeSS(d: SessionData | null) {
-  d ? sessionStorage.setItem(SS_KEY, JSON.stringify(d)) : sessionStorage.removeItem(SS_KEY)
+  d ? localStorage.setItem(SS_KEY, JSON.stringify(d)) : localStorage.removeItem(SS_KEY)
 }
 
 export function SessionTimerProvider({ children }: { children: ReactNode }) {

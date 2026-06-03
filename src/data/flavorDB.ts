@@ -31,6 +31,15 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'af-lychee', name: 'ライチ', brand: 'Al Fakher', category: 'フルーツ系' },
   { id: 'af-grapefruit', name: 'グレープフルーツ', brand: 'Al Fakher', category: 'フルーツ系' },
   { id: 'af-watermelon2', name: 'スイカ', brand: 'Al Fakher', category: 'フルーツ系' },
+  { id: 'af-special-grape', name: 'スペシャルグレープ', brand: 'Al Fakher', category: 'フルーツ系' },
+  { id: 'af-berry-mix', name: 'ベリーミックス', brand: 'Al Fakher', category: 'フルーツ系' },
+  { id: 'af-guava', name: 'グアバ', brand: 'Al Fakher', category: 'フルーツ系' },
+  { id: 'af-chocolate', name: 'チョコレート', brand: 'Al Fakher', category: 'デザート系' },
+  { id: 'af-cardamom', name: 'カルダモン', brand: 'Al Fakher', category: 'スパイス系' },
+  { id: 'af-lavender', name: 'ラベンダー', brand: 'Al Fakher', category: 'スパイス系' },
+  { id: 'af-honeydew', name: 'ハニーデューメロン', brand: 'Al Fakher', category: 'フルーツ系' },
+  { id: 'af-fresh', name: 'フレッシュ', brand: 'Al Fakher', category: 'ミント系' },
+  { id: 'af-diamond-dust', name: 'ダイアモンドダスト', brand: 'Al Fakher', category: 'アイス系' },
 
   // ===== Fumari =====
   { id: 'fm-strawberry', name: 'ストロベリー', brand: 'Fumari', category: 'フルーツ系' },
@@ -46,10 +55,15 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'fm-mojito', name: 'モヒート', brand: 'Fumari', category: 'スパイス系' },
   { id: 'fm-ambrosia', name: 'アンブロシア', brand: 'Fumari', category: 'フルーツ系' },
   { id: 'fm-mandarin', name: 'マンダリンゼスト', brand: 'Fumari', category: 'フルーツ系' },
+  { id: 'fm-white-gummi', name: 'ホワイトグミベア', brand: 'Fumari', category: 'デザート系' },
+  { id: 'fm-red-gummi', name: 'レッドグミベア', brand: 'Fumari', category: 'デザート系' },
+  { id: 'fm-peach', name: 'ピーチ', brand: 'Fumari', category: 'フルーツ系' },
+  { id: 'fm-guava', name: 'グアバ', brand: 'Fumari', category: 'フルーツ系' },
+  { id: 'fm-lime', name: 'ライム', brand: 'Fumari', category: 'フルーツ系' },
 
   // ===== Starbuzz =====
   { id: 'sb-blue-mist', name: 'ブルーミスト', brand: 'Starbuzz', category: 'ミント系' },
-  { id: 'sb-pirates-cave', name: "パイレーツケーブ", brand: 'Starbuzz', category: 'フルーツ系' },
+  { id: 'sb-pirates-cave', name: 'パイレーツケーブ', brand: 'Starbuzz', category: 'フルーツ系' },
   { id: 'sb-code-69', name: 'Code 69', brand: 'Starbuzz', category: 'フルーツ系' },
   { id: 'sb-white-gummi-bear', name: 'White Gummi Bear', brand: 'Starbuzz', category: 'デザート系' },
   { id: 'sb-island-breeze', name: 'Island Breeze', brand: 'Starbuzz', category: 'フルーツ系' },
@@ -61,6 +75,10 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'sb-cardamom', name: 'カルダモン', brand: 'Starbuzz', category: 'スパイス系' },
   { id: 'sb-melon', name: 'メロン', brand: 'Starbuzz', category: 'フルーツ系' },
   { id: 'sb-pink', name: 'ピンク', brand: 'Starbuzz', category: 'フルーツ系' },
+  { id: 'sb-exotic-juice', name: 'エキゾチックジュース', brand: 'Starbuzz', category: 'フルーツ系' },
+  { id: 'sb-lebanese', name: 'レバニーズボムシェル', brand: 'Starbuzz', category: 'フルーツ系' },
+  { id: 'sb-peach', name: 'ピーチ', brand: 'Starbuzz', category: 'フルーツ系' },
+  { id: 'sb-asian-persuasion', name: 'アジアンパースエイジョン', brand: 'Starbuzz', category: 'フルーツ系' },
 
   // ===== Adalya =====
   { id: 'ad-love-66', name: 'Love 66', brand: 'Adalya', category: 'フルーツ系' },
@@ -75,6 +93,10 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'ad-orange', name: 'オレンジ', brand: 'Adalya', category: 'フルーツ系' },
   { id: 'ad-energy', name: 'エナジードリンク', brand: 'Adalya', category: 'スパイス系' },
   { id: 'ad-sultan', name: 'スルタン', brand: 'Adalya', category: 'フルーツ系' },
+  { id: 'ad-lady-killer', name: 'Lady Killer', brand: 'Adalya', category: 'アイス系', description: 'マンゴー×ストロベリー×メンソール' },
+  { id: 'ad-orange-mint', name: 'オレンジミント', brand: 'Adalya', category: 'ミント系' },
+  { id: 'ad-cola', name: 'コーラ', brand: 'Adalya', category: 'スパイス系' },
+  { id: 'ad-cherry', name: 'チェリー', brand: 'Adalya', category: 'フルーツ系' },
 
   // ===== Dozaj =====
   { id: 'dz-ice-watermelon', name: 'アイスウォーターメロン', brand: 'Dozaj', category: 'アイス系' },
@@ -85,6 +107,13 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'dz-ice-grape', name: 'アイスグレープ', brand: 'Dozaj', category: 'アイス系' },
   { id: 'dz-ice-mint', name: 'アイスミント', brand: 'Dozaj', category: 'アイス系' },
   { id: 'dz-lychee', name: 'ライチ', brand: 'Dozaj', category: 'フルーツ系' },
+  { id: 'dz-ice', name: 'アイス', brand: 'Dozaj', category: 'アイス系' },
+  { id: 'dz-vanilla', name: 'バニラ', brand: 'Dozaj', category: 'デザート系' },
+  { id: 'dz-milk', name: 'ミルク', brand: 'Dozaj', category: 'デザート系' },
+  { id: 'dz-jasmine', name: 'ジャスミン', brand: 'Dozaj', category: 'スパイス系' },
+  { id: 'dz-guava', name: 'グアバ', brand: 'Dozaj', category: 'フルーツ系' },
+  { id: 'dz-casablanca', name: 'カサブランカ', brand: 'Dozaj', category: 'スパイス系', description: 'ローズ×ジャスミン' },
+  { id: 'dz-banana-milk', name: 'バナナミルクシェイク', brand: 'Dozaj', category: 'デザート系' },
 
   // ===== Tangiers =====
   { id: 'tg-cane-mint', name: 'ケインミント', brand: 'Tangiers', category: 'ミント系' },
@@ -94,38 +123,85 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'tg-m-cherries', name: 'M-Cherries', brand: 'Tangiers', category: 'フルーツ系' },
   { id: 'tg-kashmiri-chai', name: 'カシミリチャイ', brand: 'Tangiers', category: 'スパイス系' },
   { id: 'tg-cream', name: 'クリーム', brand: 'Tangiers', category: 'デザート系' },
+  { id: 'tg-cassis', name: 'カシス', brand: 'Tangiers', category: 'フルーツ系' },
+  { id: 'tg-blueberry', name: 'ブルーベリー', brand: 'Tangiers', category: 'フルーツ系' },
+  { id: 'tg-banana', name: 'バナナ', brand: 'Tangiers', category: 'フルーツ系' },
+  { id: 'tg-african-queen', name: 'アフリカンクイーン', brand: 'Tangiers', category: 'フルーツ系', description: 'マンゴー×パッションフルーツ' },
 
   // ===== Al Waha =====
   { id: 'aw-pan-rasna', name: 'パンラズナ', brand: 'Al Waha', category: 'スパイス系' },
+  { id: 'aw-grape', name: 'グレープ', brand: 'Al Waha', category: 'フルーツ系' },
+  { id: 'aw-mint', name: 'ミント', brand: 'Al Waha', category: 'ミント系' },
+  { id: 'aw-chai', name: 'チャイ', brand: 'Al Waha', category: 'スパイス系' },
+  { id: 'aw-cardamom', name: 'カルダモン', brand: 'Al Waha', category: 'スパイス系' },
 
   // ===== Nakhla =====
   { id: 'nk-blueberry', name: 'ブルーベリー', brand: 'Nakhla', category: 'フルーツ系' },
   { id: 'nk-double-apple', name: 'ダブルアップル', brand: 'Nakhla', category: 'ダブルアップル系' },
   { id: 'nk-watermelon', name: 'ウォーターメロン', brand: 'Nakhla', category: 'フルーツ系' },
   { id: 'nk-mango', name: 'マンゴー', brand: 'Nakhla', category: 'フルーツ系' },
+  { id: 'nk-mint', name: 'ミント', brand: 'Nakhla', category: 'ミント系' },
+  { id: 'nk-grape', name: 'グレープ', brand: 'Nakhla', category: 'フルーツ系' },
+  { id: 'nk-strawberry', name: 'ストロベリー', brand: 'Nakhla', category: 'フルーツ系' },
+  { id: 'nk-lemon', name: 'レモン', brand: 'Nakhla', category: 'フルーツ系' },
+  { id: 'nk-apple', name: 'アップル', brand: 'Nakhla', category: 'フルーツ系' },
 
   // ===== Azure =====
   { id: 'az-ice-mint', name: 'アイスミント', brand: 'Azure', category: 'アイス系' },
   { id: 'az-melon-ice', name: 'メロンアイス', brand: 'Azure', category: 'アイス系' },
   { id: 'az-blueberry', name: 'ブルーベリー', brand: 'Azure', category: 'フルーツ系' },
-
-  // ===== Musthave =====
-  { id: 'mh-guava', name: 'グアバ', brand: 'Musthave', category: 'フルーツ系' },
-  { id: 'mh-mango', name: 'マンゴー', brand: 'Musthave', category: 'フルーツ系' },
-  { id: 'mh-passion', name: 'パッションフルーツ', brand: 'Musthave', category: 'フルーツ系' },
+  { id: 'az-strong-mint', name: 'ストロングミント', brand: 'Azure', category: 'ミント系' },
+  { id: 'az-grape', name: 'グレープ', brand: 'Azure', category: 'フルーツ系' },
+  { id: 'az-peach', name: 'ピーチ', brand: 'Azure', category: 'フルーツ系' },
+  { id: 'az-watermelon', name: 'スイカ', brand: 'Azure', category: 'フルーツ系' },
 
   // ===== Darkside =====
   { id: 'ds-double-apple', name: 'ダブルアップル', brand: 'Darkside', category: 'ダブルアップル系' },
   { id: 'ds-shot-cola', name: 'ショットコーラ', brand: 'Darkside', category: 'スパイス系' },
   { id: 'ds-berry', name: 'ベリー', brand: 'Darkside', category: 'フルーツ系' },
+  { id: 'ds-lemon-blast', name: 'レモンブラスト', brand: 'Darkside', category: 'フルーツ系' },
+  { id: 'ds-blueberry', name: 'ブルーベリー', brand: 'Darkside', category: 'フルーツ系' },
+  { id: 'ds-grape', name: 'グレープ', brand: 'Darkside', category: 'フルーツ系' },
+  { id: 'ds-strawberry', name: 'ストロベリー', brand: 'Darkside', category: 'フルーツ系' },
+  { id: 'ds-pear', name: 'ペア', brand: 'Darkside', category: 'フルーツ系' },
 
   // ===== Mazaya =====
   { id: 'mz-double-apple', name: 'ダブルアップル', brand: 'Mazaya', category: 'ダブルアップル系' },
   { id: 'mz-mint', name: 'ミント', brand: 'Mazaya', category: 'ミント系' },
   { id: 'mz-grape', name: 'グレープ', brand: 'Mazaya', category: 'フルーツ系' },
+  { id: 'mz-lemon-mint', name: 'レモンミント', brand: 'Mazaya', category: 'ミント系' },
+  { id: 'mz-strawberry-mint', name: 'ストロベリーミント', brand: 'Mazaya', category: 'ミント系' },
+  { id: 'mz-blueberry', name: 'ブルーベリー', brand: 'Mazaya', category: 'フルーツ系' },
+
+  // ===== Musthave =====
+  { id: 'mh-guava', name: 'グアバ', brand: 'Musthave', category: 'フルーツ系' },
+  { id: 'mh-mango', name: 'マンゴー', brand: 'Musthave', category: 'フルーツ系' },
+  { id: 'mh-passion', name: 'パッションフルーツ', brand: 'Musthave', category: 'フルーツ系' },
+  { id: 'mh-lychee', name: 'ライチ', brand: 'Musthave', category: 'フルーツ系' },
 
   // ===== Element =====
   { id: 'el-watermelon', name: 'ウォーターメロン', brand: 'Element', category: 'フルーツ系' },
   { id: 'el-mint', name: 'ミント', brand: 'Element', category: 'ミント系' },
   { id: 'el-mango', name: 'マンゴー', brand: 'Element', category: 'フルーツ系' },
+  { id: 'el-water', name: 'ウォーター', brand: 'Element', category: 'アイス系', description: 'スイカ×ミント' },
+  { id: 'el-air', name: 'エア', brand: 'Element', category: 'ミント系', description: 'ミント' },
+  { id: 'el-earth', name: 'アース', brand: 'Element', category: 'フルーツ系', description: 'グレープ' },
+  { id: 'el-fire', name: 'ファイア', brand: 'Element', category: 'スパイス系', description: 'シナモン×スパイス' },
+
+  // ===== Afzal =====
+  { id: 'afzal-pan-rasna', name: 'パンラズナ', brand: 'Afzal', category: 'スパイス系' },
+  { id: 'afzal-double-apple', name: 'ダブルアップル', brand: 'Afzal', category: 'ダブルアップル系' },
+  { id: 'afzal-grape', name: 'グレープ', brand: 'Afzal', category: 'フルーツ系' },
+  { id: 'afzal-kajal', name: 'カジャル', brand: 'Afzal', category: 'スパイス系', description: 'ブドウ×ハーブ' },
+
+  // ===== Social Smoke =====
+  { id: 'ss-chai-latte', name: 'チャイラテ', brand: 'Social Smoke', category: 'スパイス系' },
+  { id: 'ss-watermelon', name: 'ウォーターメロン', brand: 'Social Smoke', category: 'フルーツ系' },
+  { id: 'ss-strawberry-lemon', name: 'ストロベリーレモネード', brand: 'Social Smoke', category: 'フルーツ系' },
+  { id: 'ss-arctic-mint', name: 'アークティックミント', brand: 'Social Smoke', category: 'ミント系' },
+
+  // ===== Trifecta =====
+  { id: 'tf-peppermint-shake', name: 'ペパーミントシェイク', brand: 'Trifecta', category: 'ミント系' },
+  { id: 'tf-twice-ice', name: 'トゥワイスザアイス', brand: 'Trifecta', category: 'アイス系' },
+  { id: 'tf-nawar', name: 'ナワール', brand: 'Trifecta', category: 'スパイス系', description: 'ローズ×フルーツ' },
 ]

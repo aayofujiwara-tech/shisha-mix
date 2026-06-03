@@ -37,7 +37,8 @@ export function useAuth() {
   }
 
   const signInWithEmail = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password)
+    const cred = await signInWithEmailAndPassword(auth, email, password)
+    await upsertUserProfile(cred.user)
   }
 
   const logout = () => signOut(auth)
