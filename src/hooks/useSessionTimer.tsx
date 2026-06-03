@@ -27,6 +27,9 @@ interface ContextValue {
   coalCountdown: number
   status: TimerStatus
   pendingStart: PendingStart | null
+  completedSession: SessionData | null
+  completedElapsed: number
+  clearCompletedSession: () => void
   requestStart: (recipeId: string, recipeName: string) => void
   dismissPending: () => void
   startSession: (recipeId: string, recipeName: string, coalInterval: number) => Promise<void>
@@ -50,6 +53,8 @@ export function SessionTimerProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<SessionData | null>(null)
   const [, setTick] = useState(0)
   const [pendingStart, setPendingStart] = useState<PendingStart | null>(null)
+  const [completedSession, setCompletedSession] = useState<SessionData | null>(null)
+  const [completedElapsed, setCompletedElapsed] = useState(0)
 
   useEffect(() => {
     if (user) {
@@ -114,14 +119,21 @@ export function SessionTimerProvider({ children }: { children: ReactNode }) {
     await persist({ ...session, lastCoalChange: Date.now(), coalChangeCount: session.coalChangeCount + 1 })
   }, [session, persist])
 
+  const clearCompletedSession = useCallback(() => setCompletedSession(null), [])
+
   const endSession = useCallback(async () => {
+    if (session) {
+      setCompletedSession(session)
+      setCompletedElapsed(Math.floor((Date.now() - session.startTime) / 1000))
+    }
     await persist(null)
-  }, [persist])
+  }, [session, persist])
 
   return (
     <Ctx.Provider value={{
       session, isActive: !!session, elapsedSeconds, coalCountdown, status,
-      pendingStart, requestStart, dismissPending, startSession, changeCoal, endSession,
+      pendingStart, completedSession, completedElapsed, clearCompletedSession,
+      requestStart, dismissPending, startSession, changeCoal, endSession,
     }}>
       {children}
     </Ctx.Provider>

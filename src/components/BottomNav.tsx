@@ -7,6 +7,7 @@ const tabs = [
   { to: '/inventory', label: '在庫', icon: '📦', exact: false },
   { to: '/suggest', label: '提案', icon: '🎲', exact: false },
   { to: '/store', label: '店舗', icon: '🏪', exact: false },
+  { to: '/diary', label: '日記', icon: '📔', exact: false },
 ]
 
 export default function BottomNav() {

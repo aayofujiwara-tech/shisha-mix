@@ -78,6 +78,24 @@ export const STRENGTH_LABELS: StrengthLabel = { weak: '弱', medium: '中', stro
 export const SWEETNESS_LABELS: SweetnessLabel = { low: '低', medium: '中', high: '高' };
 export const STATUS_LABELS: StatusLabel = { full: 'あり', low: '残り少し', empty: 'なし' };
 
+export interface DiaryEntry {
+  id: string;
+  date: string;
+  recipeId?: string;
+  recipeName?: string;
+  flavors?: FlavorItem[];
+  sessionDuration: number;
+  coalCount: number;
+  rating: number;
+  mood: string[];
+  memo: string;
+  photos: string[];
+  createdAt: number;
+}
+
+export const MOOD_TAGS = ['リラックス', '集中', '友人と', '一人で', 'おうち', 'カフェ', '夜', '昼'] as const;
+export type MoodTag = typeof MOOD_TAGS[number];
+
 export type TableStatus = 'empty' | 'active' | 'warning' | 'overdue';
 
 export interface CoalChangeRecord {
