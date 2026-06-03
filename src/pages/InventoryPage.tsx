@@ -21,6 +21,7 @@ export default function InventoryPage() {
   const [filterStatus, setFilterStatus] = useState<InventoryFlavor['status'] | 'all'>('all')
   const [adding, setAdding] = useState(false)
   const [activeTab, setActiveTab] = useState<'inventory' | 'compat'>('inventory')
+  const [confirmDeleteFlavorId, setConfirmDeleteFlavorId] = useState<string | null>(null)
 
   if (!user) {
     return (
@@ -145,7 +146,7 @@ export default function InventoryPage() {
                       <option value="low">残り少し</option>
                       <option value="empty">なし</option>
                     </select>
-                    <button className="inv-remove-btn" onClick={() => removeFlavor(f.id)}>✕</button>
+                    <button className="inv-remove-btn" onClick={() => setConfirmDeleteFlavorId(f.id)}>✕</button>
                   </div>
                 </div>
               ))}
@@ -232,6 +233,30 @@ export default function InventoryPage() {
       )}
 
       {activeTab === 'compat' && <FlavorCompatibility userId={user.uid} />}
+
+      {confirmDeleteFlavorId && (
+        <div className="modal-overlay" onClick={() => setConfirmDeleteFlavorId(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-handle" />
+            <h3 style={{ marginBottom: 12, fontSize: 16 }}>フレーバーを削除しますか？</h3>
+            <p style={{ fontSize: 14, color: 'var(--color-text-muted)', marginBottom: 20 }}>
+              この操作は取り消せません。
+            </p>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button className="btn-ghost" style={{ flex: 1 }} onClick={() => setConfirmDeleteFlavorId(null)}>
+                キャンセル
+              </button>
+              <button
+                className="btn-danger"
+                style={{ flex: 1 }}
+                onClick={() => { removeFlavor(confirmDeleteFlavorId); setConfirmDeleteFlavorId(null) }}
+              >
+                削除する
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

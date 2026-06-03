@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSessionTimer } from '../hooks/useSessionTimer'
 import './SessionTimer.css'
 
@@ -9,9 +10,11 @@ function fmt(s: number): string {
 }
 
 export default function SessionTimer() {
+  const navigate = useNavigate()
   const {
     session, isActive, elapsedSeconds, coalCountdown, status,
-    pendingStart, requestStart, dismissPending, startSession, changeCoal, endSession,
+    pendingStart, completedSession, completedElapsed, clearCompletedSession,
+    requestStart, dismissPending, startSession, changeCoal, endSession,
   } = useSessionTimer()
 
   const [interval, setIntervalMin] = useState(20)
@@ -41,6 +44,24 @@ export default function SessionTimer() {
     setCustomVal(v)
     const n = parseInt(v, 10)
     if (!isNaN(n) && n >= 5) setIntervalMin(n)
+  }
+
+  /* ---- Diary prompt (after session ends) ---- */
+  if (completedSession) {
+    const duration = Math.max(1, Math.floor(completedElapsed / 60))
+    const handleRecord = () => {
+      clearCompletedSession()
+      navigate('/diary', { state: { prefill: { recipeName: completedSession.recipeName, duration, coalCount: completedSession.coalChangeCount } } })
+    }
+    return (
+      <div className="st-busy-toast st-diary-toast">
+        <span>📔 このセッションを日記に記録しますか？</span>
+        <div className="st-diary-actions">
+          <button className="st-diary-record-btn" onClick={handleRecord}>記録する</button>
+          <button className="st-busy-close" onClick={clearCompletedSession}>✕</button>
+        </div>
+      </div>
+    )
   }
 
   /* ---- Busy alert ---- */

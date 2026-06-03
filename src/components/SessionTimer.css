@@ -279,6 +279,35 @@
   flex-shrink: 0;
 }
 
+.st-diary-toast {
+  background: rgba(245,158,11,0.12);
+  border-top-color: var(--color-amber);
+}
+
+.st-diary-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.st-diary-record-btn {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-bg);
+  background: var(--color-amber);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.st-diary-record-btn:hover {
+  background: var(--color-amber-light);
+}
+
 /* ===== PC (768px+): sidebar layout ===== */
 @media (min-width: 768px) {
   /* FAB: centered in sidebar */

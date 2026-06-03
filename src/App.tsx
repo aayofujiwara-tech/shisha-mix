@@ -11,7 +11,9 @@ import RecipeFormPage from './pages/RecipeFormPage'
 import InventoryPage from './pages/InventoryPage'
 import SuggestPage from './pages/SuggestPage'
 import ProfilePage from './pages/ProfilePage'
+import UserPage from './pages/UserPage'
 import StorePage from './pages/StorePage'
+import DiaryPage from './pages/DiaryPage'
 import SessionTimer from './components/SessionTimer'
 import InstallPrompt from './components/InstallPrompt'
 import { SessionTimerProvider } from './hooks/useSessionTimer'
@@ -48,6 +50,7 @@ function AppRoutes() {
             </ProtectedRoute>
           } />
           <Route path="/suggest" element={<SuggestPage />} />
+          <Route path="/user/:userId" element={<UserPage />} />
           <Route path="/profile" element={
             <ProtectedRoute user={user} loading={loading}>
               <ProfilePage />
@@ -56,6 +59,11 @@ function AppRoutes() {
           <Route path="/store" element={
             <ProtectedRoute user={user} loading={loading}>
               <StorePage />
+            </ProtectedRoute>
+          } />
+          <Route path="/diary" element={
+            <ProtectedRoute user={user} loading={loading}>
+              <DiaryPage />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/" replace />} />

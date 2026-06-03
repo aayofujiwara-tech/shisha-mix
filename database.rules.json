@@ -43,7 +43,7 @@
     },
     "users": {
       "$userId": {
-        ".read": "auth.uid === $userId",
+        ".read": true,
         ".write": "auth.uid === $userId"
       }
     },
@@ -60,6 +60,12 @@
       }
     },
     "user-likes": {
+      "$userId": {
+        ".read": "auth.uid === $userId",
+        ".write": "auth.uid === $userId"
+      }
+    },
+    "diaries": {
       "$userId": {
         ".read": "auth.uid === $userId",
         ".write": "auth.uid === $userId"

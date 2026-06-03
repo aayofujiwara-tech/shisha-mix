@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
+import RecipeRanking from '../components/RecipeRanking'
 import RecipeDetailPanel from '../components/RecipeDetailPanel'
 import CommentSection from '../components/CommentSection'
 import FlavorCalculator from '../components/FlavorCalculator'
@@ -357,6 +358,7 @@ export default function SearchPage() {
 
           {/* Bottom: 2-col recipe grid (60vh) */}
           <div className="search-pc-grid-wrap">
+            <RecipeRanking onSelectRecipe={toggleSelected} />
             {filtered.length === 0 && !loading ? (
               <div className="empty-state">
                 <div className="empty-state-icon">🔍</div>
@@ -405,6 +407,8 @@ export default function SearchPage() {
           🎛️{hasFilter ? ` (${selCategories.length + selBrands.length + selStrengths.length + selSweetness.length})` : ''}
         </button>
       </div>
+
+      <RecipeRanking onSelectRecipe={handleMobileSelect} />
 
       {showFilters && (
         <div className="filter-panel card">

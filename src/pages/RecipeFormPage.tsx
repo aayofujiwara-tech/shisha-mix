@@ -26,9 +26,9 @@ export default function RecipeFormPage() {
   const { id } = useParams<{ id: string }>()
   const isEdit = Boolean(id)
   const navigate = useNavigate()
-  const { user } = useAuth()
+  const { user, loading: authLoading } = useAuth()
   const { createRecipe, updateRecipe } = useMyRecipes(user?.uid ?? null)
-  const recipeId = id ?? `recipe_${Date.now()}`
+  const [recipeId] = useState(() => id ?? `recipe_${Date.now()}`)
 
   const [name, setName] = useState('')
   const [flavors, setFlavors] = useState<FlavorItem[]>([{ name: '', brand: 'Al Fakher', ratio: 100 }])
@@ -52,6 +52,7 @@ export default function RecipeFormPage() {
 
   useEffect(() => {
     if (!isEdit || !id) return
+    if (authLoading) return
     getRecipe(id)
       .then((r) => {
         if (!r) { setLoadError(true); return }
@@ -80,7 +81,7 @@ export default function RecipeFormPage() {
         setExistingCreatedAt(r.createdAt ?? Date.now())
       })
       .catch(() => setLoadError(true))
-  }, [isEdit, id])
+  }, [isEdit, id, user, authLoading])
 
   const addFlavor = () => setFlavors((prev) => [...prev, { name: '', brand: 'Al Fakher', ratio: 0 }])
   const removeFlavor = (i: number) => setFlavors((prev) => prev.filter((_, idx) => idx !== i))

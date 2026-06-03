@@ -46,10 +46,14 @@ export interface InventoryFlavor {
 
 export interface UserProfile {
   displayName: string;
-  email: string;
   photoURL: string;
+  bio: string;
+  favoriteCategory: string[];
+  favoriteBrand: string[];
+  favoriteMixes: string[];
   createdAt: number;
   recipeCount: number;
+  totalLikes: number;
 }
 
 export interface FlavorDBItem {
@@ -70,13 +74,31 @@ export type Category = typeof CATEGORIES[number];
 export const BRANDS = [
   'Al Fakher', 'Fumari', 'Starbuzz', 'Adalya', 'Tangiers',
   'Dozaj', 'Al Waha', 'Darkside', 'Azure', 'Nakhla',
-  'Mazaya', 'Musthave', 'Element', 'その他',
+  'Mazaya', 'Musthave', 'Element', 'Afzal', 'Social Smoke', 'Trifecta', 'その他',
 ] as const;
 export type Brand = typeof BRANDS[number];
 
 export const STRENGTH_LABELS: StrengthLabel = { weak: '弱', medium: '中', strong: '強' };
 export const SWEETNESS_LABELS: SweetnessLabel = { low: '低', medium: '中', high: '高' };
 export const STATUS_LABELS: StatusLabel = { full: 'あり', low: '残り少し', empty: 'なし' };
+
+export interface DiaryEntry {
+  id: string;
+  date: string;
+  recipeId?: string;
+  recipeName?: string;
+  flavors?: FlavorItem[];
+  sessionDuration: number;
+  coalCount: number;
+  rating: number;
+  mood: string[];
+  memo: string;
+  photos: string[];
+  createdAt: number;
+}
+
+export const MOOD_TAGS = ['リラックス', '集中', '友人と', '一人で', 'おうち', 'カフェ', '夜', '昼'] as const;
+export type MoodTag = typeof MOOD_TAGS[number];
 
 export type TableStatus = 'empty' | 'active' | 'warning' | 'overdue';
 
