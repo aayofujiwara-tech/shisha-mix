@@ -1,0 +1,133 @@
+.dp-add-btn {
+  padding: 8px 16px;
+  background: var(--color-amber);
+  color: var(--color-bg);
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.dp-add-btn:hover {
+  background: var(--color-amber-light);
+}
+
+/* Stats grid */
+.dp-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dp-stat-card {
+  background: rgba(30, 45, 64, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(42, 61, 82, 0.8);
+  border-radius: var(--radius);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.dp-stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-amber);
+  line-height: 1.2;
+}
+
+.dp-stat-value--sm {
+  font-size: 16px;
+}
+
+.dp-stat-value--ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.dp-stat-label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Entry section */
+.dp-entries {
+  margin-top: 4px;
+}
+
+.dp-entries-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dp-entries-date {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.dp-clear-btn {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.dp-clear-btn:hover {
+  color: var(--color-amber);
+  border-color: var(--color-amber);
+}
+
+.dp-recent {
+  margin-top: 4px;
+}
+
+/* Delete confirm modal */
+.dp-confirm {
+  max-height: 50vh;
+}
+
+.dp-confirm-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.dp-confirm-body {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.dp-confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.dp-delete-btn {
+  flex: 1;
+  padding: 12px;
+}
+
+@media (min-width: 768px) {
+  .dp-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

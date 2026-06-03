@@ -64,6 +64,12 @@
         ".read": "auth.uid === $userId",
         ".write": "auth.uid === $userId"
       }
+    },
+    "diaries": {
+      "$userId": {
+        ".read": "auth.uid === $userId",
+        ".write": "auth.uid === $userId"
+      }
     }
   }
 }
