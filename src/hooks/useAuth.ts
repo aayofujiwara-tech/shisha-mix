@@ -9,7 +9,7 @@ import {
   updateProfile,
   type User,
 } from 'firebase/auth'
-import { ref, set, get } from 'firebase/database'
+import { ref, set, get, update } from 'firebase/database'
 import { auth, db } from '../firebase'
 
 export function useAuth() {
@@ -51,10 +51,17 @@ async function upsertUserProfile(user: User, displayName?: string) {
   if (!snap.exists()) {
     await set(userRef, {
       displayName: displayName || user.displayName || '',
-      email: user.email || '',
       photoURL: user.photoURL || '',
+      bio: '',
+      favoriteCategory: [],
+      favoriteBrand: [],
+      favoriteMixes: [],
       createdAt: Date.now(),
       recipeCount: 0,
+      totalLikes: 0,
     })
+  } else if (snap.val()?.email !== undefined) {
+    // メールを公開ノードから除去するマイグレーション
+    await update(userRef, { email: null })
   }
 }

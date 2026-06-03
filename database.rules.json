@@ -43,7 +43,7 @@
     },
     "users": {
       "$userId": {
-        ".read": "auth.uid === $userId",
+        ".read": true,
         ".write": "auth.uid === $userId"
       }
     },

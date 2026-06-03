@@ -48,7 +48,13 @@ export default function RecipeCard({ recipe, showAuthor = false, selected = fals
         </div>
 
         {showAuthor && (
-          <p className="recipe-card-author">by {recipe.authorName}</p>
+          <p
+            className="recipe-card-author"
+            style={recipe.userId !== 'system' ? { cursor: 'pointer', color: 'var(--color-amber-light)' } : undefined}
+            onClick={recipe.userId !== 'system' ? (e) => { e.stopPropagation(); navigate(`/user/${recipe.userId}`) } : undefined}
+          >
+            by {recipe.authorName}
+          </p>
         )}
 
         <div className="recipe-card-flavors">

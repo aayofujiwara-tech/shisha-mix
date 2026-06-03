@@ -11,6 +11,7 @@ import RecipeFormPage from './pages/RecipeFormPage'
 import InventoryPage from './pages/InventoryPage'
 import SuggestPage from './pages/SuggestPage'
 import ProfilePage from './pages/ProfilePage'
+import UserPage from './pages/UserPage'
 import StorePage from './pages/StorePage'
 import DiaryPage from './pages/DiaryPage'
 import SessionTimer from './components/SessionTimer'
@@ -49,6 +50,7 @@ function AppRoutes() {
             </ProtectedRoute>
           } />
           <Route path="/suggest" element={<SuggestPage />} />
+          <Route path="/user/:userId" element={<UserPage />} />
           <Route path="/profile" element={
             <ProtectedRoute user={user} loading={loading}>
               <ProfilePage />
