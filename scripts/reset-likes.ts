@@ -1,14 +1,16 @@
 /**
  * Reset all preset recipe like counts to 0 in Firebase RTDB.
  *
- * BEFORE RUNNING: temporarily set Firebase rules to { "rules": { ".read": true, ".write": true } }
- * AFTER RUNNING: restore rules from database.rules.json
+ * BEFORE RUNNING: Deploy open rules ONLY in a staging/dev project, never production:
+ *   { "rules": { ".read": true, ".write": true } }
+ * AFTER RUNNING: IMMEDIATELY restore rules: firebase deploy --only database
  *
  * Usage: npm run reset-likes
  */
 import * as dotenv from 'dotenv'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { presets } from '../src/data/presets'
 
 const __dir = dirname(fileURLToPath(import.meta.url))
 dotenv.config({ path: resolve(__dir, '../.env.local') })
@@ -19,7 +21,7 @@ if (!DATABASE_URL) {
   process.exit(1)
 }
 
-const IDS = Array.from({ length: 110 }, (_, i) => `p${i + 1}`)
+const IDS = presets.map((p) => p.id)
 
 async function resetLikes() {
   console.log(`Resetting likes for ${IDS.length} presets → ${DATABASE_URL}/recipes/\n`)

@@ -1,12 +1,13 @@
 /**
- * Preset migration script — migrates 100 presets to Firebase RTDB
+ * Preset migration script — migrates presets to Firebase RTDB
  *
  * BEFORE RUNNING:
- * 1. In Firebase Console → Realtime Database → Rules, temporarily set:
+ * 1. Fill in .env.local with real Firebase credentials
+ * 2. Deploy open rules ONLY in a staging/dev project, never production:
  *    { "rules": { ".read": true, ".write": true } }
- * 2. Fill in .env.local with real Firebase credentials
  * 3. Run: npm run migrate
- * 4. Restore rules from database.rules.json via Firebase Console or CLI
+ * 4. IMMEDIATELY restore rules: firebase deploy --only database
+ *    Never leave open rules active longer than necessary.
  */
 import { presets } from '../src/data/presets'
 import * as dotenv from 'dotenv'

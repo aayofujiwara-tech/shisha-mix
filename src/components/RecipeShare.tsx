@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { Recipe } from '../types'
 import './RecipeShare.css'
 
-const APP_ORIGIN = 'https://shisha-mix-eight.vercel.app'
+const APP_ORIGIN = import.meta.env.VITE_APP_ORIGIN ?? 'https://shisha-mix-eight.vercel.app'
 
 const STRENGTH: Record<string, string> = { weak: '弱', medium: '中', strong: '強' }
 const SWEETNESS: Record<string, string> = { low: '低', medium: '中', high: '高' }
