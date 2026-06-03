@@ -37,7 +37,9 @@ export function useMyRecipes(userId: string | null) {
   }, [])
 
   const updateRecipe = useCallback(async (id: string, data: Partial<Recipe>) => {
-    await set(ref(db, `recipes/${id}`), JSON.parse(JSON.stringify({ ...data, id })))
+    const likesSnap = await get(ref(db, `recipes/${id}/likes`))
+    const currentLikes = typeof likesSnap.val() === 'number' ? likesSnap.val() : (data.likes ?? 0)
+    await set(ref(db, `recipes/${id}`), JSON.parse(JSON.stringify({ ...data, id, likes: currentLikes })))
   }, [])
 
   const deleteRecipe = useCallback(async (id: string) => {

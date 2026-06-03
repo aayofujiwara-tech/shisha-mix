@@ -55,6 +55,7 @@ export default function RecipeFormPage() {
     getRecipe(id)
       .then((r) => {
         if (!r) { setLoadError(true); return }
+        if (r.userId !== user?.uid) { navigate('/my'); return }
         const loadedFlavors = (r.flavors ?? []).length > 0
           ? r.flavors.map((f) => ({
               name: f.name ?? '',

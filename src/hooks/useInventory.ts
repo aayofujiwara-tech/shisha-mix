@@ -23,18 +23,21 @@ export function useInventory(userId: string | null) {
     return unsub
   }, [userId])
 
-  const addFlavor = useCallback(async (data: Omit<InventoryFlavor, 'id'>, uid: string) => {
-    const newRef = push(ref(db, `inventory/${uid}/flavors`))
+  const addFlavor = useCallback(async (data: Omit<InventoryFlavor, 'id'>) => {
+    if (!userId) return
+    const newRef = push(ref(db, `inventory/${userId}/flavors`))
     await set(newRef, data)
-  }, [])
+  }, [userId])
 
-  const updateStatus = useCallback(async (id: string, status: InventoryFlavor['status'], uid: string) => {
-    await set(ref(db, `inventory/${uid}/flavors/${id}/status`), status)
-  }, [])
+  const updateStatus = useCallback(async (id: string, status: InventoryFlavor['status']) => {
+    if (!userId) return
+    await set(ref(db, `inventory/${userId}/flavors/${id}/status`), status)
+  }, [userId])
 
-  const removeFlavor = useCallback(async (id: string, uid: string) => {
-    await remove(ref(db, `inventory/${uid}/flavors/${id}`))
-  }, [])
+  const removeFlavor = useCallback(async (id: string) => {
+    if (!userId) return
+    await remove(ref(db, `inventory/${userId}/flavors/${id}`))
+  }, [userId])
 
   return { flavors, loading, addFlavor, updateStatus, removeFlavor }
 }

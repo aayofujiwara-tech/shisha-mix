@@ -1,6 +1,23 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Anthropic from '@anthropic-ai/sdk'
 
+const MAX_INPUT_LENGTH = 500
+const MAX_INVENTORY_ITEMS = 50
+
+async function verifyFirebaseToken(token: string, apiKey: string): Promise<string | null> {
+  const res = await fetch(
+    `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken: token }),
+    }
+  )
+  if (!res.ok) return null
+  const data = await res.json() as { users?: Array<{ localId: string }> }
+  return data.users?.[0]?.localId ?? null
+}
+
 const systemPrompt = `あなたはシーシャのレシピ専門家です。
 ユーザーの要望に合わせてオリジナルのシーシャレシピを提案してください。
 
@@ -28,6 +45,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
+  const authHeader = req.headers.authorization
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'ログインが必要です' })
+  }
+  const firebaseApiKey = process.env.VITE_FIREBASE_API_KEY
+  if (!firebaseApiKey) {
+    return res.status(500).json({ error: 'サーバー設定エラー' })
+  }
+  const uid = await verifyFirebaseToken(authHeader.slice(7), firebaseApiKey)
+  if (!uid) {
+    return res.status(401).json({ error: 'ログインが必要です' })
+  }
+
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
     return res.status(500).json({ error: 'APIキーが設定されていません' })
@@ -40,6 +70,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (!userInput?.trim()) {
     return res.status(400).json({ error: '要望を入力してください' })
+  }
+  if (userInput.length > MAX_INPUT_LENGTH) {
+    return res.status(400).json({ error: `要望は${MAX_INPUT_LENGTH}文字以内で入力してください` })
+  }
+  if (Array.isArray(inventory) && inventory.length > MAX_INVENTORY_ITEMS) {
+    return res.status(400).json({ error: 'フレーバーが多すぎます' })
   }
 
   const userMessage = inventory && inventory.length > 0

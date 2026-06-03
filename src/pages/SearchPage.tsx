@@ -151,6 +151,9 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
   const flavors = recipe.flavors ?? []
   const photos = recipe.photos ?? []
   const totalRatio = flavors.reduce((s, f) => s + (f.ratio ?? 0), 0)
+  const isOwner = userId === recipe.userId
+  const visibility = recipe.visibility ?? { photos: true, bowl: true, charcoal: true, packing: true, memo: true }
+  const canShowField = (field: keyof typeof visibility) => visibility[field] || isOwner
 
   const handleLike = async () => {
     if (!userId) { navigate('/login'); return }
@@ -189,21 +192,21 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
           <span className="tag tag-muted">甘さ: {SWEETNESS_LABELS[recipe.sweetness]}</span>
         </div>
 
-        {(recipe.bowl || recipe.charcoal || recipe.packing) && (
+        {(canShowField('bowl') && recipe.bowl || canShowField('charcoal') && recipe.charcoal || canShowField('packing') && recipe.packing) && (
           <div className="pc-detail-fields">
-            {recipe.bowl && (
+            {canShowField('bowl') && recipe.bowl && (
               <div className="pc-detail-field">
                 <span className="pc-detail-field-label">ボウル</span>
                 <span>{recipe.bowl}</span>
               </div>
             )}
-            {recipe.charcoal && (
+            {canShowField('charcoal') && recipe.charcoal && (
               <div className="pc-detail-field">
                 <span className="pc-detail-field-label">炭</span>
                 <span>{recipe.charcoal}</span>
               </div>
             )}
-            {recipe.packing && (
+            {canShowField('packing') && recipe.packing && (
               <div className="pc-detail-field">
                 <span className="pc-detail-field-label">パッキング</span>
                 <span>{recipe.packing}</span>
@@ -212,7 +215,7 @@ function PCDetailView({ recipe, onClose, userId, userName }: {
           </div>
         )}
 
-        {recipe.memo && <p className="pc-detail-memo">{recipe.memo}</p>}
+        {canShowField('memo') && recipe.memo && <p className="pc-detail-memo">{recipe.memo}</p>}
         <CommentSection recipeId={recipe.id} userId={userId} userName={userName} />
       </div>
 

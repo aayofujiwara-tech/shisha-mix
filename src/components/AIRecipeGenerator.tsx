@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
 import { useInventory } from '../hooks/useInventory'
 import { useMyRecipes } from '../hooks/useRecipes'
@@ -50,9 +51,14 @@ export default function AIRecipeGenerator() {
         : undefined
 
     try {
+      const idToken = await auth.currentUser?.getIdToken()
+      if (!idToken) throw new Error('ログインが必要です')
       const res = await fetch('/api/generate-recipe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`,
+        },
         body: JSON.stringify({ userInput: input, inventory: inventoryPayload }),
       })
       const data = await res.json() as { recipe?: AIRecipe; error?: string }

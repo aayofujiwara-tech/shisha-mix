@@ -24,7 +24,7 @@ export default function RecipeDetailPage() {
 
   useEffect(() => {
     if (!id) return
-    getRecipe(id).then((r) => { setRecipe(r); setLoading(false) })
+    getRecipe(id).then((r) => { setRecipe(r); setLoading(false) }).catch(() => { setRecipe(null); setLoading(false) })
   }, [id])
 
   if (loading) return <div className="loading"><div className="spinner" />読み込み中...</div>

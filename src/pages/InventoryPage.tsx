@@ -50,7 +50,7 @@ export default function InventoryPage() {
       status: 'full',
       isCustom: false,
       addedAt: Date.now(),
-    }, user.uid)
+    })
     setAdding(false)
     setShowAddModal(false)
     setDbSearch('')
@@ -66,7 +66,7 @@ export default function InventoryPage() {
       status: 'full',
       isCustom: true,
       addedAt: Date.now(),
-    }, user.uid)
+    })
     setAdding(false)
     setShowAddModal(false)
     setCustomName('')
@@ -138,14 +138,14 @@ export default function InventoryPage() {
                   <div className="inv-item-controls">
                     <select
                       value={f.status}
-                      onChange={(e) => updateStatus(f.id, e.target.value as InventoryFlavor['status'], user.uid)}
+                      onChange={(e) => updateStatus(f.id, e.target.value as InventoryFlavor['status'])}
                       className={`inv-status-select status-${f.status}`}
                     >
                       <option value="full">あり</option>
                       <option value="low">残り少し</option>
                       <option value="empty">なし</option>
                     </select>
-                    <button className="inv-remove-btn" onClick={() => removeFlavor(f.id, user.uid)}>✕</button>
+                    <button className="inv-remove-btn" onClick={() => removeFlavor(f.id)}>✕</button>
                   </div>
                 </div>
               ))}
