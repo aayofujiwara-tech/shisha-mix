@@ -46,10 +46,14 @@ export interface InventoryFlavor {
 
 export interface UserProfile {
   displayName: string;
-  email: string;
   photoURL: string;
+  bio: string;
+  favoriteCategory: string[];
+  favoriteBrand: string[];
+  favoriteMixes: string[];
   createdAt: number;
   recipeCount: number;
+  totalLikes: number;
 }
 
 export interface FlavorDBItem {

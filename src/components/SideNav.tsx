@@ -38,7 +38,7 @@ export default function SideNav() {
 
       <div className="side-nav-footer">
         {user ? (
-          <div className="side-nav-user">
+          <div className="side-nav-user" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
             {user.photoURL ? (
               <img src={user.photoURL} alt="avatar" className="side-nav-avatar-img" />
             ) : (
@@ -48,7 +48,9 @@ export default function SideNav() {
             )}
             <div className="side-nav-user-info">
               <p className="side-nav-user-name">{user.displayName || 'ユーザー'}</p>
-              <button className="side-nav-logout" onClick={logout}>ログアウト</button>
+              <button className="side-nav-logout" onClick={(e) => { e.stopPropagation(); logout() }}>
+                ログアウト
+              </button>
             </div>
           </div>
         ) : (
