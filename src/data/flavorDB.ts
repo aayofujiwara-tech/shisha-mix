@@ -76,9 +76,9 @@ export const flavorDB: FlavorDBItem[] = [
   { id: 'sb-melon', name: 'メロン', brand: 'Starbuzz', category: 'フルーツ系' },
   { id: 'sb-pink', name: 'ピンク', brand: 'Starbuzz', category: 'フルーツ系' },
   { id: 'sb-exotic-juice', name: 'エキゾチックジュース', brand: 'Starbuzz', category: 'フルーツ系' },
-  { id: 'sb-lebanese', name: 'レバニーズボムシェル', brand: 'Starbuzz', category: 'フルーツ系' },
+  { id: 'sb-lebanese-bombshell', name: 'レバニーズ ボムシェル', brand: 'Starbuzz', category: 'フルーツ系' },
   { id: 'sb-peach', name: 'ピーチ', brand: 'Starbuzz', category: 'フルーツ系' },
-  { id: 'sb-asian-persuasion', name: 'アジアンパースエイジョン', brand: 'Starbuzz', category: 'フルーツ系' },
+  { id: 'sb-asian-persuasion', name: 'アジアン パースエイション', brand: 'Starbuzz', category: 'フルーツ系' },
 
   // ===== Adalya =====
   { id: 'ad-love-66', name: 'Love 66', brand: 'Adalya', category: 'フルーツ系' },
@@ -202,6 +202,6 @@ export const flavorDB: FlavorDBItem[] = [
 
   // ===== Trifecta =====
   { id: 'tf-peppermint-shake', name: 'ペパーミントシェイク', brand: 'Trifecta', category: 'ミント系' },
-  { id: 'tf-twice-ice', name: 'トゥワイスザアイス', brand: 'Trifecta', category: 'アイス系' },
+  { id: 'tf-twice-the-ice', name: 'トゥワイス ザ アイス', brand: 'Trifecta', category: 'アイス系' },
   { id: 'tf-nawar', name: 'ナワール', brand: 'Trifecta', category: 'スパイス系', description: 'ローズ×フルーツ' },
 ]
