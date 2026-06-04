@@ -455,3 +455,20 @@
     font-weight: 700;
   }
 }
+
+@media (min-width: 1024px) {
+  .search-pc-sidebar {
+    width: 280px;
+    min-width: 280px;
+    padding: 24px 20px;
+  }
+
+  .recipe-grid-2col {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .search-pc-detail-top {
+    height: 45vh;
+  }
+}

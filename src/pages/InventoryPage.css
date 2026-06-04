@@ -272,7 +272,7 @@
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1024px) {
   .inv-grid {
     grid-template-columns: repeat(3, 1fr);
   }

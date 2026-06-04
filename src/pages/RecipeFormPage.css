@@ -225,3 +225,9 @@
     padding: 16px 20px;
   }
 }
+
+@media (min-width: 1024px) {
+  .recipe-form-page {
+    max-width: 600px;
+  }
+}

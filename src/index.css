@@ -60,12 +60,12 @@ html, body {
   margin: 0 auto;
 }
 
-/* PC overrides */
+/* Tablet: sidebar + constrained shell */
 @media (min-width: 768px) {
   .app-shell {
     flex-direction: row;
     height: 100vh;
-    max-width: 1280px;
+    max-width: 768px;
     margin: 0 auto;
   }
 
@@ -74,6 +74,13 @@ html, body {
     max-width: none;
     overflow-y: auto;
     margin: 0;
+  }
+}
+
+/* PC: full 2-column layout */
+@media (min-width: 1024px) {
+  .app-shell {
+    max-width: 1280px;
   }
 }
 
@@ -236,9 +243,16 @@ h1, h2, h3 {
 
 @media (min-width: 768px) {
   .page {
-    padding: 28px 32px;
-    padding-bottom: 32px;
-    max-width: 900px;
+    padding: 24px 24px 28px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 40px 40px;
   }
 }
 

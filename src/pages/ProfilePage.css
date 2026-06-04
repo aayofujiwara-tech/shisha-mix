@@ -315,6 +315,35 @@
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .profile-hero {
+    padding: 20px;
+    border-radius: var(--radius);
+  }
+
+  .profile-avatar-lg,
+  .profile-avatar-placeholder-lg {
+    width: 96px;
+    height: 96px;
+  }
+
+  .profile-avatar-placeholder-lg {
+    font-size: 38px;
+  }
+
+  .profile-hero-name {
+    font-size: 24px;
+  }
+
+  .mix-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* ===== Mix Picker Modal ===== */
 .mix-picker-list {
   max-height: 45vh;

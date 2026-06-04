@@ -131,3 +131,30 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+@media (min-width: 1024px) {
+  .diary-pc-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .diary-pc-left .sc-wrap {
+    position: sticky;
+    top: 0;
+    margin-bottom: 0;
+  }
+
+  .diary-pc-right {
+    min-width: 0;
+  }
+
+  .dp-stat-card {
+    padding: 18px 12px;
+  }
+
+  .dp-stat-value {
+    font-size: 28px;
+  }
+}

@@ -129,12 +129,16 @@ export default function DiaryPage() {
         <div className="loading"><div className="spinner" />読み込み中...</div>
       ) : (
         <>
+          <div className="diary-pc-layout">
+          <div className="diary-pc-left">
           <SessionCalendar
             entries={entries}
             selectedDate={selectedDate}
             onSelectDate={setSelectedDate}
             onMonthChange={(y, m) => { setStatsYear(y); setStatsMonth(m) }}
           />
+          </div>
+          <div className="diary-pc-right">
 
           {/* Stats */}
           <div className="dp-stats">
@@ -208,6 +212,8 @@ export default function DiaryPage() {
               <p className="empty-state-text">まだ記録がありません<br />「＋ 記録する」から最初の記録を追加しましょう</p>
             </div>
           )}
+          </div>{/* diary-pc-right */}
+          </div>{/* diary-pc-layout */}
         </>
       )}
 

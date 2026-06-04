@@ -151,7 +151,7 @@ export default function RecipeFormPage() {
 
   if (loadError) {
     return (
-      <div className="page">
+      <div className="page recipe-form-page">
         <div className="empty-state">
           <div className="empty-state-icon">⚠️</div>
           <p className="empty-state-text">データの読み込みに失敗しました</p>
@@ -164,7 +164,7 @@ export default function RecipeFormPage() {
   }
 
   return (
-    <div className="page">
+    <div className="page recipe-form-page">
       <div className="page-header">
         <button className="back-btn-sm" onClick={() => navigate(-1)}>← 戻る</button>
         <h1 className="page-title">{isEdit ? 'レシピ編集' : '新規レシピ'}</h1>
