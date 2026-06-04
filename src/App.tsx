@@ -6,6 +6,7 @@ import SideNav from './components/SideNav'
 import ProtectedRoute from './components/ProtectedRoute'
 import SessionTimer from './components/SessionTimer'
 import InstallPrompt from './components/InstallPrompt'
+import ErrorBoundary from './components/ErrorBoundary'
 import { SessionTimerProvider } from './hooks/useSessionTimer'
 
 const LoginPage        = lazy(() => import('./pages/LoginPage'))
@@ -27,7 +28,8 @@ function AppRoutes() {
     <div className="app-shell">
       <SideNav />
       <main className="app-main">
-        <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>読み込み中…</div>}>
+        <ErrorBoundary>
+        <Suspense fallback={<div className="loading"><div className="spinner" />読み込み中...</div>}>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<SearchPage />} />
@@ -72,6 +74,7 @@ function AppRoutes() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
+        </ErrorBoundary>
       </main>
       <BottomNav />
       <SessionTimer />
