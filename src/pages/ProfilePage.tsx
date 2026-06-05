@@ -12,7 +12,7 @@ import './ProfilePage.css'
 
 export default function ProfilePage() {
   const navigate = useNavigate()
-  const { user, logout } = useAuth()
+  const { user, logout, deleteAccount } = useAuth()
   const { profile, loading, saveProfile } = useProfile(user?.uid)
   const { recipes: myRecipes } = useMyRecipes(user?.uid ?? null)
   const { entries: diaryEntries } = useDiary(user?.uid ?? null)
@@ -23,6 +23,7 @@ export default function ProfilePage() {
   const [editCategories, setEditCategories] = useState<string[]>([])
   const [editBrands, setEditBrands] = useState<string[]>([])
   const [saving, setSaving] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
   const [isMixEditing, setIsMixEditing] = useState(false)
   const [showMixPicker, setShowMixPicker] = useState(false)
@@ -126,6 +127,28 @@ export default function ProfilePage() {
   }
 
   const handleLogout = async () => { await logout(); navigate('/') }
+
+  const handleDeleteAccount = async () => {
+    if (!user) return
+    const confirmed = window.confirm(
+      '退会すると在庫・日記・店舗データが削除されます。投稿したレシピは残ります。\n本当に退会しますか？'
+    )
+    if (!confirmed) return
+    setDeleting(true)
+    try {
+      await deleteAccount(user)
+      navigate('/')
+    } catch (err: unknown) {
+      const code = (err as { code?: string })?.code
+      if (code === 'auth/requires-recent-login') {
+        alert('セキュリティのため、一度ログアウトして再ログイン後に退会操作を行ってください。')
+      } else {
+        alert('退会処理に失敗しました。時間をおいて再試行してください。')
+      }
+    } finally {
+      setDeleting(false)
+    }
+  }
 
   return (
     <div className="page">
@@ -325,6 +348,24 @@ export default function ProfilePage() {
 
       <button className="btn-danger" style={{ marginTop: 24 }} onClick={handleLogout}>
         ログアウト
+      </button>
+
+      <button
+        onClick={handleDeleteAccount}
+        disabled={deleting}
+        style={{
+          display: 'block',
+          margin: '12px auto 0',
+          background: 'transparent',
+          color: 'var(--color-error)',
+          border: 'none',
+          fontSize: 13,
+          cursor: deleting ? 'not-allowed' : 'pointer',
+          opacity: deleting ? 0.5 : 1,
+          textDecoration: 'underline',
+        }}
+      >
+        {deleting ? '退会処理中...' : '退会する'}
       </button>
 
       {/* レシピ選択モーダル */}

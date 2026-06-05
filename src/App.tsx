@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import BottomNav from './components/BottomNav'
 import SideNav from './components/SideNav'
@@ -7,9 +7,11 @@ import ProtectedRoute from './components/ProtectedRoute'
 import SessionTimer from './components/SessionTimer'
 import InstallPrompt from './components/InstallPrompt'
 import ErrorBoundary from './components/ErrorBoundary'
+import AgeVerification from './components/AgeVerification'
 import { SessionTimerProvider } from './hooks/useSessionTimer'
 
 const LoginPage        = lazy(() => import('./pages/LoginPage'))
+const PrivacyPage      = lazy(() => import('./pages/PrivacyPage'))
 const SearchPage       = lazy(() => import('./pages/SearchPage'))
 const RecipeDetailPage = lazy(() => import('./pages/RecipeDetailPage'))
 const MyRecipePage     = lazy(() => import('./pages/MyRecipePage'))
@@ -71,11 +73,20 @@ function AppRoutes() {
                 <DiaryPage />
               </ProtectedRoute>
             } />
+            <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
         </ErrorBoundary>
       </main>
+      <footer style={{ textAlign: 'center', padding: '8px 0 4px', flexShrink: 0 }}>
+        <Link
+          to="/privacy"
+          style={{ fontSize: 11, color: 'var(--color-text-muted)', textDecoration: 'none' }}
+        >
+          プライバシーポリシー
+        </Link>
+      </footer>
       <BottomNav />
       <SessionTimer />
       <InstallPrompt />
@@ -86,6 +97,7 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
+      <AgeVerification />
       <SessionTimerProvider>
         <AppRoutes />
       </SessionTimerProvider>

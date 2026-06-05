@@ -7,9 +7,11 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  deleteUser,
   type User,
 } from 'firebase/auth'
-import { ref, set, get, update } from 'firebase/database'
+import { ref, set, get, update, remove } from 'firebase/database'
+import { getDatabase } from 'firebase/database'
 import { auth, db } from '../firebase'
 
 export function useAuth() {
@@ -43,7 +45,20 @@ export function useAuth() {
 
   const logout = () => signOut(auth)
 
-  return { user, loading, signInWithGoogle, signUpWithEmail, signInWithEmail, logout }
+  const deleteAccount = async (targetUser: User): Promise<void> => {
+    const database = getDatabase()
+    await Promise.all([
+      remove(ref(database, `users/${targetUser.uid}`)),
+      remove(ref(database, `inventory/${targetUser.uid}`)),
+      remove(ref(database, `stores/${targetUser.uid}`)),
+      remove(ref(database, `sessions/${targetUser.uid}`)),
+      remove(ref(database, `diaries/${targetUser.uid}`)),
+      remove(ref(database, `user-likes/${targetUser.uid}`)),
+    ])
+    await deleteUser(targetUser)
+  }
+
+  return { user, loading, signInWithGoogle, signUpWithEmail, signInWithEmail, logout, deleteAccount }
 }
 
 async function upsertUserProfile(user: User, displayName?: string) {
