@@ -4,8 +4,8 @@
       ".read": "(auth != null && query.orderByChild == 'userId' && query.equalTo == auth.uid) || (query.orderByChild == 'isPublic' && query.equalTo == true)",
       "$recipeId": {
         ".read": "data.child('isPublic').val() === true || auth.uid === data.child('userId').val()",
-        ".write": "auth.uid === newData.child('userId').val() || auth.uid === data.child('userId').val()",
-        ".validate": "newData.hasChildren(['title', 'userId'])",
+        ".write": "auth != null && (auth.uid === data.child('userId').val() || auth.uid === newData.child('userId').val() || (newData.hasChild('likes') && !newData.hasChildren(['title', 'flavors'])))",
+        ".validate": "!newData.hasChildren(['title', 'userId']) || (newData.hasChildren(['title', 'userId']) && newData.child('title').val().length >= 1 && newData.child('title').val().length <= 100)",
         "title": {
           ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 100"
         },
@@ -15,11 +15,12 @@
         "userId": {
           ".validate": "newData.isString() && newData.val() === auth.uid"
         },
+        "likes": {
+          ".write": "auth != null",
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
         "$other": {
           ".validate": true
-        },
-        "likes": {
-          ".write": "auth != null"
         }
       }
     },
