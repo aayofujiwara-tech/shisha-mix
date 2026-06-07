@@ -23,8 +23,17 @@ export default defineConfig({
       manifest: false, // using public/manifest.json
       includeAssets: ['favicon.ico', 'icons/*.png'],
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globPatterns: ['**/*.{html,ico,png,svg,woff2}'],
         runtimeCaching: [
+          {
+            urlPattern: /\.(?:js|css)$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'assets-cache',
+              expiration: { maxEntries: 50, maxAgeSeconds: 86400 },
+              networkTimeoutSeconds: 10,
+            },
+          },
           {
             urlPattern: /^https:\/\/.*\.firebaseio\.com\/.*/i,
             handler: 'NetworkFirst',

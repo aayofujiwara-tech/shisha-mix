@@ -11,12 +11,25 @@ interface State {
 export default class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false }
 
-  static getDerivedStateFromError(): State {
+  static getDerivedStateFromError(error: Error): State {
+    const isChunkError =
+      error.message.includes('Failed to fetch dynamically imported module') ||
+      error.message.includes('Importing a module script failed') ||
+      error.name === 'ChunkLoadError'
+
+    if (isChunkError && !sessionStorage.getItem('chunk_reload')) {
+      sessionStorage.setItem('chunk_reload', '1')
+      window.location.reload()
+      return { hasError: false }
+    }
+
     return { hasError: true }
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error('[ErrorBoundary]', error, info)
+    console.error('[ErrorBoundary] error:', error.message)
+    console.error('[ErrorBoundary] stack:', error.stack)
+    console.error('[ErrorBoundary] componentStack:', info.componentStack)
   }
 
   render() {
