@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import BottomNav from './components/BottomNav'
 import SideNav from './components/SideNav'
@@ -26,12 +26,13 @@ const DiaryPage        = lazy(() => import('./pages/DiaryPage'))
 
 function AppRoutes() {
   const { user, loading } = useAuth()
+  const location = useLocation()
 
   return (
     <div className="app-shell">
       <SideNav />
       <main className="app-main">
-        <ErrorBoundary>
+        <ErrorBoundary key={location.pathname}>
         <Suspense fallback={<div className="loading"><div className="spinner" />読み込み中...</div>}>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
