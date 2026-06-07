@@ -1,0 +1,100 @@
+.feedback-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.feedback-section {
+  margin-bottom: 20px;
+}
+
+.feedback-section-label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.feedback-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.feedback-star {
+  font-size: 28px;
+  color: var(--color-border);
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.1s;
+  background: none;
+  border: none;
+  padding: 2px;
+}
+
+.feedback-star.on,
+.feedback-star:hover {
+  color: var(--color-amber);
+}
+
+.feedback-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.feedback-chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.feedback-chip.selected {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.feedback-textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.feedback-char-count {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-align: right;
+  margin-top: 4px;
+}
+
+.feedback-submit-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.feedback-thanks {
+  text-align: center;
+  padding: 32px 16px;
+  font-size: 15px;
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.feedback-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  padding: 4px 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}

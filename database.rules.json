@@ -96,6 +96,25 @@
         ".read": "auth.uid === $userId",
         ".write": "auth.uid === $userId"
       }
+    },
+    "feedbacks": {
+      "$feedbackId": {
+        ".write": true,
+        ".read": "auth != null && auth.uid == 'IA38vNhPd8eHyWU8qjnleGlhSNC3'",
+        ".validate": "newData.hasChildren(['overall', 'willPay', 'createdAt'])",
+        "overall": {
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5"
+        },
+        "willPay": {
+          ".validate": "newData.isString() && (newData.val() == 'yes' || newData.val() == 'maybe' || newData.val() == 'no')"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": true
+        }
+      }
     }
   }
 }

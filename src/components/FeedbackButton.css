@@ -1,0 +1,31 @@
+.feedback-fab {
+  position: fixed;
+  bottom: calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 68px);
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 149;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.feedback-fab:hover {
+  border-color: var(--color-amber);
+  background: var(--color-surface-2);
+}
+
+@media (min-width: 768px) {
+  .feedback-fab {
+    right: 14px;
+    left: auto;
+    bottom: 80px;
+  }
+}

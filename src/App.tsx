@@ -9,6 +9,7 @@ import InstallPrompt from './components/InstallPrompt'
 import ErrorBoundary from './components/ErrorBoundary'
 import AgeVerification from './components/AgeVerification'
 import { SessionTimerProvider } from './hooks/useSessionTimer'
+import FeedbackButton from './components/FeedbackButton'
 
 const LoginPage        = lazy(() => import('./pages/LoginPage'))
 const PrivacyPage      = lazy(() => import('./pages/PrivacyPage'))
@@ -90,6 +91,7 @@ function AppRoutes() {
       <BottomNav />
       <SessionTimer />
       <InstallPrompt />
+      <FeedbackButton userId={user?.uid ?? null} />
     </div>
   )
 }
