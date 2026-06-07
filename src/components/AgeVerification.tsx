@@ -31,13 +31,14 @@ export default function AgeVerification() {
 
   if (loading || !firebaseCheckDone) return null
   if (user && firebaseVerified) return null
-  if (!user && localStorage.getItem(STORAGE_KEY) === 'true') return null
+  if (!user && sessionStorage.getItem(STORAGE_KEY) === 'true') return null
   if (closed) return null
 
   const handleYes = async () => {
-    localStorage.setItem(STORAGE_KEY, 'true')
     if (user) {
       await set(ref(db, `users/${user.uid}/ageVerified`), true)
+    } else {
+      sessionStorage.setItem(STORAGE_KEY, 'true')
     }
     setClosed(true)
   }

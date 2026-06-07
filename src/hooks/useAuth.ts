@@ -43,10 +43,7 @@ export function useAuth() {
     await upsertUserProfile(cred.user)
   }
 
-  const logout = () => {
-    localStorage.removeItem('age_verified')
-    return signOut(auth)
-  }
+  const logout = () => signOut(auth)
 
   const deleteAccount = async (targetUser: User): Promise<void> => {
     const database = getDatabase()
