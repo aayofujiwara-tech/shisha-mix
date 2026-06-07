@@ -1,6 +1,7 @@
 {
   "rules": {
     "recipes": {
+      ".indexOn": ["isPublic", "userId"],
       ".read": "(auth != null && query.orderByChild == 'userId' && query.equalTo == auth.uid) || (query.orderByChild == 'isPublic' && query.equalTo == true)",
       "$recipeId": {
         ".read": "data.child('isPublic').val() === true || auth.uid === data.child('userId').val()",
