@@ -8,6 +8,7 @@ import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import FlavorCalculator from '../components/FlavorCalculator'
 import RecipeShare from '../components/RecipeShare'
 import CommentSection from '../components/CommentSection'
+import PhotoLightbox from '../components/PhotoLightbox'
 import './RecipeDetailPage.css'
 import '../components/SessionTimer.css'
 
@@ -21,6 +22,7 @@ export default function RecipeDetailPage() {
   const [recipe, setRecipe] = useState<Recipe | null>(null)
   const [loading, setLoading] = useState(true)
   const [photoIdx, setPhotoIdx] = useState(0)
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null)
   const { liked, loading: likesLoading, likesCount, toggle } = useLikes(id ?? '', user?.uid)
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function RecipeDetailPage() {
       {photos.length > 0 && canShowField('photos') && (
         <div className="detail-photos">
           <div className="detail-photo-main">
-            <img src={photos[photoIdx]} alt={recipe.name} />
+            <img src={photos[photoIdx]} alt={recipe.name} onClick={() => setLightboxIdx(photoIdx)} />
           </div>
           {photos.length > 1 && (
             <div className="detail-photo-thumbs">
@@ -81,6 +83,10 @@ export default function RecipeDetailPage() {
             </div>
           )}
         </div>
+      )}
+
+      {lightboxIdx !== null && (
+        <PhotoLightbox photos={photos} initialIndex={lightboxIdx} onClose={() => setLightboxIdx(null)} />
       )}
 
       <div className="detail-body">

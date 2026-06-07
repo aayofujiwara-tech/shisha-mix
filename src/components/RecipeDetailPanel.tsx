@@ -8,6 +8,7 @@ import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
 import CommentSection from './CommentSection'
 import FlavorCalculator from './FlavorCalculator'
 import RecipeShare from './RecipeShare'
+import PhotoLightbox from './PhotoLightbox'
 import './RecipeDetailPanel.css'
 import './SessionTimer.css'
 
@@ -27,6 +28,7 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
   const photos = recipe.photos ?? []
   const categories = recipe.category ?? []
   const [photoIdx, setPhotoIdx] = useState(0)
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null)
   const { liked, loading: likesLoading, likesCount, toggle } = useLikes(recipe.id, user?.uid, initial.likes)
 
   const isOwner = user?.uid === recipe.userId
@@ -56,7 +58,7 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
         {photos.length > 0 && canShowField('photos') && (
           <div className="dp-photos">
             <div className="dp-photo-main">
-              <img src={photos[photoIdx]} alt={recipe.name} />
+              <img src={photos[photoIdx]} alt={recipe.name} onClick={() => setLightboxIdx(photoIdx)} />
             </div>
             {photos.length > 1 && (
               <div className="dp-photo-thumbs">
@@ -72,6 +74,10 @@ export default function RecipeDetailPanel({ recipe: initial, onClose }: Props) {
               </div>
             )}
           </div>
+        )}
+
+        {lightboxIdx !== null && (
+          <PhotoLightbox photos={photos} initialIndex={lightboxIdx} onClose={() => setLightboxIdx(null)} />
         )}
 
         <div className="dp-title-row">
