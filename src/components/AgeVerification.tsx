@@ -1,17 +1,20 @@
 import { useState } from 'react'
+import { useAuth } from '../hooks/useAuth'
 
 const STORAGE_KEY = 'age_verified'
 
 export default function AgeVerification() {
-  const [verified, setVerified] = useState(() =>
-    localStorage.getItem(STORAGE_KEY) === 'true'
-  )
+  const { user, loading } = useAuth()
+  const [closed, setClosed] = useState(false)
 
-  if (verified) return null
+  if (loading) return null
+  if (user) return null
+  if (closed) return null
+  if (localStorage.getItem(STORAGE_KEY) === 'true') return null
 
   const handleYes = () => {
     localStorage.setItem(STORAGE_KEY, 'true')
-    setVerified(true)
+    setClosed(true)
   }
 
   const handleNo = () => {
