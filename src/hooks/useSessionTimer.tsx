@@ -140,8 +140,23 @@ export function SessionTimerProvider({ children }: { children: ReactNode }) {
   )
 }
 
+const FALLBACK: ContextValue = {
+  session: null,
+  isActive: false,
+  elapsedSeconds: 0,
+  coalCountdown: 0,
+  status: 'active',
+  pendingStart: null,
+  completedSession: null,
+  completedElapsed: 0,
+  clearCompletedSession: () => {},
+  requestStart: () => {},
+  dismissPending: () => {},
+  startSession: async () => {},
+  changeCoal: async () => {},
+  endSession: async () => {},
+}
+
 export function useSessionTimer() {
-  const ctx = useContext(Ctx)
-  if (!ctx) throw new Error('useSessionTimer must be used within SessionTimerProvider')
-  return ctx
+  return useContext(Ctx) ?? FALLBACK
 }
