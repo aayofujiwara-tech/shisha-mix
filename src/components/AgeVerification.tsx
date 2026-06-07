@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ref, get, set } from 'firebase/database'
+import { db } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
 
 const STORAGE_KEY = 'age_verified'
@@ -6,14 +8,37 @@ const STORAGE_KEY = 'age_verified'
 export default function AgeVerification() {
   const { user, loading } = useAuth()
   const [closed, setClosed] = useState(false)
+  const [firebaseVerified, setFirebaseVerified] = useState(false)
+  const [firebaseCheckDone, setFirebaseCheckDone] = useState(false)
 
-  if (loading) return null
-  if (user) return null
+  useEffect(() => {
+    if (!user) {
+      setFirebaseVerified(false)
+      setFirebaseCheckDone(true)
+      return
+    }
+    setFirebaseCheckDone(false)
+    get(ref(db, `users/${user.uid}/ageVerified`))
+      .then((snap) => {
+        setFirebaseVerified(snap.val() === true)
+        setFirebaseCheckDone(true)
+      })
+      .catch(() => {
+        setFirebaseVerified(false)
+        setFirebaseCheckDone(true)
+      })
+  }, [user])
+
+  if (loading || !firebaseCheckDone) return null
+  if (user && firebaseVerified) return null
+  if (!user && localStorage.getItem(STORAGE_KEY) === 'true') return null
   if (closed) return null
-  if (localStorage.getItem(STORAGE_KEY) === 'true') return null
 
-  const handleYes = () => {
+  const handleYes = async () => {
     localStorage.setItem(STORAGE_KEY, 'true')
+    if (user) {
+      await set(ref(db, `users/${user.uid}/ageVerified`), true)
+    }
     setClosed(true)
   }
 
