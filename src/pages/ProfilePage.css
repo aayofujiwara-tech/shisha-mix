@@ -66,6 +66,52 @@
   font-size: 13px;
 }
 
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-name-edit-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px;
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.profile-name-edit-icon:hover {
+  opacity: 1;
+}
+
+.profile-name-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-name-input {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 4px 8px;
+  width: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name-save-btn {
+  padding: 4px 10px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.profile-name-cancel-btn {
+  padding: 4px 6px;
+  font-size: 13px;
+}
+
 /* ===== Bio & Tags ===== */
 .profile-bio {
   font-size: 14px;

@@ -1,0 +1,17 @@
+.nickname-modal-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.nickname-modal-sub {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.nickname-modal-btn {
+  width: 100%;
+  margin-top: 16px;
+}

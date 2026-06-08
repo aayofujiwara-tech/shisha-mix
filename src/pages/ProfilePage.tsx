@@ -12,7 +12,7 @@ import './ProfilePage.css'
 
 export default function ProfilePage() {
   const navigate = useNavigate()
-  const { user, logout, deleteAccount } = useAuth()
+  const { user, logout, deleteAccount, setDisplayName } = useAuth()
   const { profile, loading, saveProfile } = useProfile(user?.uid)
   const { recipes: myRecipes } = useMyRecipes(user?.uid ?? null)
   const { entries: diaryEntries } = useDiary(user?.uid ?? null)
@@ -24,6 +24,9 @@ export default function ProfilePage() {
   const [editBrands, setEditBrands] = useState<string[]>([])
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [isNameEditing, setIsNameEditing] = useState(false)
+  const [nameEditValue, setNameEditValue] = useState('')
+  const [nameSaving, setNameSaving] = useState(false)
 
   const [isMixEditing, setIsMixEditing] = useState(false)
   const [showMixPicker, setShowMixPicker] = useState(false)
@@ -99,14 +102,24 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     setSaving(true)
+    const newName = editName.trim() || displayName
+    await setDisplayName(newName)
     await saveProfile({
-      displayName: editName.trim() || displayName,
+      displayName: newName,
       bio: editBio,
       favoriteCategory: editCategories,
       favoriteBrand: editBrands,
     })
     setSaving(false)
     setIsEditing(false)
+  }
+
+  const handleNameSave = async () => {
+    if (!nameEditValue.trim()) return
+    setNameSaving(true)
+    await setDisplayName(nameEditValue.trim())
+    setNameSaving(false)
+    setIsNameEditing(false)
   }
 
   const toggleCategory = (cat: string) =>
@@ -162,14 +175,46 @@ export default function ProfilePage() {
           )}
         </div>
         <div className="profile-hero-info">
-          <h1 className="profile-hero-name">{displayName}</h1>
+          {isNameEditing ? (
+            <div className="profile-name-edit-row">
+              <input
+                className="profile-name-input"
+                value={nameEditValue}
+                onChange={(e) => setNameEditValue(e.target.value)}
+                maxLength={20}
+                autoFocus
+                onKeyDown={(e) => { if (e.key === 'Enter') handleNameSave(); if (e.key === 'Escape') setIsNameEditing(false) }}
+              />
+              <button
+                className="btn-primary profile-name-save-btn"
+                onClick={handleNameSave}
+                disabled={!nameEditValue.trim() || nameSaving}
+              >
+                {nameSaving ? '...' : '保存'}
+              </button>
+              <button className="btn-ghost profile-name-cancel-btn" onClick={() => setIsNameEditing(false)}>×</button>
+            </div>
+          ) : (
+            <div className="profile-name-row">
+              <h1 className="profile-hero-name">{displayName}</h1>
+              {!isEditing && (
+                <button
+                  className="profile-name-edit-icon"
+                  onClick={() => { setNameEditValue(displayName); setIsNameEditing(true) }}
+                  aria-label="表示名を編集"
+                >
+                  ✏️
+                </button>
+              )}
+            </div>
+          )}
           {joinDate && <p className="profile-hero-date">登録: {joinDate}</p>}
           <div className="profile-hero-stats">
             <span>📝 {publicRecipes.length}件</span>
             <span>❤️ {totalLikes}</span>
           </div>
         </div>
-        {!isEditing && (
+        {!isEditing && !isNameEditing && (
           <button className="btn-ghost profile-edit-btn" onClick={startEditing}>編集</button>
         )}
       </div>

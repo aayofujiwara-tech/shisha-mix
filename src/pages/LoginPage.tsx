@@ -1,20 +1,22 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
+import NicknameModal from '../components/NicknameModal'
 import './LoginPage.css'
 
 type Mode = 'login' | 'signup'
 
 export default function LoginPage() {
-  const { signInWithGoogle, signUpWithEmail, signInWithEmail, sendPasswordReset } = useAuth()
+  const { signInWithGoogle, signUpWithEmail, signInWithEmail, sendPasswordReset, setDisplayName } = useAuth()
   const navigate = useNavigate()
   const [mode, setMode] = useState<Mode>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [displayName, setDisplayName] = useState('')
+  const [displayName, setDisplayNameState] = useState('')
   const [error, setError] = useState('')
   const [resetMessage, setResetMessage] = useState('')
   const [loading, setLoading] = useState(false)
+  const [pendingNickname, setPendingNickname] = useState<{ defaultName: string } | null>(null)
 
   const handlePasswordReset = async () => {
     setError('')
@@ -25,7 +27,7 @@ export default function LoginPage() {
     }
     try {
       await sendPasswordReset(email)
-      setResetMessage('パスワードリセットメールを送信しました。メールをご確認ください。')
+      setResetMessage('パスワードリセットメールを送信しました。受信トレイまたは迷惑メールフォルダをご確認ください。')
     } catch {
       setError('メールアドレスが登録されていません')
     }
@@ -35,13 +37,22 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      await signInWithGoogle()
-      navigate('/')
-    } catch (e) {
+      const { isNewUser, defaultName } = await signInWithGoogle()
+      if (isNewUser) {
+        setPendingNickname({ defaultName })
+      } else {
+        navigate('/')
+      }
+    } catch {
       setError('Googleログインに失敗しました')
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleNicknameSubmit = async (nickname: string) => {
+    await setDisplayName(nickname)
+    navigate('/')
   }
 
   const handleEmail = async (e: React.FormEvent) => {
@@ -64,6 +75,10 @@ export default function LoginPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (pendingNickname) {
+    return <NicknameModal defaultName={pendingNickname.defaultName} onSubmit={handleNicknameSubmit} />
   }
 
   return (
@@ -100,7 +115,7 @@ export default function LoginPage() {
                 type="text"
                 placeholder="あなたの名前"
                 value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                onChange={(e) => setDisplayNameState(e.target.value)}
                 required
               />
             </div>

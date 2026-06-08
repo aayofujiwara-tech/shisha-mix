@@ -27,10 +27,19 @@ export function useAuth() {
     return unsub
   }, [])
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (): Promise<{ isNewUser: boolean; defaultName: string }> => {
     const provider = new GoogleAuthProvider()
     const cred = await signInWithPopup(auth, provider)
+    const snap = await get(ref(db, `users/${cred.user.uid}`))
+    const isNewUser = !snap.exists()
     await upsertUserProfile(cred.user)
+    return { isNewUser, defaultName: cred.user.displayName || '' }
+  }
+
+  const setDisplayName = async (newName: string) => {
+    if (!user) return
+    await updateProfile(user, { displayName: newName })
+    await update(ref(db, `users/${user.uid}`), { displayName: newName })
   }
 
   const signUpWithEmail = async (email: string, password: string, displayName: string) => {
@@ -61,7 +70,7 @@ export function useAuth() {
     await deleteUser(targetUser)
   }
 
-  return { user, loading, signInWithGoogle, signUpWithEmail, signInWithEmail, logout, deleteAccount, sendPasswordReset }
+  return { user, loading, signInWithGoogle, signUpWithEmail, signInWithEmail, logout, deleteAccount, sendPasswordReset, setDisplayName }
 }
 
 async function upsertUserProfile(user: User, displayName?: string) {
