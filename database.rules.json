@@ -21,7 +21,7 @@
           ".validate": "newData.isNumber() && newData.val() >= 0"
         },
         "$other": {
-          ".validate": true
+          ".validate": false
         }
       }
     },
@@ -50,7 +50,8 @@
       "$recipeId": {
         ".read": true,
         "$userId": {
-          ".write": "auth.uid === $userId"
+          ".write": "auth != null && auth.uid === $userId",
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5"
         }
       }
     },
@@ -58,7 +59,8 @@
       "$recipeId": {
         ".read": true,
         "$userId": {
-          ".write": "auth.uid === $userId"
+          ".write": "auth != null && auth.uid === $userId",
+          ".validate": "newData.isBoolean()"
         }
       }
     },

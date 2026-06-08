@@ -66,6 +66,11 @@ export default function ProfilePage() {
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file || !user) return
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      alert('JPEG・PNG・WEBP 形式の画像のみアップロードできます')
+      return
+    }
     setAvatarUploading(true)
     try {
       const compressed = await compressImage(file)

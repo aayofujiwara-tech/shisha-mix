@@ -46,6 +46,14 @@ export default function PhotoUploader({ photos, onChange, userId, recipeId }: Pr
     const toUpload = Array.from(files).slice(0, remaining)
     if (toUpload.length === 0) return
 
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+    for (const file of toUpload) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        alert('JPEG・PNG・WEBP 形式の画像のみアップロードできます')
+        return
+      }
+    }
+
     setUploading(true)
     try {
       const urls: string[] = []
