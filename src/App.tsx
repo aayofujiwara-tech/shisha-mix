@@ -28,6 +28,22 @@ function AppRoutes() {
   const { user, loading } = useAuth()
   const location = useLocation()
 
+  if (loading) {
+    return (
+      <div style={{
+        height: '100dvh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'var(--color-bg)',
+      }}>
+        <div className="loading">
+          <div className="spinner" />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="app-shell">
       <SideNav />

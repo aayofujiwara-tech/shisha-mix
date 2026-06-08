@@ -1,5 +1,8 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { updateProfile } from 'firebase/auth'
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { update, ref } from 'firebase/database'
 import { useAuth } from '../hooks/useAuth'
 import { useProfile } from '../hooks/useProfile'
 import { useMyRecipes, getRecipe } from '../hooks/useRecipes'
@@ -8,7 +11,35 @@ import RecipeCard from '../components/RecipeCard'
 import type { Recipe } from '../types'
 import { CATEGORIES, BRANDS } from '../types'
 import { presets } from '../data/presets'
+import { db, storage } from '../firebase'
 import './ProfilePage.css'
+
+async function compressImage(file: File): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    const url = URL.createObjectURL(file)
+    img.onload = () => {
+      URL.revokeObjectURL(url)
+      const MAX = 1200
+      let { width, height } = img
+      if (width > MAX || height > MAX) {
+        if (width > height) { height = Math.round((height / width) * MAX); width = MAX }
+        else { width = Math.round((width / height) * MAX); height = MAX }
+      }
+      const canvas = document.createElement('canvas')
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d')!
+      ctx.drawImage(img, 0, 0, width, height)
+      canvas.toBlob((blob) => {
+        if (blob) resolve(blob)
+        else reject(new Error('compress failed'))
+      }, 'image/webp', 0.85)
+    }
+    img.onerror = reject
+    img.src = url
+  })
+}
 
 export default function ProfilePage() {
   const navigate = useNavigate()
@@ -27,6 +58,29 @@ export default function ProfilePage() {
   const [isNameEditing, setIsNameEditing] = useState(false)
   const [nameEditValue, setNameEditValue] = useState('')
   const [nameSaving, setNameSaving] = useState(false)
+  const [avatarUploading, setAvatarUploading] = useState(false)
+  const avatarInputRef = useRef<HTMLInputElement>(null)
+
+  const handleAvatarClick = () => avatarInputRef.current?.click()
+
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !user) return
+    setAvatarUploading(true)
+    try {
+      const compressed = await compressImage(file)
+      const sRef = storageRef(storage, `avatars/${user.uid}`)
+      await uploadBytes(sRef, compressed, { contentType: 'image/webp' })
+      const downloadURL = await getDownloadURL(sRef)
+      await updateProfile(user, { photoURL: downloadURL })
+      await update(ref(db, `users/${user.uid}`), { photoURL: downloadURL })
+    } catch {
+      alert('アイコンのアップロードに失敗しました')
+    } finally {
+      setAvatarUploading(false)
+      if (avatarInputRef.current) avatarInputRef.current.value = ''
+    }
+  }
 
   const [isMixEditing, setIsMixEditing] = useState(false)
   const [showMixPicker, setShowMixPicker] = useState(false)
@@ -167,12 +221,22 @@ export default function ProfilePage() {
     <div className="page">
       {/* プロフィールヘッダー */}
       <div className="profile-hero card">
-        <div className="profile-hero-avatar">
+        <div className="profile-hero-avatar" onClick={handleAvatarClick} style={{ cursor: 'pointer' }}>
           {user.photoURL ? (
             <img src={user.photoURL} alt="avatar" className="profile-avatar-lg" />
           ) : (
             <div className="profile-avatar-placeholder-lg">{displayName[0].toUpperCase()}</div>
           )}
+          <div className="profile-avatar-overlay">
+            {avatarUploading ? <div className="spinner" style={{ width: 20, height: 20 }} /> : '📷'}
+          </div>
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            style={{ display: 'none' }}
+            ref={avatarInputRef}
+            onChange={handleAvatarChange}
+          />
         </div>
         <div className="profile-hero-info">
           {isNameEditing ? (

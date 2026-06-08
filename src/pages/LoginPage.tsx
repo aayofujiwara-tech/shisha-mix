@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import NicknameModal from '../components/NicknameModal'
@@ -17,8 +17,16 @@ export default function LoginPage() {
   const [resetMessage, setResetMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [pendingNickname, setPendingNickname] = useState<{ defaultName: string } | null>(null)
+  const [resetCooldown, setResetCooldown] = useState(0)
+
+  useEffect(() => {
+    if (resetCooldown <= 0) return
+    const timer = setTimeout(() => setResetCooldown((c) => c - 1), 1000)
+    return () => clearTimeout(timer)
+  }, [resetCooldown])
 
   const handlePasswordReset = async () => {
+    if (resetCooldown > 0) return
     setError('')
     setResetMessage('')
     if (!email) {
@@ -28,6 +36,7 @@ export default function LoginPage() {
     try {
       await sendPasswordReset(email)
       setResetMessage('パスワードリセットメールを送信しました。受信トレイまたは迷惑メールフォルダをご確認ください。')
+      setResetCooldown(60)
     } catch {
       setError('メールアドレスが登録されていません')
     }
@@ -141,8 +150,13 @@ export default function LoginPage() {
               minLength={6}
             />
             {mode === 'login' && (
-              <button type="button" className="password-reset-link" onClick={handlePasswordReset}>
-                パスワードをお忘れの方
+              <button
+                type="button"
+                className="password-reset-link"
+                onClick={handlePasswordReset}
+                disabled={resetCooldown > 0}
+              >
+                {resetCooldown > 0 ? `再送信まで ${resetCooldown}秒` : 'パスワードをお忘れの方'}
               </button>
             )}
           </div>

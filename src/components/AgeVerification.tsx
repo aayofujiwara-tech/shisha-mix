@@ -6,7 +6,7 @@ import { useAuth } from '../hooks/useAuth'
 const STORAGE_KEY = 'age_verified'
 
 export default function AgeVerification() {
-  const { user, loading } = useAuth()
+  const { user } = useAuth()
   const [closed, setClosed] = useState(false)
   const [firebaseVerified, setFirebaseVerified] = useState(false)
   const [firebaseCheckDone, setFirebaseCheckDone] = useState(false)
@@ -29,7 +29,7 @@ export default function AgeVerification() {
       })
   }, [user])
 
-  if (loading || !firebaseCheckDone) return null
+  if (!firebaseCheckDone) return null
   if (user && firebaseVerified) return null
   if (!user && sessionStorage.getItem(STORAGE_KEY) === 'true') return null
   if (closed) return null
