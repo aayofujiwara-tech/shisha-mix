@@ -31,7 +31,6 @@ export default function MyRecipePage() {
       await deleteRecipe(deleteTarget)
       setDeleteTarget(null)
     } catch (err) {
-      console.error('Delete error:', err)
     } finally {
       setDeleting(false)
     }

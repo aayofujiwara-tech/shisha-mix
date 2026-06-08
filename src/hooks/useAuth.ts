@@ -8,6 +8,7 @@ import {
   signOut,
   updateProfile,
   deleteUser,
+  sendPasswordResetEmail,
   type User,
 } from 'firebase/auth'
 import { ref, set, get, update, remove } from 'firebase/database'
@@ -45,6 +46,8 @@ export function useAuth() {
 
   const logout = () => signOut(auth)
 
+  const sendPasswordReset = (email: string) => sendPasswordResetEmail(auth, email)
+
   const deleteAccount = async (targetUser: User): Promise<void> => {
     const database = getDatabase()
     await Promise.all([
@@ -58,7 +61,7 @@ export function useAuth() {
     await deleteUser(targetUser)
   }
 
-  return { user, loading, signInWithGoogle, signUpWithEmail, signInWithEmail, logout, deleteAccount }
+  return { user, loading, signInWithGoogle, signUpWithEmail, signInWithEmail, logout, deleteAccount, sendPasswordReset }
 }
 
 async function upsertUserProfile(user: User, displayName?: string) {

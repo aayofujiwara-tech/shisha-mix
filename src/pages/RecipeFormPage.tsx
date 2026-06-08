@@ -138,7 +138,6 @@ export default function RecipeFormPage() {
       navigate('/my')
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      console.error('Save error:', { code: (err as { code?: string })?.code, message: msg, err })
       if (msg.includes('PERMISSION_DENIED') || msg.includes('permission')) {
         setSaveError('保存権限がありません。再ログインしてお試しください。')
       } else {

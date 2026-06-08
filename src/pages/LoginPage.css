@@ -117,6 +117,28 @@
   border: 1px solid rgba(239,68,68,0.2);
 }
 
+.login-success {
+  color: var(--color-success, #16a34a);
+  font-size: 13px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  background: rgba(22,163,74,0.1);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(22,163,74,0.2);
+}
+
+.password-reset-link {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--color-text-secondary, #9ca3af);
+  text-decoration: underline;
+  display: block;
+  margin-top: 6px;
+}
+
 .login-skip {
   text-align: center;
   margin-top: 16px;

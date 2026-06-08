@@ -67,7 +67,6 @@ export default function InstallPrompt() {
     // Android Chrome / Desktop Chrome: beforeinstallprompt を待つ
     const handler = (e: Event) => {
       e.preventDefault()
-      console.log('[InstallPrompt] beforeinstallprompt fired')
       promptFired.current = true
       setDeferredPrompt(e as BeforeInstallPromptEvent)
       setVisible(true)
@@ -79,7 +78,6 @@ export default function InstallPrompt() {
     if (isAndroidChrome()) {
       fallback = setTimeout(() => {
         if (!promptFired.current) {
-          console.log('[InstallPrompt] fallback to android-chrome guide')
           setGuideType('android-chrome')
           setVisible(true)
         }

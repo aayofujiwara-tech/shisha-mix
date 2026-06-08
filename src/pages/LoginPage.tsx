@@ -6,14 +6,30 @@ import './LoginPage.css'
 type Mode = 'login' | 'signup'
 
 export default function LoginPage() {
-  const { signInWithGoogle, signUpWithEmail, signInWithEmail } = useAuth()
+  const { signInWithGoogle, signUpWithEmail, signInWithEmail, sendPasswordReset } = useAuth()
   const navigate = useNavigate()
   const [mode, setMode] = useState<Mode>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [error, setError] = useState('')
+  const [resetMessage, setResetMessage] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const handlePasswordReset = async () => {
+    setError('')
+    setResetMessage('')
+    if (!email) {
+      setError('メールアドレスを入力してください')
+      return
+    }
+    try {
+      await sendPasswordReset(email)
+      setResetMessage('パスワードリセットメールを送信しました。メールをご確認ください。')
+    } catch {
+      setError('メールアドレスが登録されていません')
+    }
+  }
 
   const handleGoogle = async () => {
     setError('')
@@ -109,8 +125,14 @@ export default function LoginPage() {
               required
               minLength={6}
             />
+            {mode === 'login' && (
+              <button type="button" className="password-reset-link" onClick={handlePasswordReset}>
+                パスワードをお忘れの方
+              </button>
+            )}
           </div>
           {error && <p className="login-error">{error}</p>}
+          {resetMessage && <p className="login-success">{resetMessage}</p>}
           <button type="submit" className="btn-primary" disabled={loading}>
             {loading ? '処理中...' : mode === 'signup' ? 'アカウント作成' : 'ログイン'}
           </button>
