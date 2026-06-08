@@ -23,8 +23,18 @@ export default defineConfig({
       manifest: false, // using public/manifest.json
       includeAssets: ['favicon.ico', 'icons/*.png'],
       workbox: {
-        globPatterns: ['**/*.{html,ico,png,svg,woff2}'],
+        skipWaiting: true,
+        clientsClaim: true,
+        globPatterns: ['**/*.{ico,png,svg,woff2}'],
         runtimeCaching: [
+          {
+            urlPattern: /\/$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'html-cache',
+              networkTimeoutSeconds: 5,
+            },
+          },
           {
             urlPattern: /\.(?:js|css)$/,
             handler: 'NetworkFirst',
