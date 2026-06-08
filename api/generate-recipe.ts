@@ -3,6 +3,12 @@ import Anthropic from '@anthropic-ai/sdk'
 
 const MAX_INPUT_LENGTH = 500
 const MAX_INVENTORY_ITEMS = 50
+const MAX_FIELD_LENGTH = 100
+
+function sanitizeField(value: unknown): string {
+  if (typeof value !== 'string') return ''
+  return value.replace(/[\r\n\t]/g, ' ').trim().slice(0, MAX_FIELD_LENGTH)
+}
 
 async function verifyFirebaseToken(token: string, apiKey: string): Promise<string | null> {
   const res = await fetch(
@@ -79,7 +85,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const userMessage = inventory && inventory.length > 0
-    ? `要望：${userInput}\n\n手持ちのフレーバー（これらを優先して使ってください）：${inventory.map((f) => `${f.name}（${f.brand}）`).join(', ')}`
+    ? `要望：${userInput}\n\n手持ちのフレーバー（これらを優先して使ってください）：${inventory.map((f) => `${sanitizeField(f.name)}（${sanitizeField(f.brand)}）`).join(', ')}`
     : `要望：${userInput}`
 
   try {

@@ -102,7 +102,7 @@
     },
     "feedbacks": {
       "$feedbackId": {
-        ".write": true,
+        ".write": "auth != null",
         ".read": "auth != null && auth.uid == 'IA38vNhPd8eHyWU8qjnleGlhSNC3'",
         ".validate": "newData.hasChildren(['overall', 'willPay', 'createdAt'])",
         "overall": {
@@ -115,7 +115,7 @@
           ".validate": "newData.isNumber()"
         },
         "$other": {
-          ".validate": true
+          ".validate": false
         }
       }
     }

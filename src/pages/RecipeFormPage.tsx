@@ -141,7 +141,7 @@ export default function RecipeFormPage() {
       if (msg.includes('PERMISSION_DENIED') || msg.includes('permission')) {
         setSaveError('保存権限がありません。再ログインしてお試しください。')
       } else {
-        setSaveError(`保存に失敗しました: ${msg}`)
+        setSaveError('保存に失敗しました。時間をおいて再試行してください。')
       }
     } finally {
       setLoading(false)
