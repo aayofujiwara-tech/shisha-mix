@@ -3,6 +3,7 @@
   position: fixed;
   bottom: 76px;
   right: 1rem;
+  left: auto;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -318,14 +319,6 @@
 
 /* ===== PC (768px+): sidebar layout ===== */
 @media (min-width: 768px) {
-  /* FAB: centered in sidebar */
-  .st-fab {
-    left: calc(var(--side-nav-width, 220px) / 2 - 22px);
-    right: auto;
-    bottom: 24px;
-    box-shadow: none;
-  }
-
   /* Active bar: fixed to bottom of sidebar */
   .st-bar {
     left: 0;
