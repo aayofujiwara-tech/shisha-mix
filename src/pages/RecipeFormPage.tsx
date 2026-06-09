@@ -6,6 +6,7 @@ import PhotoUploader from '../components/PhotoUploader'
 import { flavorDB } from '../data/flavorDB'
 import { CATEGORIES, BRANDS } from '../types'
 import type { Recipe, FlavorItem, RecipeVisibility } from '../types'
+import { trackRecipeCreate } from '../firebase'
 import './RecipeFormPage.css'
 
 const EMPTY_VISIBILITY: RecipeVisibility = { photos: true, bowl: true, charcoal: true, packing: true, memo: true }
@@ -134,6 +135,7 @@ export default function RecipeFormPage() {
         await updateRecipe(id, { ...data, id })
       } else {
         await createRecipe(data)
+        trackRecipeCreate(recipeId, isPublic)
       }
       navigate('/my')
     } catch (err) {

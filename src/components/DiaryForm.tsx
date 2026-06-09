@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import type { DiaryEntry } from '../types'
 import { MOOD_TAGS } from '../types'
 import { useDiary } from '../hooks/useDiary'
+import { trackDiaryWrite } from '../firebase'
 import './DiaryForm.css'
 
 interface Prefill {
@@ -79,6 +80,7 @@ export default function DiaryForm({ userId, onClose, onSaved, entry, prefill }: 
         await updateEntry(entry.id, data, existingPhotos, newPhotoFiles)
       } else {
         await addEntry(data, newPhotoFiles)
+        trackDiaryWrite()
       }
       onSaved()
     } catch {

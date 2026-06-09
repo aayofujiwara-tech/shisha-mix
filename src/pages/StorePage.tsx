@@ -7,6 +7,7 @@ import TableCard from '../components/TableCard'
 import TableDetailPanel from '../components/TableDetailPanel'
 import TableFormModal from '../components/TableFormModal'
 import type { StoreTable } from '../types'
+import { trackStoreAdd } from '../firebase'
 import './StorePage.css'
 
 export default function StorePage() {
@@ -51,6 +52,7 @@ export default function StorePage() {
       await updateTable(editingTable.id, data)
     } else {
       await addTable(data)
+      trackStoreAdd()
     }
     setShowFormModal(false)
     setEditingTable(null)

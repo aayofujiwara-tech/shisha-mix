@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Recipe } from '../types'
+import { trackCommunityShare } from '../firebase'
 import './RecipeShare.css'
 
 const APP_ORIGIN = import.meta.env.VITE_APP_ORIGIN ?? 'https://shisha-mix-eight.vercel.app'
@@ -68,15 +69,18 @@ export default function RecipeShare({ recipe }: RecipeShareProps) {
   const hasWebShare = typeof navigator !== 'undefined' && !!navigator.share
 
   const openX = () => {
+    trackCommunityShare(recipe.id)
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(xText)}`, '_blank')
   }
 
   const openLine = () => {
+    trackCommunityShare(recipe.id)
     // line.me/R/share を使用。lineText にURLが含まれているため text のみで完結
     window.open(`https://line.me/R/share?text=${encodeURIComponent(lineText)}`, '_blank')
   }
 
   const copyUrl = async () => {
+    trackCommunityShare(recipe.id)
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(pageUrl)
@@ -99,6 +103,7 @@ export default function RecipeShare({ recipe }: RecipeShareProps) {
   }
 
   const shareNative = async () => {
+    trackCommunityShare(recipe.id)
     await navigator.share({ title: recipe.name, text: xText, url: pageUrl })
   }
 

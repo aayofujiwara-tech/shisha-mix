@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import BottomNav from './components/BottomNav'
@@ -10,6 +10,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import AgeVerification from './components/AgeVerification'
 import { SessionTimerProvider } from './hooks/useSessionTimer'
 import FeedbackButton from './components/FeedbackButton'
+import { trackPageView } from './firebase'
 
 const LoginPage        = lazy(() => import('./pages/LoginPage'))
 const PrivacyPage      = lazy(() => import('./pages/PrivacyPage'))
@@ -23,10 +24,15 @@ const ProfilePage      = lazy(() => import('./pages/ProfilePage'))
 const UserPage         = lazy(() => import('./pages/UserPage'))
 const StorePage        = lazy(() => import('./pages/StorePage'))
 const DiaryPage        = lazy(() => import('./pages/DiaryPage'))
+const AdminPage        = lazy(() => import('./pages/AdminPage'))
 
 function AppRoutes() {
   const { user, loading } = useAuth()
   const location = useLocation()
+
+  useEffect(() => {
+    trackPageView(location.pathname)
+  }, [location.pathname])
 
   if (loading) {
     return (
@@ -92,6 +98,7 @@ function AppRoutes() {
               </ProtectedRoute>
             } />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

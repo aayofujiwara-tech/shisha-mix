@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth'
 import { useSessionTimer } from '../hooks/useSessionTimer'
 import type { Recipe } from '../types'
 import { STRENGTH_LABELS, SWEETNESS_LABELS } from '../types'
+import { trackRecipeLike } from '../firebase'
 import FlavorCalculator from '../components/FlavorCalculator'
 import RecipeShare from '../components/RecipeShare'
 import CommentSection from '../components/CommentSection'
@@ -53,6 +54,7 @@ export default function RecipeDetailPage() {
   const handleLike = async () => {
     if (!user) { navigate('/login'); return }
     await toggle()
+    if (id) trackRecipeLike(id)
   }
 
   return (
