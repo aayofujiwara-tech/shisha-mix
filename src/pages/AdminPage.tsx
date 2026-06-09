@@ -45,9 +45,18 @@ function fmtDate(ts: number): string {
   return `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
 }
 
+function withTimeout<T>(promise: Promise<T>, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`Timeout: ${label}`)), 5000)
+    ),
+  ])
+}
+
 async function safeGet(path: string): Promise<DataSnapshot | null> {
   try {
-    return await get(ref(db, path))
+    return await withTimeout(get(ref(db, path)), path)
   } catch (e) {
     console.error(`[Admin] Failed to fetch "${path}":`, e)
     return null
