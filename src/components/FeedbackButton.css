@@ -1,6 +1,6 @@
 .feedback-fab {
   position: fixed;
-  bottom: 120px;
+  bottom: 128px;
   right: 1.5rem;
   width: 44px;
   height: 44px;
@@ -24,7 +24,7 @@
 
 @media (min-width: 769px) {
   .feedback-fab {
-    bottom: 80px;
+    bottom: 88px;
     right: 1.5rem;
   }
 }

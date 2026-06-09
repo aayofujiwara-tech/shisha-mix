@@ -1,7 +1,7 @@
 /* ===== Floating Start Button (FAB) ===== */
 .st-fab {
   position: fixed;
-  bottom: 72px;
+  bottom: 76px;
   right: 1.5rem;
   width: 44px;
   height: 44px;
@@ -25,7 +25,7 @@
 
 @media (min-width: 769px) {
   .st-fab {
-    bottom: 1.5rem;
+    bottom: 24px;
     right: 1.5rem;
   }
 }

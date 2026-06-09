@@ -4,10 +4,12 @@
   border-radius: var(--radius);
   overflow: hidden;
   margin-bottom: 12px;
+  min-width: 320px;
 }
 
 .ranking-header {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 11px 14px;
@@ -18,6 +20,7 @@
   font-weight: 700;
   color: var(--color-text);
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .ranking-header-right {
