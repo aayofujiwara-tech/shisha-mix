@@ -2,7 +2,7 @@
 .st-fab {
   position: fixed;
   bottom: 76px;
-  right: 1.5rem;
+  right: 1rem;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -26,7 +26,8 @@
 @media (min-width: 769px) {
   .st-fab {
     bottom: 24px;
-    right: 1.5rem;
+    right: 2rem;
+    left: auto;
   }
 }
 
