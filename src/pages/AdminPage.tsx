@@ -71,8 +71,6 @@ export default function AdminPage() {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
   const fetchAdminData = useCallback(async () => {
-    console.log('[Admin] Fetching admin data...')
-    console.log('[Admin] db instance:', db)
     setStatus('loading')
     setFetchError(null)
     try {

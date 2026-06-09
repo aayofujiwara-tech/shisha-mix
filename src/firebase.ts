@@ -14,7 +14,6 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 }
 
-console.log('[Firebase] config databaseURL:', import.meta.env.VITE_FIREBASE_DATABASE_URL)
 const app = initializeApp(firebaseConfig)
 
 export const auth = getAuth(app)
