@@ -1,7 +1,7 @@
 .feedback-fab {
   position: fixed;
-  bottom: calc(var(--tab-height) + env(safe-area-inset-bottom, 0px) + 68px);
-  right: 14px;
+  bottom: 120px;
+  right: 1.5rem;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -22,10 +22,9 @@
   background: var(--color-surface-2);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .feedback-fab {
-    right: 14px;
-    left: auto;
     bottom: 80px;
+    right: 1.5rem;
   }
 }
