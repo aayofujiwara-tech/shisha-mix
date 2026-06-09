@@ -49,7 +49,7 @@ async function safeGet(path: string): Promise<DataSnapshot | null> {
   try {
     return await get(ref(db, path))
   } catch (e) {
-    console.warn(`[Admin] fetch failed for "${path}":`, e)
+    console.error(`[Admin] Failed to fetch "${path}":`, e)
     return null
   }
 }
@@ -152,12 +152,12 @@ export default function AdminPage() {
         diaryTotal, sessionUserCount, storeUserCount,
       })
       setLastUpdated(new Date())
-      setStatus('ready')
-      console.log('[Admin] Fetch complete', { userCount, recipeTotal, feedbackCount })
     } catch (e) {
       console.error('[Admin] Fetch error:', e)
       setFetchError(e instanceof Error ? e.message : '取得に失敗しました')
-      setStatus('error')
+    } finally {
+      console.log('[Admin] Fetch complete (with or without errors)')
+      setStatus('ready')
     }
   }, [])
 
